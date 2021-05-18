@@ -1,0 +1,482 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="fr-fr" xml:lang="fr-fr">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="copyright" content="(C) Copyright 2005">
+<meta name="DC.rights.owner" content="(C) Copyright 2005">
+<meta name="DC.Type" content="concept">
+<meta name="DC.Title" content="Console virtuelle à distance avec Java">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="bmc_help_0008">
+<meta name="DC.Language" content="fr-fr">
+<link rel="stylesheet" type="text/css" href="../public_sys-resources/commonltr.css">
+<link rel="stylesheet" type="text/css" href="../public_sys-resources/mediaQuery.css">
+<script type="text/javascript" src="../public_sys-resources/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../public_sys-resources/mediaQuery.js"></script>
+<title>Console virtuelle à distance avec Java</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="bmc_help_0008"></a><a name="bmc_help_0008"></a>
+
+
+
+<h1 class="topictitle1">Console virtuelle à distance avec Java</h1>
+
+<div id="kvm"><a name="kvm"></a><a name="kvm"></a>
+<div class="section" id="bmc_help_0008__java_02"><a name="bmc_help_0008__java_02"></a><a name="java_02"></a><h4 class="sectiontitle">Description de la fonction</h4><p id="bmc_help_0008__func01"><a name="bmc_help_0008__func01"></a><a name="func01"></a>Avec la console virtuelle à distance avec Java, vous pouvez accéder et gérer un serveur à distance, installer ou réparer le système d'exploitation, et installer des pilotes
+sur le serveur. </p>
+<p id="bmc_help_0008__func04"><a name="bmc_help_0008__func04"></a><a name="func04"></a>Avec la console à distance intégrée : </p>
+<a name="bmc_help_0008__func02"></a><a name="func02"></a><ul id="bmc_help_0008__func02"><li>Vous pouvez utiliser le clavier et la souris du PC local pour gérer à distance le serveur.</li><li>Vous pouvez permettre au serveur d'accéder à distance au PC local sur un réseau à l'aide d'un <span>lecteur de disquettes virtuel (FDD) ou</span> d'un lecteur de DVD-ROM. Pour le serveur, l'utilisation du<span> lecteur virtuel
+FDD ou du </span> lecteur de DVD-ROM vituel est le même que l'utilisation d'un périphérique USB physique.<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>Les médias sur le PC local peuvent être un<span> lecteur disquette (FDD) ou </span>un lecteur DVD-ROM local, ou <span>un disquette
+ou </span> un fichier d'image DVD stocké sur le PC local ou sur le lecteur réseau.</p>
+</div></div>
+</li></ul>
+<p id="bmc_help_0008__func03"><a name="bmc_help_0008__func03"></a><a name="func03"></a><a href="#bmc_help_0008__tab_02">Tableau 1</a> décrit les icônes de l'écran KVM.</p>
+
+<div class="tablenoborder"><a name="bmc_help_0008__tab_02"></a><a name="tab_02"></a><table cellpadding="4" cellspacing="0" summary="" id="bmc_help_0008__tab_02" frame="border" border="1" rules="all"><caption><b>Tableau 1 </b>Icônes sur l'écran KVM</caption>
+<thead align="left">
+<tr>
+<th class="cellrowborder" valign="top" width="31%" id="mcps1.2.1.6.2.3.1.1"><p>Icône</p>
+</th>
+
+<th class="cellrowborder" valign="top" width="69%" id="mcps1.2.1.6.2.3.1.2"><p>Description</p>
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_02.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__lock"><a name="bmc_help_0008__lock"></a><a name="lock"></a>Verrouillez la barre d'outils.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_07.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__hide"><a name="bmc_help_0008__hide"></a><a name="hide"></a>Masquez la barre d'outils.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_04.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__full-screen"><a name="bmc_help_0008__full-screen"></a><a name="full-screen"></a>Le Bureau du serveur en mode plein écran s'affiche.</p>
+<div class="note"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>Pour passer du mode en plein écran au mode en fenêtre, déplacez le pointeur vers le haut du plein écran ou appuyez sur <span class="uicontrol"><b>Ctrl + Alt +
+Maj</b></span>pour afficher la barre d'outils et l'appuyez sur <span><img src="fig/fig_bmc_help_0008_05.png"></span>.</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_22.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p>Synchronisez l'emplacement de la souris.</p>
+<div class="note"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>Ce bouton n'est disponible sur la barre d'outils que le Bureau du serveur est affiché en mode plein écran.</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_23.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p>Changez le mode de la souris. </p>
+<div class="note"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>Ce bouton n'est disponible sur la barre d'outils que le bureau du serveur est affiché en mode plein écran.</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_05.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p>Retournez au bureau du serveur en mode fenêtre.</p>
+<div class="note"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>Ce bouton n'est disponible sur la barre d'outils que le bureau du serveur est affiché en mode plein écran.</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_13.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__contrl01"><a name="bmc_help_0008__contrl01"></a><a name="contrl01"></a>Le menu du contrôle d'alimentation s'affhiche, qui comprend les éléments suivants :</p>
+<div class="p" id="bmc_help_0008__contrl02"><a name="bmc_help_0008__contrl02"></a><a name="contrl02"></a><ul><li>Mise sous tension</li><li>Mise hors tension forcée</li><li>&Eacute;teindre</li><li>Réinitialisation du système forcée</li><li>Cycle d'alimentation forcée</li></ul>
+</div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_15.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__video"><a name="bmc_help_0008__video"></a><a name="video"></a>Enregistrez une vidéo pour les opérations effectuées sur le serveur.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_16.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__mouse01"><a name="bmc_help_0008__mouse01"></a><a name="mouse01"></a>Contrôlez la souris du serveur. Les opérations de contrôle comprennent les suivantes:</p>
+<a name="bmc_help_0008__mouse02"></a><a name="mouse02"></a><ul id="bmc_help_0008__mouse02"><li><p><span class="parmvalue"><b>Accélération de la souris</b></span></p>
+<p>Accélérez la souris sur le bureau du serveur pour le synchroniser avec la souris sur le PC local.</p>
+<div class="note"><span class="notetitle"> REMARQUE: </span><div class="notebody">Les versions SUSE plus tôt que SUSE 12 ne prennent pas en charge l'accélération
+de la souris.</div></div>
+</li><li><p><span class="parmname"><b>Souris unique</b></span></p>
+<p>Masquez la souris sur le PC local et afficher uniquement la souris sur le bureau du serveur.</p>
+</li><li><p><span class="parmvalue"><b>Réinitialisation de Souris &amp; Clavier</b></span></p>
+<p>Simulez la suppression et l'installation d'un clavier et d'une souris USB. Lorsque le clavier et la souris sur le bureau du serveur cessent de répondre, vous
+pouvez cliquer sur <span class="uicontrol"><b>Réinitialisation de la souris et des touches </b></span>pour les restaurer.</p>
+</li></ul>
+<p><span id="bmc_help_0008__mouse03"><a name="bmc_help_0008__mouse03"></a><a name="mouse03"></a>Paramètre par défaut : <span class="parmvalue"><b>Accélération de la souris</b></span></span></p>
+<div class="note"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p id="bmc_help_0008__mouse_note"><a name="bmc_help_0008__mouse_note"></a><a name="mouse_note"></a>Si <span class="parmvalue"><b>Accélération de la souris</b></span> et <span class="parmvalue"><b>Souris unique</b></span> ne
+sont pas sélectionnées, la souris du bureau du serveur et la souris du PC local seront affichées et ne sont pas synchronisées.</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_10.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__dvdbutton"><a name="bmc_help_0008__dvdbutton"></a><a name="dvdbutton"></a>Sélectionnez et utilisez un lecteur de DVD-ROM virtuel.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_11.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__fddbutton"><a name="bmc_help_0008__fddbutton"></a><a name="fddbutton"></a>Sélectionnez et utilisez un FDD virtuel.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_12.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p>Utilisez un lecteur de DVD-ROM ou de FDD pour créer un fichier d'image.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_03.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__keybo"><a name="bmc_help_0008__keybo"></a><a name="keybo"></a>Envoyez ou personnalisez les touches de combinaison. Les touches combinées sont décrites comme suit :</p>
+<ul><li id="bmc_help_0008__ctrl_shift"><a name="bmc_help_0008__ctrl_shift"></a><a name="ctrl_shift"></a><span class="uicontrol"><b>Ctrl + Maj</b></span> : basculez entre les méthodes d'entrée.</li><li id="bmc_help_0008__ctrl_esc"><a name="bmc_help_0008__ctrl_esc"></a><a name="ctrl_esc"></a><span class="uicontrol"><b>Ctrl + Echap</b></span> : expansion ou reduit le menu de <span class="parmname"><b>Démarrer</b></span>.</li><li id="bmc_help_0008__ctrl_alt_del"><a name="bmc_help_0008__ctrl_alt_del"></a><a name="ctrl_alt_del"></a><span class="uicontrol"><b>Ctrl + Alt + Echap</b></span> : verrouillez la fenêtre du système d'exploitation, déconnectez un utilisateur, modifiez le mot de passe, ouvrez le gestionnaire des tâches ou redémarrez le serveur.</li><li id="bmc_help_0008__alt_tab"><a name="bmc_help_0008__alt_tab"></a><a name="alt_tab"></a><span class="uicontrol"><b>Alt + Tab</b></span> : basculez entre les applications d'exécution.</li><li id="bmc_help_0008__ctrl_space"><a name="bmc_help_0008__ctrl_space"></a><a name="ctrl_space"></a><span class="uicontrol"><b>Ctrl + Espace</b></span> : activez ou désactivez une méthode d'entrée.</li><li><span class="uicontrol"><b>Réinitialisation du clavier</b></span> : simulez le déclenchement d'une touche sur le clavier.</li></ul>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/help_0008_0001.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__keybo_layout_01"><a name="bmc_help_0008__keybo_layout_01"></a><a name="keybo_layout_01"></a>Personnalisez le clavier client. Par défaut, l'iBMC sélectionne automatiquement le type de clavier client à utiliser. Si le clavier sélectionné automatiquement ne fonctionne pas correctement, vous pouvez spécifier manuellement
+le type de clavier.</p>
+<a name="bmc_help_0008__keybo_layout_02"></a><a name="keybo_layout_02"></a><ul id="bmc_help_0008__keybo_layout_02"><li id="bmc_help_0008__keybo_layout_us"><a name="bmc_help_0008__keybo_layout_us"></a><a name="keybo_layout_us"></a><span class="parmname"><b>Clavier qwerty(us)</b></span> : Utilisez le clavier anglais (US)</li><li id="bmc_help_0008__keybo_layout_jp"><a name="bmc_help_0008__keybo_layout_jp"></a><a name="keybo_layout_jp"></a><span class="parmname"><b>Clavier japonais</b></span> : Utilisez le clavier japonais</li><li id="bmc_help_0008__keybo_layout_fr"><a name="bmc_help_0008__keybo_layout_fr"></a><a name="keybo_layout_fr"></a><span class="parmname"><b>Clavier azerty</b></span> : Utilisez le clavier français</li></ul>
+<div class="note" id="bmc_help_0008__keybo_laout_note"><a name="bmc_help_0008__keybo_laout_note"></a><a name="keybo_laout_note"></a><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>Seules l'iBMC 2.98 et les versions supérieurs prennent en charge la sélection du type de clavier client.</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><p>Clarté de l'image</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__image"><a name="bmc_help_0008__image"></a><a name="image"></a>Ajustez la clarté de l'image du Bureau du serveur.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_06.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__num"><a name="bmc_help_0008__num"></a><a name="num"></a>Indiquez l'état de la touche <span class="uicontrol"><b>Num Lock</b></span>sur le serveur.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_08.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__caps_lock"><a name="bmc_help_0008__caps_lock"></a><a name="caps_lock"></a>Indiquez l'état de la touche <span class="uicontrol"><b>Caps Lock</b></span>sur le serveur.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_09.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__scroll"><a name="bmc_help_0008__scroll"></a><a name="scroll"></a>Indique l'état de la touche <span class="uicontrol"><b>Scroll Lock</b></span> sur le serveur. </p>
+<p>Si vous appuyez sur <span class="uicontrol"><b>CTRL + S</b></span> par erreur après avoir entré le mode de caractère de Linux, l'écran est verrouillé.
+Appuyez sur <span class="uicontrol"><b>Scroll Lock</b></span> pour déverrouiller l'écran.</p>
+<div class="note" id="bmc_help_0008__scroll_note"><a name="bmc_help_0008__scroll_note"></a><a name="scroll_note"></a><span class="notetitle"> REMARQUE: </span><div class="notebody">Si une erreur d'entrée de clavier se produit lorsque vous gérez le serveur à l'aide de la console à distance virtuelle, vérifiez
+d'abord l'état des icônes de <span><img src="fig/fig_bmc_help_0008_06.png"></span>, <span><img src="fig/fig_bmc_help_0008_08.png"></span>, et de <span><img src="fig/fig_bmc_help_0008_09.png"></span>.</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_14.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__help"><a name="bmc_help_0008__help"></a><a name="help"></a>Les informations d'aide s'affiche.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" colspan="2" valign="top" headers="mcps1.2.1.6.2.3.1.1 mcps1.2.1.6.2.3.1.2 "><p>Remarque :  Les icônes de l'écran de la console à distance virtuelle et leurs fonctions varient selon le modèle de serveur.</p>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+<p><a href="#bmc_help_0008__fig_21">Figure 1</a>illustre le processus d'utilisation d'un lecteur de DVD-ROM virtuel dans la barre d'outils. Le processus d'utilisation d'un fichier d'image ou d'un FDD virtuel est similaire à
+ce processus.</p>
+<div class="fignone" id="bmc_help_0008__fig_21"><a name="bmc_help_0008__fig_21"></a><a name="fig_21"></a><span class="figcap"><b>Figure 1 </b>Processus</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_20.png"></span></div>
+</div>
+
+<div class="section"><h4 class="sectiontitle">GUI</h4><p>Choisissez <span class="uicontrol"><b>Console à distance</b></span> dans le menu principal, et puis cliquez sur <span class="uicontrol"><b>Console à distance intégrée Java (partagée) </b></span>ou <span class="uicontrol"><b>Console à distance avec Java intégré (privée)</b></span>. </p>
+<p>L'écran KVM s'affiche.</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody">Si vous cliquez sur <span class="uicontrol"><b>Console à distance avec Java intégré (partagée)</b></span>, deux utilisateurs sont autorisés à accéder simultanément et à effectuer des opérations sur le serveur. L'un
+utilisateur peut voir les opérations effectuées par l'autre utilisateur, ce qui entraîne des risques de sécurité.</div></div>
+<p>L'écran KVM se compose de trois zones, comme indiqué dans <a href="#bmc_help_0008__fig_01">Figure 2</a>. <a href="#bmc_help_0008__tab_01">Tableau 2</a> décrit
+les zones.</p>
+<div class="fignone" id="bmc_help_0008__fig_01"><a name="bmc_help_0008__fig_01"></a><a name="fig_01"></a><span class="figcap"><b>Figure 2 </b>&Eacute;cran KVM</span>
+
+<br><span><img src="fig/help_0008_rvc_fr.png"></span><br>
+</div>
+
+<div class="tablenoborder"><a name="bmc_help_0008__tab_01"></a><a name="tab_01"></a><table cellpadding="4" cellspacing="0" summary="" id="bmc_help_0008__tab_01" frame="border" border="1" rules="all"><caption><b>Tableau 2 </b>Zones de l'écran KVM</caption>
+<thead align="left">
+<tr>
+<th class="cellrowborder" valign="top" width="6.64451827242525%" id="mcps1.2.2.7.2.4.1.1"><p>N&deg;</p>
+</th>
+
+<th class="cellrowborder" valign="top" width="16.943521594684388%" id="mcps1.2.2.7.2.4.1.2"><p>Zone</p>
+</th>
+
+<th class="cellrowborder" valign="top" width="76.41196013289037%" id="mcps1.2.2.7.2.4.1.3"><p>Fonction</p>
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td class="cellrowborder" valign="top" width="6.64451827242525%" headers="mcps1.2.2.7.2.4.1.1 "><p>1</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="16.943521594684388%" headers="mcps1.2.2.7.2.4.1.2 "><p>Barre d'outils</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="76.41196013289037%" headers="mcps1.2.2.7.2.4.1.3 "><p>Les icônes de la barre d'outils peuvent être utilisées pour gérer à distance le serveur.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="6.64451827242525%" headers="mcps1.2.2.7.2.4.1.1 "><p>2</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="16.943521594684388%" headers="mcps1.2.2.7.2.4.1.2 "><p>Serveur de bureau</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="76.41196013289037%" headers="mcps1.2.2.7.2.4.1.3 "><p>Vous pouvez utiliser la souris et le clavier sur votre PC local pour manger le serveur sur une base en temps réel. </p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="6.64451827242525%" headers="mcps1.2.2.7.2.4.1.1 "><p>3</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="16.943521594684388%" headers="mcps1.2.2.7.2.4.1.2 "><p>&Eacute;tat de Barre</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="76.41196013289037%" headers="mcps1.2.2.7.2.4.1.3 "><p>Afficher des conseils pour le Bureau du serveur et des données sur la communication entre le serveur et le PC local sur une base en temps réel.</p>
+<div class="note"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>La barre de titre en haut de l'écran KVM affiche l'adresse
+IP de l'iBMC et le numéro de série du produit du serveur.</p>
+</div></div>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section" id="bmc_help_0008__java_01"><a name="bmc_help_0008__java_01"></a><a name="java_01"></a><h4 class="sectiontitle">Procédure</h4><p><strong id="bmc_help_0008__combine"><a name="bmc_help_0008__combine"></a><a name="combine"></a>Envoi une touche de combinaison </strong></p>
+<ol><li><p>Sur l'écran KVM, cliquez sur <span><img src="fig/fig_bmc_help_0008_03.png"></span> de la barre d'outils.</p>
+<p>La boîte de dialogue de combinaison de touches est affichée.</p>
+</li><li id="bmc_help_0008__combine_tep2"><a name="bmc_help_0008__combine_tep2"></a><a name="combine_tep2"></a>Cliquez sur une touche de combinaison.<p>Le serveur effectue l'opération définie pour la touche de combinaison.</p>
+</li></ol>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p id="bmc_help_0008__custom"><a name="bmc_help_0008__custom"></a><a name="custom"></a>Si vous souhaitez de personnaliser une touche de combinaison, entrez les clés dans la zone de texte à côté de <span class="parmname"><b>Custom</b></span> et cliquez sur <span class="uicontrol"><b>Envoyer</b></span>.</p>
+</div></div>
+<p id="bmc_help_0008__keybo_layout_pro01"><a name="bmc_help_0008__keybo_layout_pro01"></a><a name="keybo_layout_pro01"></a><strong>Spécification du clavier du client</strong></p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>Seules l'iBMC 2.98 et les versions supérieurs prennent en charge la sélection du type de clavier client.</p>
+</div></div>
+<p>Sur l'écran <span class="wintitle"><b>KVM</b></span>, cliquez sur <span><img src="fig/help_0008_0001.png"></span> de la barre d'outils
+et sélectionnez le clavier à utiliser.</p>
+<p><strong id="bmc_help_0008__iso_01"><a name="bmc_help_0008__iso_01"></a><a name="iso_01"></a>Montage d'un lecteur de DVD-ROM</strong></p>
+<p id="bmc_help_0008__iso_02"><a name="bmc_help_0008__iso_02"></a><a name="iso_02"></a>Monter le lecteur de DVD-ROM sur le PC local sur le serveur.</p>
+<ol><li><p>Sur l'écran KVM, cliquez sur <span><img src="fig/fig_bmc_help_0008_10.png"></span> dans la barre d'outils.</p>
+<p>La boîte de dialogue illustrée dans <a href="#bmc_help_0008__fig_17">Figure 3</a> est affichée.</p>
+<div class="fignone" id="bmc_help_0008__fig_17"><a name="bmc_help_0008__fig_17"></a><a name="fig_17"></a><span class="figcap"><b>Figure 3 </b>Montage d'un lecteur de DVD-ROM virtuel</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_17_fr.png"></span><br>
+</div>
+</li><li>Sélectionner <span class="parmname"><b>CD/DVD</b></span>.</li><li>Sélectionnez la lettre de lecteur du lecteur de DVD-ROM sur le PC local dans la liste déroulante, par exemple,  <span class="parmvalue"><b>G : </b></span>.</li><li>Cliquez sur <span class="uicontrol"><b>Connexion</b></span>.<p> Le lecteur de DVD-ROM du PC local est monté sur le serveur.</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>Pour démonter le lecteur de DVD-ROM, cliquez sur <span class="uicontrol"><b>Se déconnecter</b></span>. Et puis ; cliquez sur <span class="uicontrol"><b>Oui</b></span> dans la boîte de dialogue affichée <span class="wintitle"><b>Confirmer</b></span>.</p>
+</div></div>
+</li></ol>
+<p id="bmc_help_0008__use_iso_install_cdrom"><a name="bmc_help_0008__use_iso_install_cdrom"></a><a name="use_iso_install_cdrom"></a><strong>Chargement d'un fichier image à partir du PC local via le lecteur de DVD-ROM virtuel</strong></p>
+<p>Montez le lecteur de DVD-ROM sur le PC local et chargez un fichier d'image du PC local vers le serveur.</p>
+<ol><li><p>Sur l'écran KVM, cliquez sur <span><img src="fig/fig_bmc_help_0008_10.png"></span> dans la barre d'outils.</p>
+<p>la boîte de dialogue illustrée dans <a href="#bmc_help_0008__fig_17">Figure 3</a> est affichée.</p>
+</li><li>Sélectionnez <span class="parmname"><b>Fichier image</b></span>.</li><li>Cliquez sur <span class="uicontrol"><b>Parcourir</b></span>.<p>La boîte de dialogue <span class="wintitle"><b>Ouvrir</b></span> est affichée.</p>
+</li><li>Sélectionnez le fichier image sur le PC local, puis cliquez sur <span class="uicontrol"><b>Ouvrir</b></span>. <p> La boîte de dialogue illustrée dans <a href="#bmc_help_0008__fig_17">Figure 3</a> est affichée.</p>
+</li><li>Cliquez sur <span class="uicontrol"><b>Connexion</b></span>.<p>Le lecteur de DVD-ROM virtuel est correctement monté sur le serveur et le fichier d'image est correctement téléchargé.</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody"><ul><li><p>Pour télécharger un autre fichier d'image, cliquez sur <span class="uicontrol"><b>&Eacute;jecter</b></span> pour éjecter le fichier d'image de FDD existant, et sélectionnez le nouveau fichier d'image, puis cliquez sur <span class="uicontrol"><b>Insérer</b></span>.</p>
+</li><li><p>Pour démonter le lecteur de DVD-ROM virtuel, cliquez sur<span class="uicontrol"><b>Se déconnecter</b></span>. Puis, cliquez sur <span class="uicontrol"><b>Oui</b></span> dans la boîte de dialogue de <span class="wintitle"><b>Confirmer</b></span>.</p>
+</li></ul>
+</div></div>
+</li></ol>
+<p><strong>Montage d'un FDD virtuel</strong></p>
+<p>Montez le FDD sur le PC local sur le serveur.</p>
+<ol><li>Sur l'écran KVM, cliquez sur <span><img src="fig/fig_bmc_help_0008_11.png"></span> dans la barre d'outils.<p>La boîte de dialogue illustrée dans <a href="#bmc_help_0008__fig_18">Figure 4</a> est affichée.</p>
+<div class="fignone" id="bmc_help_0008__fig_18"><a name="bmc_help_0008__fig_18"></a><a name="fig_18"></a><span class="figcap"><b>Figure 4 </b>Montage d'un FDD virtuel</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_18_fr.png"></span><br>
+</div>
+</li><li>Sélectionnez <span class="parmname"><b>Disquette</b></span>.</li><li>Sélectionnez la lettre de lecteur du FDD sur le PC local dans la liste déroulante, par exemple, <span class="parmvalue"><b>A : </b></span>.</li><li>Sélectionnez la boîte de vérifier <span class="parmname"><b>Protection d'écrire</b></span>.<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p><span class="parmname"><b>Protection d'écrire</b></span> est un mécanisme qui empêche l'altération ou l'effacement des données importantes. Si <span class="parmname"><b>Protection d'écrire</b></span> est sélectionné, les données ne peuvent pas être écrites dans le FDD spécifié.</p>
+</div></div>
+</li><li>Cliquez sur <span class="uicontrol"><b>Connexion</b></span>.<p> Le FDD est monté sur le serveur.</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>Pour démonter le FDD, cliquez sur <span class="uicontrol"><b>Se déconnecter</b></span>. Puis, cliquez sur <span class="uicontrol"><b>Oui</b></span> dans la boîte de dialogue de <span class="wintitle"><b>Confirmer</b></span>.</p>
+</div></div>
+</li></ol>
+<p><strong id="bmc_help_0008__fdd_img01"><a name="bmc_help_0008__fdd_img01"></a><a name="fdd_img01"></a>Téléchargement d'un fichier d'image à partir du PC local via le FDD virtuel</strong></p>
+<p id="bmc_help_0008__fdd_img02"><a name="bmc_help_0008__fdd_img02"></a><a name="fdd_img02"></a>Montez le FDD du PC local et chargez un fichier d'image du PC local au serveur. </p>
+<ol><li>Sur l'écran KVM, cliquez sur <span><img src="fig/fig_bmc_help_0008_11.png"></span> dans la barre d'outils.<p> La boîte de dialogue illustrée dans <a href="#bmc_help_0008__fig_18">Figure 4</a> est affichée.</p>
+</li><li>Sélectionnez <span class="parmname"><b>Fichier Image</b></span>.</li><li>Cliquez sur <span class="uicontrol"><b>Parcourir</b></span>.<p> La boîte de dialogue <span class="wintitle"><b>Ouvrir</b></span> est affichée.</p>
+</li><li>Sélectionnez le fichier image sur le PC local, puis cliquez sur <span class="uicontrol"><b>Ouvrir</b></span>.<p> La boîte de dialogue illustrée dans <a href="#bmc_help_0008__fig_18">Figure 4</a> est affichée.</p>
+</li><li>Cliquez sur <span class="uicontrol"><b>Connexion</b></span>.<p> Le fichier image est correctement téléchargé sur le serveur.</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody"><ul><li id="bmc_help_0008__fdd_img04"><a name="bmc_help_0008__fdd_img04"></a><a name="fdd_img04"></a><p>Pour télécharger un autre fichier image, cliquez sur <span class="uicontrol"><b>&Eacute;jecter</b></span> pour éjecter le FDD virtuel existant, sélectionnez le nouveau fichier image, puis cliquez sur <span class="uicontrol"><b>Insérer</b></span>.</p>
+</li><li><p>Pour démonter le FDD vituel, cliquez sur <span class="uicontrol"><b>Se déconnecter</b></span>. Puis, cliquez sur <span class="uicontrol"><b>Oui</b></span> dans la boîte de dialogue de <span class="wintitle"><b>Confirmer</b></span>.</p>
+</li></ul>
+</div></div>
+</li></ol>
+<p id="bmc_help_0008__make_iso"><a name="bmc_help_0008__make_iso"></a><a name="make_iso"></a><strong>Création d'un fichier image</strong></p>
+<p>Créez un fichier image à l'aide de la disquette sur le FDD ou le DVD-ROM dans le lecture de DVD-ROM du PC local. Le fichier image créé est stocké sur le PC local.</p>
+<p>Avant d'effectuer
+cette opération, assurez-vous qu'une disquette a été insérée dans le FDD ou qu'un DVD-ROM a été inséré dans le lecteur de DVD-ROM du PC local.</p>
+<ol><li><p>Sur l'écran KVM, cliquez sur <span><img src="fig/fig_bmc_help_0008_12.png"></span> dans la barre d'outils.</p>
+<p>La boîte de dialogue illustrée dans <a href="#bmc_help_0008__fig_19">Figure 5</a> s'affiche.</p>
+<div class="fignone" id="bmc_help_0008__fig_19"><a name="bmc_help_0008__fig_19"></a><a name="fig_19"></a><span class="figcap"><b>Figure 5 </b>Création d'un fichier image</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_19_fr.png"></span><br>
+</div>
+</li><li>Sélectionnez la lettre de lecteur du lecteur de disquette ou de DVD-ROM sur le PC local dans la liste déroulante pilote <span class="parmname"><b>Pilote</b></span> .</li><li>Cliquez sur <span class="uicontrol"><b>Parcourir</b></span>. La boîte de dialogue <span class="wintitle"><b>Enregistrer</b></span> s'affiche. </li><li>Spécifiez un répertoire pour enregistrer le fichier image et saisissez le nom du fichier dans la zone de texte <span class="parmname"><b>Nom du fichier</b></span>.<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>Vous ne pouvez créer que <i><span class="varname">*</span></i> fichiers image ISO à l'aide du lecteur
+de DVD-ROM et <i><span class="varname">*</span></i> fichiers image img en utilisant le FDD.</p>
+</div></div>
+</li><li>Cliquez sur <span class="uicontrol"><b>Enregistrer</b></span>.<p> La boîte de dialogue illustrée dans <a href="#bmc_help_0008__fig_19">Figure 5</a> s'affiche.</p>
+</li><li>Cliquez sur <span class="uicontrol"><b>Créer</b></span>. <p><span class="parmname"><b>Progression</b></span> indique la progression de la création du fichier image.</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>Pour arrêter la création d'un fichier image, cliquez sur <span class="uicontrol"><b>Arrêt</b></span>.</p>
+</div></div>
+</li></ol>
+<p><strong id="bmc_help_0008__iso_local_01"><a name="bmc_help_0008__iso_local_01"></a><a name="iso_local_01"></a>Montage d'un répertoire virtuel</strong></p>
+<p id="bmc_help_0008__iso_local_02"><a name="bmc_help_0008__iso_local_02"></a><a name="iso_local_02"></a>Montez les répertoires sur le PC local sur le serveur afin que le serveur puisse accéder aux répertoires locaux en mode lecture-seule.</p>
+<div class="notice"><span class="noticetitle"><img src="../public_sys-resources/icon-notice.gif"> AVIS: </span><div class="noticebody"><p><span id="bmc_help_0008__iso_local_03"><a name="bmc_help_0008__iso_local_03"></a><a name="iso_local_03"></a>Avant de monter un répertoire, copiez les fichiers nécessaires dans le répertoire. Une fois le répertoire monté, vous ne pouvez pas ajouter ou supprimer des fichiers dans le répertoire.</span>.</p>
+</div></div>
+<ol><li>Sur l'écran KVM, cliquez sur <span><img src="fig/fig_bmc_help_0008_10.png"></span> de la barre d'outils. <p>La boîte de dialogue illustrée dans <a href="#bmc_help_0008__fig_20">Figure 6</a> s'affiche. </p>
+<div class="fignone" id="bmc_help_0008__fig_20"><a name="bmc_help_0008__fig_20"></a><a name="fig_20"></a><span class="figcap"><b>Figure 6 </b>Montage d'un répertoire virtuel</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_17_fr.png"></span><br>
+</div>
+</li><li>Cliquez sur le bouton d'option<span class="parmname"><b>Répertoire</b></span>.</li><li>Cliquez sur <span class="uicontrol"><b>Parcourir</b></span>. <p>La boîte de dialogue permettant de sélectionner un répertoire local s'affiche.</p>
+</li><li>Sélectionnez le répertoire et cliquez sur <span class="uicontrol"><b>Ouvrir</b></span>.</li><li>Cliquez sur <span class="uicontrol"><b>Connexion</b></span>. <div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody"><a name="bmc_help_0008__iso_local_04"></a><a name="iso_local_04"></a><ul id="bmc_help_0008__iso_local_04"><li>Si la connexion est réussie, le répertoire virtuel est affiché dans la liste du système d'exploitation du serveur. Vous pouvez copier des fichiers de ce répertoire.</li><li>Pour démonter le répertoire virtuel, cliquez sur <span class="uicontrol"><b>Se déconnecter</b></span>.</li></ul>
+</div></div>
+</li></ol>
+<p id="bmc_help_0008__poweron_01"><a name="bmc_help_0008__poweron_01"></a><a name="poweron_01"></a><strong>Mise sous tension sur le serveur</strong></p>
+<ol><li>Sur l'écran KVM, cliquez sur <span><img src="fig/fig_bmc_help_0008_13.png"></span> de la barre d'outils, et choisissez <span class="uicontrol"><b>Mise Sous Tension</b></span> dans le menu. <p>La boîte de dialogue <span class="wintitle"><b>Confirmer </b></span> est affichée.</p>
+</li><li>Cliquez sur <span class="uicontrol"><b>Oui</b></span>.<p id="bmc_help_0008__poweron_03"><a name="bmc_help_0008__poweron_03"></a><a name="poweron_03"></a>Le serveur est sous tension.</p>
+<div class="note" id="bmc_help_0008__poweron_02"><a name="bmc_help_0008__poweron_02"></a><a name="poweron_02"></a><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>L'heure de mise sous tension du serveur varie en fonction de la configuration du serveur.</p>
+</div></div>
+</li></ol>
+<p id="bmc_help_0008__poweroff_01"><a name="bmc_help_0008__poweroff_01"></a><a name="poweroff_01"></a><strong>Mise hors tension du serveur</strong></p>
+<div class="notice" id="bmc_help_0008__poweroff_02"><a name="bmc_help_0008__poweroff_02"></a><a name="poweroff_02"></a><span class="noticetitle"><img src="../public_sys-resources/icon-notice.gif"> AVIS: </span><div class="noticebody"><ul><li><p>Avant d'éteindre le serveur, assurez-vous que tous les services sont arrêtés.</p>
+</li><li>Sélectionnez un mode de mise hors tension selon vos besoins. Pour plus de détails sur la différence entre les modes de mise hors tension, voir <span class="uicontrol"><b>Contrôle d'alimentation</b></span>.</li></ul>
+</div></div>
+<ol><li>Sur l'écran KVM, cliquez sur <span><img src="fig/fig_bmc_help_0008_13.png"></span> de la barre d'outils, et choisissez <span class="uicontrol"><b>&Eacute;teindre</b></span> dans le menu.<p>La boîte de dialogue <span class="wintitle"><b>Confirmer </b></span> est affichée.</p>
+</li><li>Cliquez sur <span class="uicontrol"><b>Oui</b></span>.<p id="bmc_help_0008__poweroff_03"><a name="bmc_help_0008__poweroff_03"></a><a name="poweroff_03"></a>Le serveur est hors tension.</p>
+</li></ol>
+<p id="bmc_help_0008__force_01"><a name="bmc_help_0008__force_01"></a><a name="force_01"></a><strong>La réinitialisation forcée ou le cycle de la puissance du serveur</strong></p>
+<div class="notice" id="bmc_help_0008__force_02"><a name="bmc_help_0008__force_02"></a><a name="force_02"></a><span class="noticetitle"><img src="../public_sys-resources/icon-notice.gif"> AVIS: </span><div class="noticebody"><ul><li><p id="bmc_help_0008__force_reset_cycle"><a name="bmc_help_0008__force_reset_cycle"></a><a name="force_reset_cycle"></a>Une réinitialisation forcée ou un cycle d'alimentation peuvent endommager les programmes d'utilisateur ou les données non enregistrées. </p>
+</li><li><p>Avant de réinitialiser avec force le système ou d'alimenter le serveur la puissance cyclique avec force, assurez-vous qu'aucun risque de service n'existe.</p>
+</li><li><p>Sélectionnez un mode de réinitialisation (<span class="uicontrol"><b>Réinitialisation du système forcée </b></span>ou <span class="uicontrol"><b>Cycle d'alimentation forcée</b></span>) selon les exigences de service. Pour plus d'informations sur la différence entre
+les deux modes, voir <span class="uicontrol"><b>Contrôle d'alimentation</b></span>.</p>
+</li></ul>
+</div></div>
+<ol><li>Sur l'écran KVM, cliquez<span><img src="fig/fig_bmc_help_0008_13.png"></span> sur la barre d'outils, et choisissez <span class="uicontrol"><b>Réinitialisation du système forcée</b></span>ou <span class="uicontrol"><b>Cycle d'alimentation forcée</b></span>dans le
+menu. <p>La boîte de dialogue <span class="wintitle"><b>Confirmer </b></span> est affichée.</p>
+</li><li>Cliquez sur <span class="uicontrol"><b>Oui</b></span>.<p id="bmc_help_0008__force_03"><a name="bmc_help_0008__force_03"></a><a name="force_03"></a>Le serveur commence à réinitialiser ou à s'éteindre, et puis s'alimente.</p>
+<div class="note" id="bmc_help_0008__force_04"><a name="bmc_help_0008__force_04"></a><a name="force_04"></a><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> REMARQUE: </span><div class="notebody"><p>La durée de réinitialisation ou de cycle d'alimentation varie en
+fonction de la configuration du serveur.</p>
+</div></div>
+</li></ol>
+<p><strong id="bmc_help_0008__resetkm1"><a name="bmc_help_0008__resetkm1"></a><a name="resetkm1"></a>Réinitialisation de la souris et des touches</strong></p>
+<p id="bmc_help_0008__resetkm2"><a name="bmc_help_0008__resetkm2"></a><a name="resetkm2"></a>Simulez la suppression et l'installation d'un clavier et d'une souris USB lorsque le clavier et la souris sur le Bureau du serveur cessent de
+répondre.</p>
+<ol><li>Sur l'écran KVM, cliquez sur <span><img src="fig/fig_bmc_help_0008_16.png"></span> dans la barre d'outils, et choisissez <span class="uicontrol"><b>Réinitialisation de la souris et des touches</b></span> dans le menu.<p> La boîte de dialogue <span class="wintitle"><b>Confirmer </b></span> est affichée.</p>
+</li><li>Cliquez sur <span class="uicontrol"><b>Oui</b></span>.<p id="bmc_help_0008__resetkm3"><a name="bmc_help_0008__resetkm3"></a><a name="resetkm3"></a> Le clavier et la souris USB sont réinitialisés.</p>
+</li></ol>
+<p id="bmc_help_0008__record"><a name="bmc_help_0008__record"></a><a name="record"></a><strong id="bmc_help_0008__record01"><a name="bmc_help_0008__record01"></a><a name="record01"></a>Enregistrement d'une vidéo dans le Bureau du serveur</strong></p>
+<p id="bmc_help_0008__record02"><a name="bmc_help_0008__record02"></a><a name="record02"></a>Enregistrez une vidéo du Bureau affichée sur la console à distance virtuelle.</p>
+<ol><li>Sur l'écran KVM, cliquez sur <span><img src="fig/fig_bmc_help_0008_15.png"></span> de la barre d'outils.<p> La boîte de dialogue <span class="wintitle"><b>Confirmer </b></span> est affichée.</p>
+</li><li>Cliquez sur <span class="uicontrol"><b>Oui</b></span>.<p> La boîte de dialogue <span class="wintitle"><b>Enregistrer</b></span> s'affiche.</p>
+</li><li>Sélectionnez un répertoire pour enregistrer le fichier vidéo à enregistrer et saisissez un nom de fichier dans la zone de texte <span class="parmname"><b>Nom du fichier</b></span>.</li><li>Cliquez sur <span class="uicontrol"><b>Enregistrer</b></span>.<p> L'écran KVM s'affiche, et l'enregistrement vidéo démarre.</p>
+</li><li>Une fois la vidéo enregistrée, cliquez sur <span><img src="fig/fig_bmc_help_0008_21.png"></span>.<p> La boîte de dialogue <span class="wintitle"><b>Confirmer </b></span> est affichée.</p>
+</li><li>Cliquez sur <span class="uicontrol"><b>Oui</b></span>.<p> Le fichier vidéo est enregistré dans le répertoire spécifié.</p>
+</li></ol>
+<p id="bmc_help_0008__record03"><a name="bmc_help_0008__record03"></a><a name="record03"></a>Le fichier vidéo est a fichier de .rep. Vous pouvez lire le fichier vidéo sur la page<span class="uicontrol"><b> Lecture</b></span>.</p>
+<p><strong id="bmc_help_0008__sigle_mouse1"><a name="bmc_help_0008__sigle_mouse1"></a><a name="sigle_mouse1"></a>Utilisation d'une souris unique</strong></p>
+<p id="bmc_help_0008__sigle_mouse2"><a name="bmc_help_0008__sigle_mouse2"></a><a name="sigle_mouse2"></a>Si la souris sur le
+PC local n'est pas synchronisée avec le bureau du serveur, utilisez la fonction mono-souris pour masquer la souris sur le PC local et afficher uniquement la souris du bureau du serveur sur le </p>
+<ol><li>Sur l'écran KVM, cliquez sur <span><img src="fig/fig_bmc_help_0008_16.png"></span> dans la barre d'outils, et choisissez <span class="uicontrol"><b>Souris unique</b></span>dans le menu.<p> La boîte de dialogue <span class="wintitle"><b>Confirmer </b></span> est affichée.</p>
+</li><li>Cliquez sur <span class="uicontrol"><b>Oui</b></span>.<p id="bmc_help_0008__single_mouse3"><a name="bmc_help_0008__single_mouse3"></a><a name="single_mouse3"></a> Que la souris sur le Bureau du serveur est affichée sur l'écran KVM.</p>
+</li></ol>
+<p><strong id="bmc_help_0008__acce_mouse1"><a name="bmc_help_0008__acce_mouse1"></a><a name="acce_mouse1"></a>Accélération de la souris à distance</strong><strong></strong></p>
+<p id="bmc_help_0008__acce_mouse2"><a name="bmc_help_0008__acce_mouse2"></a><a name="acce_mouse2"></a>Accélérez la souris sur le Bureau du serveur pour la synchroniser avec la souris sur le PC local.</p>
+<ol><li>Sur l'écran KVM, cliquez <span><img src="fig/fig_bmc_help_0008_16.png"></span> sur la barre d'outils, et choisissez <span class="uicontrol"><b>Accélération de la souris</b></span> dans le menu.<p> La boîte de dialogue <span class="wintitle"><b>Confirmer </b></span> est
+affichée.</p>
+</li><li>Cliquez sur <span class="uicontrol"><b>Oui</b></span>.<p id="bmc_help_0008__acce_mouse3"><a name="bmc_help_0008__acce_mouse3"></a><a name="acce_mouse3"></a> La souris du serveur est synchronisée avec la souris sur le PC local.</p>
+</li></ol>
+</div>
+
+</div>
+
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>

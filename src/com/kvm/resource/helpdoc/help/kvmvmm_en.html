@@ -1,0 +1,531 @@
+<!DOCTYPE html  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en-us" xml:lang="en-us">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+<meta name="copyright" content="(C) Copyright 2005">
+<meta name="DC.rights.owner" content="(C) Copyright 2005">
+<meta name="DC.Type" content="concept">
+<meta name="DC.Title" content="Java Remote Virtual Console">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="bmc_help_0008">
+<meta name="DC.Language" content="en-us">
+<link rel="stylesheet" type="text/css" href="../public_sys-resources/commonltr.css">
+<title>Java Remote Virtual Console</title>
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js"></script>
+<script type="text/javascript" language="javascript" src="../whver.js"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js"></script>
+
+ <meta name="generator" content="Adobe RoboHelp 9">
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	if (window.addTocInfo)
+	{
+	addTocInfo("Remote Console\nJava Remote Virtual Console");
+addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	document.write("<p style=\"text-align:right\"> ");
+AddMasterBreadcrumbs("../pme_help.htm", "", ">", "Home", "bmc_help_0017.html");
+document.write("<a href=\"bmc_help_0007.html\">Remote Console<\/a> > Java Remote Virtual Console<\/p>");
+
+
+	if (window.setRelStartPage)
+	{
+	setRelStartPage("../pme_help.htm");
+
+		autoSync(1);
+		sendSyncInfo();
+		sendAveInfoOut();
+	}
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+//-->
+//]]></script><a name="bmc_help_0008"></a><a name="bmc_help_0008"></a>
+
+
+<h1 class="topictitle1">Java Remote Virtual Console</h1>
+
+<div id="kvm"><a name="kvm"></a><a name="kvm"></a>
+<div class="section" id="bmc_help_0008__java_02"><a name="bmc_help_0008__java_02"></a><a name="java_02"></a><h4 class="sectiontitle">Function Description</h4><p id="bmc_help_0008__func01"><a name="bmc_help_0008__func01"></a><a name="func01"></a>With the Java remote virtual console, you can access and manage a server remotely, install or repair the OS, and install drivers on the server. </p>
+<p id="bmc_help_0008__func04"><a name="bmc_help_0008__func04"></a><a name="func04"></a>With the Integrated Remote Console: </p>
+<a name="bmc_help_0008__func02"></a><a name="func02"></a><ul id="bmc_help_0008__func02"><li>You can use the keyboard and mouse of the local PC to remotely manage the server.</li><li>You can enable the server to remotely access the local PC over a network using a <span>virtual floppy disk drive (FDD) or </span>DVD-ROM drive. To the server, the use of <span>the virtual FDD or </span>virtual DVD-ROM drive is the same as the user of a physical USB device.<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody"><p>The media on the local PC can be a local <span>FDD or </span>DVD-ROM drive, or a <span>floppy disk or </span>DVD image file stored on the local PC or network drive.</p>
+</div></div>
+</li></ul>
+<p id="bmc_help_0008__func03"><a name="bmc_help_0008__func03"></a><a name="func03"></a><a href="#bmc_help_0008__tab_02">Table 1</a> describes the icons on the KVM screen.</p>
+
+<div class="tablenoborder"><a name="bmc_help_0008__tab_02"></a><a name="tab_02"></a><table cellpadding="4" cellspacing="0" summary="" id="bmc_help_0008__tab_02" frame="border" border="1" rules="all"><caption><b>Table 1 </b>Icons on the KVM screen</caption>
+<thead align="left">
+<tr>
+<th class="cellrowborder" valign="top" width="31%" id="mcps1.2.1.6.2.3.1.1"><p>Icon</p>
+</th>
+
+<th class="cellrowborder" valign="top" width="69%" id="mcps1.2.1.6.2.3.1.2"><p>Description</p>
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_02.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__lock"><a name="bmc_help_0008__lock"></a><a name="lock"></a>Locks the toolbar.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_07.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__hide"><a name="bmc_help_0008__hide"></a><a name="hide"></a>Hides the toolbar.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_04.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__full-screen"><a name="bmc_help_0008__full-screen"></a><a name="full-screen"></a>Shows the server desktop in full-screen mode.</p>
+<div class="note"><span class="notetitle"> NOTE: </span><div class="notebody"><p>To switch from full-screen mode to windowed mode, move the pointer to the top of the full-screen or press <span class="uicontrol"><b>Ctrl+Alt+Shift</b></span> to display the tool bar and press <span><img src="fig/fig_bmc_help_0008_05.png"></span>.</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_22.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p>Synchronizes the mouse location.</p>
+<div class="note"><span class="notetitle"> NOTE: </span><div class="notebody"><p>This button is available on the toolbar only when the server desktop is displayed in full screen mode.</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_23.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p>Changes the mouse mode. </p>
+<div class="note"><span class="notetitle"> NOTE: </span><div class="notebody"><p>This button is available on the toolbar only when the server desktop is displayed in full screen mode.</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_05.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p>Returns to the server desktop in windowed mode.</p>
+<div class="note"><span class="notetitle"> NOTE: </span><div class="notebody"><p>This button is available on the toolbar only when the server desktop is displayed in full screen mode.</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_13.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__contrl01"><a name="bmc_help_0008__contrl01"></a><a name="contrl01"></a>Displays the power control menu, which includes the following:</p>
+<div class="p" id="bmc_help_0008__contrl02"><a name="bmc_help_0008__contrl02"></a><a name="contrl02"></a><ul><li>Power On</li><li>Forced Power Off</li><li>Power Off</li><li>Forced System Reset</li><li>Forced Power Cycle</li></ul>
+</div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_15.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__video"><a name="bmc_help_0008__video"></a><a name="video"></a>Records a video for the operations performed on the server.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_16.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__mouse01"><a name="bmc_help_0008__mouse01"></a><a name="mouse01"></a>Controls the server mouse. The control operations include the following:</p>
+<a name="bmc_help_0008__mouse02"></a><a name="mouse02"></a><ul id="bmc_help_0008__mouse02"><li><p><span class="parmvalue"><b>Mouse Acceleration</b></span></p>
+<p>Accelerates the mouse on the server desktop to synchronize it with the mouse on the local PC.</p>
+<div class="note"><span class="notetitle"> NOTE: </span><div class="notebody">The SUSE versions earlier than SUSE 12 do not support mouse acceleration.</div></div>
+</li><li><p><span class="parmname"><b>Single Mouse</b></span></p>
+<p>Hides the mouse on the local PC and displays only the mouse on the server desktop.</p>
+</li><li><p><span class="parmvalue"><b>Mouse &amp; Key Reset</b></span></p>
+<p>Simulates the removal and installation of a USB keyboard and mouse. When the keyboard and mouse on the server desktop stop responding, you can click <span class="uicontrol"><b>Mouse &amp; Key Reset</b></span> to restore them.</p>
+</li></ul>
+<p><span id="bmc_help_0008__mouse03"><a name="bmc_help_0008__mouse03"></a><a name="mouse03"></a>Default setting: <span class="parmvalue"><b>Mouse Acceleration</b></span></span></p>
+<div class="note"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="bmc_help_0008__mouse_note"><a name="bmc_help_0008__mouse_note"></a><a name="mouse_note"></a>If <span class="parmvalue"><b>Mouse Acceleration</b></span> and <span class="parmname"><b>Single Mouse</b></span> are not selected, the mouse of the server desktop and the mouse of the local PC will be displayed and are not synchronized. </p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_10.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__dvdbutton"><a name="bmc_help_0008__dvdbutton"></a><a name="dvdbutton"></a>Selects and uses a virtual DVD-ROM drive.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_11.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__fddbutton"><a name="bmc_help_0008__fddbutton"></a><a name="fddbutton"></a>Selects and uses a virtual FDD.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_12.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p>Uses a DVD-ROM drive or FDD to create an image file.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_03.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__keybo"><a name="bmc_help_0008__keybo"></a><a name="keybo"></a>Sends or customizes combination keys. The combination keys are described as follows:</p>
+<ul><li id="bmc_help_0008__ctrl_shift"><a name="bmc_help_0008__ctrl_shift"></a><a name="ctrl_shift"></a><span class="uicontrol"><b>Ctrl+Shift</b></span>: switches between input methods.</li><li id="bmc_help_0008__ctrl_esc"><a name="bmc_help_0008__ctrl_esc"></a><a name="ctrl_esc"></a><span class="uicontrol"><b>Ctrl+Esc</b></span>: expands or collapses the <span class="parmname"><b>Start</b></span> menu.</li><li id="bmc_help_0008__ctrl_alt_del"><a name="bmc_help_0008__ctrl_alt_del"></a><a name="ctrl_alt_del"></a><span class="uicontrol"><b>Ctrl+Alt+Del</b></span>: locks the OS window, logs out a user, changes the password, opens Task Manager, or restarts the server.</li><li id="bmc_help_0008__alt_tab"><a name="bmc_help_0008__alt_tab"></a><a name="alt_tab"></a><span class="uicontrol"><b>Alt+Tab</b></span>: switches between running applications.</li><li id="bmc_help_0008__ctrl_space"><a name="bmc_help_0008__ctrl_space"></a><a name="ctrl_space"></a><span class="uicontrol"><b>Ctrl+Space</b></span>: enables or disables an input method.</li><li><span class="uicontrol"><b>ResetKeyboad</b></span>: simulates the release of a key on the keyboard.</li></ul>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/help_0008_0001.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__keybo_layout_01"><a name="bmc_help_0008__keybo_layout_01"></a><a name="keybo_layout_01"></a>Customizes the client keyboard. By default, the iBMC automatically selects the type of the client keyboard to be used. If the keyboard automatically selected does not function well, you can manually specify the keyboard type. </p>
+<a name="bmc_help_0008__keybo_layout_02"></a><a name="keybo_layout_02"></a><ul id="bmc_help_0008__keybo_layout_02"><li id="bmc_help_0008__keybo_layout_us"><a name="bmc_help_0008__keybo_layout_us"></a><a name="keybo_layout_us"></a><span class="parmname"><b>English (US)</b></span>: Use the English (US) keyboard. </li><li id="bmc_help_0008__keybo_layout_jp"><a name="bmc_help_0008__keybo_layout_jp"></a><a name="keybo_layout_jp"></a><span class="parmname"><b>Japanese</b></span>: Use the Japanese keyboard.</li><li id="bmc_help_0008__keybo_layout_fr"><a name="bmc_help_0008__keybo_layout_fr"></a><a name="keybo_layout_fr"></a><span class="parmname"><b>French</b></span>: Use the French keyboard. </li></ul>
+<div class="note" id="bmc_help_0008__keybo_laout_note"><a name="bmc_help_0008__keybo_laout_note"></a><a name="keybo_laout_note"></a><span class="notetitle"> NOTE: </span><div class="notebody"><p>Only iBMC 2.98 and later versions support this button and related settings.</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><p>Image Clarity</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__image"><a name="bmc_help_0008__image"></a><a name="image"></a>Adjusts the image clarity of the server desktop.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_06.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__num"><a name="bmc_help_0008__num"></a><a name="num"></a>Indicates the status of the <span class="uicontrol"><b>Num Lock</b></span> key on the server.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_08.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__caps_lock"><a name="bmc_help_0008__caps_lock"></a><a name="caps_lock"></a>Indicates the status of the <span class="uicontrol"><b>Caps Lock</b></span> key on the server.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_09.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__scroll"><a name="bmc_help_0008__scroll"></a><a name="scroll"></a>Indicates the status of the <span class="uicontrol"><b>Scroll Lock</b></span> key on the server. </p>
+<p>If you press <span class="uicontrol"><b>Ctrl+S</b></span> by mistake after entering the Linux character mode, the screen is locked. Press <span class="uicontrol"><b>Scroll Lock</b></span> to unlock the screen.</p>
+<div class="note" id="bmc_help_0008__scroll_note"><a name="bmc_help_0008__scroll_note"></a><a name="scroll_note"></a><span class="notetitle"> NOTE: </span><div class="notebody">If a keyboard input error occurs when you manage the server using the Remote Virtual Console, check the status of the <span><img src="fig/fig_bmc_help_0008_06.png"></span>, <span><img src="fig/fig_bmc_help_0008_08.png"></span>, and <span><img src="fig/fig_bmc_help_0008_09.png"></span> icons first.</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.6.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_14.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.6.2.3.1.2 "><p id="bmc_help_0008__help"><a name="bmc_help_0008__help"></a><a name="help"></a>Displays help information.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" colspan="2" valign="top" headers="mcps1.2.1.6.2.3.1.1 mcps1.2.1.6.2.3.1.2 "><p>Note: The icons on the Remote Virtual Console screen and their functions vary according to the server model.</p>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+<p><a href="#bmc_help_0008__fig_21">Figure 1</a> shows the process for using a virtual DVD-ROM drive on the toolbar. The process for using an image file or virtual FDD is similar to this process.</p>
+<div class="fignone" id="bmc_help_0008__fig_21"><a name="bmc_help_0008__fig_21"></a><a name="fig_21"></a><span class="figcap"><b>Figure 1 </b>Process</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_20.png"></span></div>
+</div>
+
+<div class="section"><h4 class="sectiontitle">GUI</h4><p>Choose <span class="uicontrol"><b>Remote Console</b></span> from the main menu, and click <span class="uicontrol"><b>Java Integrated Remote Console (Shared)</b></span> or <span class="uicontrol"><b>Java Integrated Remote Console (private)</b></span>. </p>
+<p>The KVM screen is displayed.</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody">If you click <span class="uicontrol"><b>Java Integrated Remote Console (Shared)</b></span>, two users are allowed to simultaneously access and perform operations on the server. Each user can view the operations performed by the other user,
+which causes security risks.</div></div>
+<p>The KVM screen consists of three areas, as shown in <a href="#bmc_help_0008__fig_01">Figure 2</a>. <a href="#bmc_help_0008__tab_01">Table 2</a> describes the areas.</p>
+<div class="fignone" id="bmc_help_0008__fig_01"><a name="bmc_help_0008__fig_01"></a><a name="fig_01"></a><span class="figcap"><b>Figure 2 </b>KVM screen</span>
+
+
+
+<br><span><img src="fig/help_0008_rvc_en.png"></span><br>
+</div>
+
+<div class="tablenoborder"><a name="bmc_help_0008__tab_01"></a><a name="tab_01"></a><table cellpadding="4" cellspacing="0" summary="" id="bmc_help_0008__tab_01" frame="border" border="1" rules="all"><caption><b>Table 2 </b>Areas on the KVM screen</caption>
+<thead align="left">
+<tr>
+<th class="cellrowborder" valign="top" width="6.64451827242525%" id="mcps1.2.2.7.2.4.1.1"><p>No.</p>
+</th>
+
+<th class="cellrowborder" valign="top" width="16.943521594684388%" id="mcps1.2.2.7.2.4.1.2"><p>Area</p>
+</th>
+
+<th class="cellrowborder" valign="top" width="76.41196013289037%" id="mcps1.2.2.7.2.4.1.3"><p>Function</p>
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td class="cellrowborder" valign="top" width="6.64451827242525%" headers="mcps1.2.2.7.2.4.1.1 "><p>1</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="16.943521594684388%" headers="mcps1.2.2.7.2.4.1.2 "><p>Toolbar</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="76.41196013289037%" headers="mcps1.2.2.7.2.4.1.3 "><p>The icons on the toolbar can be used to remotely manage the server.</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="6.64451827242525%" headers="mcps1.2.2.7.2.4.1.1 "><p>2</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="16.943521594684388%" headers="mcps1.2.2.7.2.4.1.2 "><p>Server desktop</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="76.41196013289037%" headers="mcps1.2.2.7.2.4.1.3 "><p>You can use the mouse and keyboard on your local PC to manage the server on a real-time basis. </p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="6.64451827242525%" headers="mcps1.2.2.7.2.4.1.1 "><p>3</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="16.943521594684388%" headers="mcps1.2.2.7.2.4.1.2 "><p>Status bar</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="76.41196013289037%" headers="mcps1.2.2.7.2.4.1.3 "><p>Displays tips for the server desktop and data about communication between the server and the local PC on a real-time basis.</p>
+<div class="note"><span class="notetitle"> NOTE: </span><div class="notebody"><p>The title bar on the top of the KVM screen displays the IP address of the iBMC and the product serial number of the server.</p>
+</div></div>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section" id="bmc_help_0008__java_01"><a name="bmc_help_0008__java_01"></a><a name="java_01"></a><h4 class="sectiontitle">Procedure</h4><p><strong id="bmc_help_0008__combine"><a name="bmc_help_0008__combine"></a><a name="combine"></a>Sending a Combination Key</strong></p>
+<ol><li><p>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_03.png"></span> on the toolbar.</p>
+<p>The combination key dialog box is displayed.</p>
+</li><li id="bmc_help_0008__combine_tep2"><a name="bmc_help_0008__combine_tep2"></a><a name="combine_tep2"></a>Click a combination key.<p>The server performs the operation defined for the combination key.</p>
+</li></ol>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody"><p id="bmc_help_0008__custom"><a name="bmc_help_0008__custom"></a><a name="custom"></a>If you want to customize a combination key, enter the keys in the text box next to <span class="parmname"><b>Custom</b></span> and click <span class="uicontrol"><b>Send</b></span>.</p>
+</div></div>
+<p id="bmc_help_0008__keybo_layout_pro01"><a name="bmc_help_0008__keybo_layout_pro01"></a><a name="keybo_layout_pro01"></a><strong>Specifying the Client Keyboard</strong></p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody"><p>Only iBMC 2.98 and later versions support this button and related settings.</p>
+</div></div>
+<p>On the KVM screen, click <span><img src="fig/help_0008_0001.png"></span> on the toolbar and select the keyboard to be used. </p>
+<p><strong id="bmc_help_0008__iso_01"><a name="bmc_help_0008__iso_01"></a><a name="iso_01"></a>Mounting a DVD-ROM Drive</strong></p>
+<p id="bmc_help_0008__iso_02"><a name="bmc_help_0008__iso_02"></a><a name="iso_02"></a>Mount the DVD-ROM drive on the local PC to the server.</p>
+<ol><li><p>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_10.png"></span> on the toolbar.</p>
+<p>The dialog box shown in <a href="#bmc_help_0008__fig_17">Figure 3</a> is displayed.</p>
+<div class="fignone" id="bmc_help_0008__fig_17"><a name="bmc_help_0008__fig_17"></a><a name="fig_17"></a><span class="figcap"><b>Figure 3 </b>Mounting a virtual DVD-ROM drive</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_17.png"></span><br>
+</div>
+</li><li>Select <span class="parmname"><b>CD/DVD</b></span>.</li><li>Select the drive letter of the DVD-ROM drive on the local PC from the drop-down list, for example, <span class="parmvalue"><b>G:</b></span>.</li><li>Click <span class="uicontrol"><b>Connect</b></span>.<p>The DVD-ROM drive of the local PC is mounted to the server.</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody"><p>To dismount the DVD-ROM drive, click <span class="uicontrol"><b>Disconnect</b></span>. Then, click <span class="uicontrol"><b>Yes</b></span> in the <span class="wintitle"><b>Confirm</b></span> dialog box displayed.</p>
+</div></div>
+</li></ol>
+<p id="bmc_help_0008__use_iso_install_cdrom"><a name="bmc_help_0008__use_iso_install_cdrom"></a><a name="use_iso_install_cdrom"></a><strong>Loading an Image File from the Local PC Through the Virtual DVD-ROM Drive</strong></p>
+<p>Mount the DVD-ROM drive on the local PC and load an image file from the local PC to the server.</p>
+<ol><li><p>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_10.png"></span> on the toolbar.</p>
+<p>The dialog box shown in <a href="#bmc_help_0008__fig_17">Figure 3</a> is displayed.</p>
+</li><li>Select <span class="parmname"><b>Image File</b></span>.</li><li>Click <span class="uicontrol"><b>Browse</b></span>.<p>The <span class="wintitle"><b>Open</b></span> dialog box is displayed.</p>
+</li><li>Select the image file on the local PC, and click <span class="uicontrol"><b>Open</b></span>.<p>The dialog box shown in <a href="#bmc_help_0008__fig_17">Figure 3</a> is displayed.</p>
+</li><li>Click <span class="uicontrol"><b>Connect</b></span>.<p>The virtual DVD-ROM drive is successfully mounted to the server and the image file is successfully loaded.</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody"><ul><li><p>To load another image file, click <span class="uicontrol"><b>Eject</b></span> to eject the existing DVD image file, select the new DVD image file, and click <span class="uicontrol"><b>Insert</b></span>.</p>
+</li><li><p>To dismount the virtual DVD-ROM drive, click <span class="uicontrol"><b>Disconnect</b></span>. Then, click <span class="uicontrol"><b>Yes</b></span> in the <span class="wintitle"><b>Confirm</b></span> dialog box.</p>
+</li></ul>
+</div></div>
+</li></ol>
+<p><strong>Mounting a Virtual FDD</strong></p>
+<p>Mount the FDD on the local PC to the server.</p>
+<ol><li>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_11.png"></span> on the toolbar.<p>The dialog box shown in <a href="#bmc_help_0008__fig_18">Figure 4</a> is displayed.</p>
+<div class="fignone" id="bmc_help_0008__fig_18"><a name="bmc_help_0008__fig_18"></a><a name="fig_18"></a><span class="figcap"><b>Figure 4 </b>Mounting a virtual FDD</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_18.png"></span><br>
+</div>
+</li><li>Select <span class="parmname"><b>Floppy</b></span>.</li><li>Select the drive letter of the FDD on the local PC from the drop-down list, for example, <span class="parmvalue"><b>A:</b></span>.</li><li>Select the <span class="parmname"><b>Write Protect</b></span> check box.<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody"><p><span class="parmname"><b>Write Protect</b></span> is a mechanism that prevents alteration or erasure of important data. If <span class="parmname"><b>Write Protect</b></span> is selected, data cannot be written to the specified FDD.</p>
+</div></div>
+</li><li>Click <span class="uicontrol"><b>Connect</b></span>.<p>The FDD is mounted to the server.</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody"><p>To dismount the FDD, click <span class="uicontrol"><b>Disconnect</b></span>. Then, click <span class="uicontrol"><b>Yes</b></span> in the <span class="wintitle"><b>Confirm</b></span> dialog box.</p>
+</div></div>
+</li></ol>
+<p><strong id="bmc_help_0008__fdd_img01"><a name="bmc_help_0008__fdd_img01"></a><a name="fdd_img01"></a>Loading an Image File from the Local PC Through the Virtual FDD</strong></p>
+<p id="bmc_help_0008__fdd_img02"><a name="bmc_help_0008__fdd_img02"></a><a name="fdd_img02"></a>Mount the FDD of the local PC and load an image file from the local PC to the server. </p>
+<ol><li>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_11.png"></span> on the toolbar.<p>The dialog box shown in <a href="#bmc_help_0008__fig_18">Figure 4</a> is displayed.</p>
+</li><li>Select <span class="parmname"><b>Image File</b></span>.</li><li>Click <span class="uicontrol"><b>Browse</b></span>.<p>The <span class="wintitle"><b>Open</b></span> dialog box is displayed.</p>
+</li><li>Select the image file on the local PC, and click <span class="uicontrol"><b>Open</b></span>.<p>The dialog box shown in <a href="#bmc_help_0008__fig_18">Figure 4</a> is displayed.</p>
+</li><li>Click <span class="uicontrol"><b>Connect</b></span>.<p>The image file is successfully loaded to the server.</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody"><ul><li id="bmc_help_0008__fdd_img04"><a name="bmc_help_0008__fdd_img04"></a><a name="fdd_img04"></a><p>To load another image file, click <span class="uicontrol"><b>Eject</b></span> to eject the existing virtual FDD, select the new image file, and click <span class="uicontrol"><b>Insert</b></span>.</p>
+</li><li><p>To dismount the virtual FDD, click <span class="uicontrol"><b>Disconnect</b></span>. Then, click <span class="uicontrol"><b>Yes</b></span> in the <span class="wintitle"><b>Confirm</b></span> dialog box.</p>
+</li></ul>
+</div></div>
+</li></ol>
+<p id="bmc_help_0008__make_iso"><a name="bmc_help_0008__make_iso"></a><a name="make_iso"></a><strong>Creating an Image File</strong></p>
+<p>Create an image file with the help of the floppy disk on the FDD or DVD-ROM on the DVD-ROM drive of the local PC. The created image file is stored on the local PC.</p>
+<p>Before performing this operation, ensure that a floppy disk has been inserted into the FDD or a DVD-ROM has been inserted into the DVD-ROM drive of the local PC.</p>
+<ol><li><p>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_12.png"></span> on the toolbar.</p>
+<p>The dialog box shown in <a href="#bmc_help_0008__fig_19">Figure 5</a> is displayed.</p>
+<div class="fignone" id="bmc_help_0008__fig_19"><a name="bmc_help_0008__fig_19"></a><a name="fig_19"></a><span class="figcap"><b>Figure 5 </b>Creating an image file</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_19.png"></span><br>
+</div>
+</li><li>Select the drive letter of the FDD or DVD-ROM drive on the local PC from the <span class="parmname"><b>Driver</b></span> drop-down list.</li><li>Click <span class="uicontrol"><b>Browse</b></span>. The <span class="wintitle"><b>Save</b></span> dialog box is displayed. </li><li>Specify a directory for saving the image file, and enter the file name in the <span class="parmname"><b>File Name</b></span> text box.<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody"><p>You can create only <i><span class="varname">*</span></i>.iso image files using the DVD-ROM drive and <i><span class="varname">*</span></i>.img image files using the FDD.</p>
+</div></div>
+</li><li>Click <span class="uicontrol"><b>Save</b></span>.<p>The dialog box shown in <a href="#bmc_help_0008__fig_19">Figure 5</a> is displayed.</p>
+</li><li>Click <span class="uicontrol"><b>Make</b></span>.<p><span class="parmname"><b>Progress</b></span> indicates the progress of the image file creation.</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody"><p>To stop creating an image file, click <span class="uicontrol"><b>Stop</b></span>.</p>
+</div></div>
+</li></ol>
+<p><strong id="bmc_help_0008__iso_local_01"><a name="bmc_help_0008__iso_local_01"></a><a name="iso_local_01"></a>Mounting a Virtual Directory</strong></p>
+<p id="bmc_help_0008__iso_local_02"><a name="bmc_help_0008__iso_local_02"></a><a name="iso_local_02"></a>Mount the directories on the local PC to the server so that the server can access the local directories in read-only mode.</p>
+<div class="notice"><span class="noticetitle"><img src="../public_sys-resources/icon-notice.gif"> NOTICE: </span><div class="noticebody"><p><span id="bmc_help_0008__iso_local_03"><a name="bmc_help_0008__iso_local_03"></a><a name="iso_local_03"></a>Before mounting a directory, copy the required files to the directory. After the directory is mounted, you cannot add files to the directory or delete files from it.</span></p>
+</div></div>
+<ol><li>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_10.png"></span> from the toolbar. <p>The dialog box shown in <a href="#bmc_help_0008__fig_20">Figure 6</a> is displayed.</p>
+<div class="fignone" id="bmc_help_0008__fig_20"><a name="bmc_help_0008__fig_20"></a><a name="fig_20"></a><span class="figcap"><b>Figure 6 </b>Mounting a virtual directory</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_17.png"></span><br>
+</div>
+</li><li>Click the <span class="parmname"><b>Directory</b></span> option button.</li><li>Click <span class="uicontrol"><b>Browse</b></span>. <p>The dialog box for selecting a local directory is displayed.</p>
+</li><li>Select the directory and click <span class="uicontrol"><b>Open</b></span>.</li><li>Click <span class="uicontrol"><b>Connect</b></span>. <div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody"><a name="bmc_help_0008__iso_local_04"></a><a name="iso_local_04"></a><ul id="bmc_help_0008__iso_local_04"><li>If the connection is successful, the virtual directory is displayed in the server OS list. You can copy files from this directory.</li><li>To dismount the virtual directory, click <span class="uicontrol"><b>Disconnect</b></span>.</li></ul>
+</div></div>
+</li></ol>
+<p id="bmc_help_0008__poweron_01"><a name="bmc_help_0008__poweron_01"></a><a name="poweron_01"></a><strong>Powering On the Server</strong></p>
+<ol><li>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_13.png"></span> on the toolbar, and choose <span class="uicontrol"><b>Power On</b></span> from the menu.<p>The <span class="wintitle"><b>Confirm</b></span> dialog box is displayed.</p>
+</li><li>Click <span class="uicontrol"><b>Yes</b></span>.<p id="bmc_help_0008__poweron_03"><a name="bmc_help_0008__poweron_03"></a><a name="poweron_03"></a>The server is powered on.</p>
+<div class="note" id="bmc_help_0008__poweron_02"><a name="bmc_help_0008__poweron_02"></a><a name="poweron_02"></a><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody"><p>The server power-on time varies depending on the server configuration.</p>
+</div></div>
+</li></ol>
+<p id="bmc_help_0008__poweroff_01"><a name="bmc_help_0008__poweroff_01"></a><a name="poweroff_01"></a><strong>Powering Off the Server</strong></p>
+<div class="notice" id="bmc_help_0008__poweroff_02"><a name="bmc_help_0008__poweroff_02"></a><a name="poweroff_02"></a><span class="noticetitle"><img src="../public_sys-resources/icon-notice.gif"> NOTICE: </span><div class="noticebody"><ul><li><p>Before powering off the server, ensure that all services are stopped.</p>
+</li><li>Select a power-off mode based on your requirements. For details about the difference between the power-off modes, see <span class="wintitle"><b>Power Control</b></span> in the <i><cite>iBMC User Guide</cite></i>. </li></ul>
+</div></div>
+<ol><li>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_13.png"></span> on the toolbar, and choose <span class="uicontrol"><b>Power Off</b></span> from the menu.<p>The <span class="wintitle"><b>Confirm</b></span> dialog box is displayed.</p>
+</li><li>Click <span class="uicontrol"><b>Yes</b></span>.<p id="bmc_help_0008__poweroff_03"><a name="bmc_help_0008__poweroff_03"></a><a name="poweroff_03"></a>The server is powered off.</p>
+</li></ol>
+<p id="bmc_help_0008__force_01"><a name="bmc_help_0008__force_01"></a><a name="force_01"></a><strong>Forcibly Resetting or Power Cycling the Server</strong></p>
+<div class="notice" id="bmc_help_0008__force_02"><a name="bmc_help_0008__force_02"></a><a name="force_02"></a><span class="noticetitle"><img src="../public_sys-resources/icon-notice.gif"> NOTICE: </span><div class="noticebody"><ul><li><p id="bmc_help_0008__force_reset_cycle"><a name="bmc_help_0008__force_reset_cycle"></a><a name="force_reset_cycle"></a>A forced reset or power cycle may damage user programs or unsaved data. </p>
+</li><li><p>Before forcefully resetting the system or forcefully power cycling the server, ensure that no service risk exists.</p>
+</li><li><p>Select a reset mode (<span class="uicontrol"><b>Forced System Reset</b></span> or <span class="uicontrol"><b>Forced Power Cycle</b></span>) based on service requirements. For details about the difference between the two modes, see <span class="wintitle"><b>Power Control</b></span> in the <i><cite>iBMC User Guide</cite></i>.</p>
+</li></ul>
+</div></div>
+<ol><li>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_13.png"></span> on the toolbar, and choose <span class="uicontrol"><b>Forced System Reset</b></span> or <span class="uicontrol"><b>Forced Power Cycle</b></span> from the menu.<p>The <span class="wintitle"><b>Confirm</b></span> dialog box is displayed.</p>
+</li><li>Click <span class="uicontrol"><b>Yes</b></span>.<p id="bmc_help_0008__force_03"><a name="bmc_help_0008__force_03"></a><a name="force_03"></a>The server starts to reset or powers off and then powers on.</p>
+<div class="note" id="bmc_help_0008__force_04"><a name="bmc_help_0008__force_04"></a><a name="force_04"></a><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> NOTE: </span><div class="notebody"><p>The reset or power cycle duration varies depending on the server configuration.</p>
+</div></div>
+</li></ol>
+<p><strong id="bmc_help_0008__resetkm1"><a name="bmc_help_0008__resetkm1"></a><a name="resetkm1"></a>Resetting the Keyboard and Mouse</strong></p>
+<p id="bmc_help_0008__resetkm2"><a name="bmc_help_0008__resetkm2"></a><a name="resetkm2"></a>Simulate the removal and installation of a USB keyboard and mouse when the keyboard and mouse on the server desktop stop responding.</p>
+<ol><li>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_16.png"></span> on the toolbar, and choose <span class="uicontrol"><b>Mouse &amp; Key Reset</b></span> from the menu.<p>The <span class="wintitle"><b>Confirm</b></span> dialog box is displayed.</p>
+</li><li>Click <span class="uicontrol"><b>Yes</b></span>.<p id="bmc_help_0008__resetkm3"><a name="bmc_help_0008__resetkm3"></a><a name="resetkm3"></a>The USB keyboard and mouse are reset.</p>
+</li></ol>
+<p id="bmc_help_0008__record"><a name="bmc_help_0008__record"></a><a name="record"></a><strong id="bmc_help_0008__record01"><a name="bmc_help_0008__record01"></a><a name="record01"></a>Recording a Video of the Server Desktop</strong></p>
+<p id="bmc_help_0008__record02"><a name="bmc_help_0008__record02"></a><a name="record02"></a>Record a video of the desktop displayed on the Remote Virtual Console.</p>
+<ol><li>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_15.png"></span> on the toolbar.<p>The <span class="wintitle"><b>Confirm</b></span> dialog box is displayed.</p>
+</li><li>Click <span class="uicontrol"><b>Yes</b></span>.<p>The <span class="wintitle"><b>Save</b></span> dialog box is displayed.</p>
+</li><li>Select a directory for saving the video file to be recorded, and enter a file name in the <span class="parmname"><b>File Name</b></span> text box.</li><li>Click <span class="uicontrol"><b>Save</b></span>.<p>The KVM screen is displayed, and the video recording starts.</p>
+</li><li>After the video is recorded, click <span><img src="fig/fig_bmc_help_0008_21.png"></span>.<p>The <span class="wintitle"><b>Confirm</b></span> dialog box is displayed.</p>
+</li><li>Click <span class="uicontrol"><b>Yes</b></span>.<p>The video file is saved to the specified directory.</p>
+</li></ol>
+<p id="bmc_help_0008__record03"><a name="bmc_help_0008__record03"></a><a name="record03"></a>The video file is a .rep file. You can play the video file on the <span class="uicontrol"><b>Play Back</b></span> page.</p>
+<p><strong id="bmc_help_0008__sigle_mouse1"><a name="bmc_help_0008__sigle_mouse1"></a><a name="sigle_mouse1"></a>Using a Single Mouse</strong></p>
+<p id="bmc_help_0008__sigle_mouse2"><a name="bmc_help_0008__sigle_mouse2"></a><a name="sigle_mouse2"></a>If the mouse on the local PC is not synchronized with the server desktop, use the single-mouse function to hide the mouse on the local PC and display only the mouse of the server desktop on the </p>
+<ol><li>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_16.png"></span> on the toolbar, and choose <span class="uicontrol"><b>Single Mouse</b></span> from the menu.<p>The <span class="wintitle"><b>Confirm</b></span> dialog box is displayed.</p>
+</li><li>Click <span class="uicontrol"><b>Yes</b></span>.<p id="bmc_help_0008__single_mouse3"><a name="bmc_help_0008__single_mouse3"></a><a name="single_mouse3"></a>Only the mouse on the server desktop is displayed on the KVM screen.</p>
+</li></ol>
+<p><strong id="bmc_help_0008__acce_mouse1"><a name="bmc_help_0008__acce_mouse1"></a><a name="acce_mouse1"></a>Accelerating the Remote Mouse</strong><strong></strong></p>
+<p id="bmc_help_0008__acce_mouse2"><a name="bmc_help_0008__acce_mouse2"></a><a name="acce_mouse2"></a>Accelerate the mouse on the server desktop to synchronize it with the mouse on the local PC.</p>
+<ol><li>On the KVM screen, click <span><img src="fig/fig_bmc_help_0008_16.png"></span> on the toolbar, and choose <span class="uicontrol"><b>Mouse Acceleration</b></span> from the menu.<p>The <span class="wintitle"><b>Confirm</b></span> dialog box is displayed.</p>
+</li><li>Click <span class="uicontrol"><b>Yes</b></span>.<p id="bmc_help_0008__acce_mouse3"><a name="bmc_help_0008__acce_mouse3"></a><a name="acce_mouse3"></a>The server mouse is synchronized with the mouse on the local PC.</p>
+</li></ol>
+</div>
+
+</div>
+
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

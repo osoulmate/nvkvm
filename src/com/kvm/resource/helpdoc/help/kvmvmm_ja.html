@@ -1,0 +1,452 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja-jp" xml:lang="ja-jp">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+   
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="copyright" content="(C) Copyright 2005">
+<meta name="DC.rights.owner" content="(C) Copyright 2005">
+<meta name="DC.Type" content="concept">
+<meta name="DC.Title" content="Javaリモートバーチャルコンソール">
+<meta name="DC.Format" content="XHTML">
+<meta name="DC.Identifier" content="bmc_help_0008_1">
+<meta name="DC.Language" content="ja-jp">
+<link rel="stylesheet" type="text/css" href="../public_sys-resources/commonltr.css">
+<link rel="stylesheet" type="text/css" href="../public_sys-resources/mediaQuery.css">
+<script type="text/javascript" src="../public_sys-resources/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../public_sys-resources/mediaQuery.js"></script>
+<title>Javaリモートバーチャルコンソール</title>
+</head>
+<body style="clear:both; padding-left:10px; padding-top:5px; padding-right:5px; padding-bottom:5px"><a name="bmc_help_0008_1"></a><a name="bmc_help_0008_1"></a>
+
+
+<h1 class="topictitle1">Javaリモートバーチャルコンソール</h1>
+
+<div id="kvm"><a name="kvm"></a><a name="kvm"></a>
+<div class="section" id="bmc_help_0008_1__java_02"><a name="bmc_help_0008_1__java_02"></a><a name="java_02"></a><h4 class="sectiontitle">機能概要</h4><p id="bmc_help_0008_1__func01"><a name="bmc_help_0008_1__func01"></a><a name="func01"></a>Javaリモートバーチャルコンソールが提供する機能を使用して、サーバーにリモートで接続することでサーバーへのリモート制御・管理、オペレーティングシステムのインストール・修復、デバイスドライバーのインストールなどの操作を行うことができます。</p>
+<a name="bmc_help_0008_1__func02"></a><a name="func02"></a><ul id="bmc_help_0008_1__func02"><li>ローカルPCから遠隔地にあるサーバーをキーボードとマウスを使用してリアルタイムにリモート操作することができます。</li><li>サーバーからインタネット経由で<span>仮想フロッピードライブ</span>や光学ドライブを使用してローカルPCにリモートアクセスすることができます。サーバー側では、<span>仮想フロッピードライブ</span>や光学ドライブの使用方法はサーバーに挿入している（USB、Universal Serial Bus）デバイスのと同じです。<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><p>ローカルの<span>フロッピードライブ</span>や光学ドライブをローカルPCのメディアとして扱えるし、ローカルPCまたはネットワークドライブにある<span>フロッピーディスク</span>や光ディスクに保存されているイメージファイルをローカルPCのメディアとして扱えます。</p>
+</div></div>
+</li></ul>
+<p id="bmc_help_0008_1__func03"><a name="bmc_help_0008_1__func03"></a><a name="func03"></a><span class="wintitle"><b>KVM</b></span>ウィンドウにあるボタン及びその役割については、<a href="#bmc_help_0008_1__tab_02">表 1</a>を参照してください。</p>
+
+<div class="tablenoborder"><a name="bmc_help_0008_1__tab_02"></a><a name="tab_02"></a><table cellpadding="4" cellspacing="0" summary="" id="bmc_help_0008_1__tab_02" frame="border" border="1" rules="all"><caption><b>表 1 </b>ボタンの説明</caption>
+<thead align="left">
+<tr>
+<th class="cellrowborder" valign="top" width="31%" id="mcps1.2.1.5.2.3.1.1"><p>ボタン</p>
+</th>
+
+<th class="cellrowborder" valign="top" width="69%" id="mcps1.2.1.5.2.3.1.2"><p>説明</p>
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_02.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__lock"><a name="bmc_help_0008_1__lock"></a><a name="lock"></a>フローティングボタン。現在のツールバーが固定されている状態になっていることを示します。</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_07.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__hide"><a name="bmc_help_0008_1__hide"></a><a name="hide"></a>フローティングボタン。現在のツールバーが非表示の状態になっていることを示します。</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_04.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__full-screen"><a name="bmc_help_0008_1__full-screen"></a><a name="full-screen"></a><b>[</b><span class="uicontrol"><b>全画面表示</b></span><b>]</b>ボタン。サーバーのリアルタイムデスクトップが全画面に表示されます。</p>
+<div class="note"><span class="notetitle"> 注記: </span><div class="notebody"><p>リアルタイムデスクトップを全画面に表示する場合、マウス ポインターを画面の上部に移動すると、ツールバーが表示されます。</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_22.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p><b>[</b><span class="uicontrol"><b>マウス同期</b></span><b>]</b>ボタン。マウスの位置を見直すことを示します。</p>
+<div class="note"><span class="notetitle"> 注記: </span><div class="notebody"><p>リアルタイムデスクトップを全画面に表示すると、ツールバーにはこのボタンが表示されます。</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_23.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p><b>[</b><span class="uicontrol"><b>マウスモード</b></span><b>]</b>ボタン。マウスのモードを切り替えることを示します。</p>
+<div class="note"><span class="notetitle"> 注記: </span><div class="notebody"><p>リアルタイムデスクトップを全画面に表示すると、ツールバーにはこのボタンが表示されます。</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_05.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p><b>[</b><span class="uicontrol"><b>戻す</b></span><b>]</b>ボタン。適切な画面サイズに戻してサーバーのリアルタイムデスクトップを表示することを示します。</p>
+<div class="note"><span class="notetitle"> 注記: </span><div class="notebody"><p>リアルタイムデスクトップを全画面に表示する場合のみ、ツールバーにはこのボタンが表示されます。</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_13.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__contrl01"><a name="bmc_help_0008_1__contrl01"></a><a name="contrl01"></a><b>[</b><span class="uicontrol"><b>制御</b></span><b>]</b>ボタン。サーバーの電源を制御することを示します。以下の操作が含まれています。</p>
+<ul><li>電源ON</li><li>強制電源停止</li><li>電源OFF</li><li>システム強制リセット</li><li>強制電源サイクル</li></ul>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_15.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__video"><a name="bmc_help_0008_1__video"></a><a name="video"></a><b>[</b><span class="uicontrol"><b>録画</b></span><b>]</b>ボタン。リモート操作をリアルタイムに録画することを示します。</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_16.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__mouse01"><a name="bmc_help_0008_1__mouse01"></a><a name="mouse01"></a><b>[</b><span class="uicontrol"><b>マウス制御</b></span><b>]</b>ボタン。サーバーのマウスを制御することを示します。以下の操作が含まれています。</p>
+<a name="bmc_help_0008_1__mouse02"></a><a name="mouse02"></a><ul id="bmc_help_0008_1__mouse02"><li>マウス高速化<p>サーバーのリアルタイムデスクトップにあるマウスの速度を速くして、ローカルPCのマウスと同期できるようにします。</p>
+<div class="note"><span class="notetitle"> 注記: </span><div class="notebody">SUSE 12以前のバージョンのSUSEオペレーティングシステムはマウスの加速機能をサポートしません。</div></div>
+</li><li>シングルマウス<p>ローカルPC上のマウスを非表示にして、サーバーのリアルタイムデスクトップにあるマウスのみ表示させます。</p>
+</li><li>キーボードとマウスのリセット<p>USBキーボードとUSBマウスの抜き差しをシミュレートしてサーバーのリアルタイムデスクトップ上のキーボードとマウスが異常で操作できなくなってしまう場合には、このボタンをクリックすると復元できます。</p>
+</li></ul>
+<p><span id="bmc_help_0008_1__mouse03"><a name="bmc_help_0008_1__mouse03"></a><a name="mouse03"></a>デフォルトの操作：マウスの加速</span></p>
+<div class="note"><span class="notetitle"> 注記: </span><div class="notebody"><p id="bmc_help_0008_1__mouse_note"><a name="bmc_help_0008_1__mouse_note"></a><a name="mouse_note"></a><span class="parmvalue">[<b>マウス高速化</b>]</span>と<span class="parmvalue">[<b>シングルマウス</b>]</span>は選択されていない場合、サーバーのリアルタイムデスクトップのマウスとローカルPCのマウスが同時に表示されますが、同期されません。</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_10.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__dvdbutton"><a name="bmc_help_0008_1__dvdbutton"></a><a name="dvdbutton"></a><b>[</b><span class="uicontrol"><b>光学ドライブ</b></span><b>]</b>ボタン。仮想光学ドライブを選択し使用することを示します。</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_11.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__fddbutton"><a name="bmc_help_0008_1__fddbutton"></a><a name="fddbutton"></a><b>[</b><span class="uicontrol"><b>フロッピードライブ</b></span><b>]</b>ボタン。仮想フロッピードライブを選択し使用することを示します。</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_12.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p><b>[</b><span class="uicontrol"><b>イメージファイルの作成</b></span><b>]</b>ボタン。光学ドライブやフロッピードライブを使用してイメージファイルを作成することを示します。</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_03.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__keybo"><a name="bmc_help_0008_1__keybo"></a><a name="keybo"></a><b>[</b><span class="uicontrol"><b>キーボード組み合せキー</b></span><b>]</b>ボタン。特殊の組み合せキーを送信またはカスタマイズすることを示します。このウィンドウの組み合せキー及びその意味は以下のとおりです。</p>
+<ul><li id="bmc_help_0008_1__ctrl_shift"><a name="bmc_help_0008_1__ctrl_shift"></a><a name="ctrl_shift"></a>Ctrl+Shift：入力方式を切り替えます。</li><li id="bmc_help_0008_1__ctrl_esc"><a name="bmc_help_0008_1__ctrl_esc"></a><a name="ctrl_esc"></a>Ctrl+Esc：<span class="parmname">[<b>開始</b>]</span>メニューを表示または非表示します。</li><li id="bmc_help_0008_1__ctrl_alt_del"><a name="bmc_help_0008_1__ctrl_alt_del"></a><a name="ctrl_alt_del"></a>Ctrl+Alt+Del：オペレーティングシステム画面のロック、ユーザーのログアウト、パスワードの変更、タスクマネージャーの起動、サーバーの再起動などの操作が実行できます。</li><li id="bmc_help_0008_1__alt_tab"><a name="bmc_help_0008_1__alt_tab"></a><a name="alt_tab"></a>Alt+Tab：開いた項目の間で切り替えます。</li><li id="bmc_help_0008_1__ctrl_space"><a name="bmc_help_0008_1__ctrl_space"></a><a name="ctrl_space"></a>Ctrl+Space：入力方式を有効または無効にします。</li><li>ResetKeyboad：キーボード上のキーを復旧することをシミュレートします。</li></ul>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><p>画像解像度</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__image"><a name="bmc_help_0008_1__image"></a><a name="image"></a><b>[</b><span class="uicontrol"><b>画像解像度</b></span><b>]</b>カーソルボタン。遠隔のリアルタイム画像の解像度を調節することを示します。</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/help_0008_0001.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__keybo_layout_01"><a name="bmc_help_0008_1__keybo_layout_01"></a><a name="keybo_layout_01"></a><b>[</b><span class="uicontrol"><b>キーボードレイアウト</b></span><b>]</b>ボタン。クライアントのキーボードの言語種類を表します。デフォルトでは、iBMCはクライアントのキーボードレイアウトに自動的に適用します。キーボードの自動適用モードが理想的でない場合は、ターゲットのキーボードレイアウトを強制的に指定してください。</p>
+<a name="bmc_help_0008_1__keybo_layout_02"></a><a name="keybo_layout_02"></a><ul id="bmc_help_0008_1__keybo_layout_02"><li id="bmc_help_0008_1__keybo_layout_us"><a name="bmc_help_0008_1__keybo_layout_us"></a><a name="keybo_layout_us"></a><span class="parmname">[<b>英語</b>]</span>：キーボードレイアウトを英語キーボードに強制的に指定します。</li><li id="bmc_help_0008_1__keybo_layout_jp"><a name="bmc_help_0008_1__keybo_layout_jp"></a><a name="keybo_layout_jp"></a><span class="parmname">[<b>日本語</b>]</span>：キーボードレイアウトを日本語キーボードに強制的に指定します。</li><li id="bmc_help_0008_1__keybo_layout_fr"><a name="bmc_help_0008_1__keybo_layout_fr"></a><a name="keybo_layout_fr"></a><span class="parmname">[<b>フランス語</b>]</span>：キーボードレイアウトをフランス語キーボードに強制的に指定します。</li></ul>
+<div class="note" id="bmc_help_0008_1__keybo_laout_note"><a name="bmc_help_0008_1__keybo_laout_note"></a><a name="keybo_laout_note"></a><span class="notetitle"> 注記: </span><div class="notebody"><p>iBMC 2.98及びその以降のバージョンのみはクライアントのキーボードレイアウトの選択をサポートします。</p>
+</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_06.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__num"><a name="bmc_help_0008_1__num"></a><a name="num"></a><b>[</b><span class="uicontrol"><b>Num Lock</b></span><b>]</b>（数字キーロック）キーのランプ。現在、サーバーにある<b>[</b><span class="uicontrol"><b>Num Lock</b></span><b>]</b>キーのランプ状態を示します。</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_08.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__caps_lock"><a name="bmc_help_0008_1__caps_lock"></a><a name="caps_lock"></a><b>[</b><span class="uicontrol"><b>Caps Lock</b></span><b>]</b>（キャプス ロック）キーのランプ。現在、サーバにある<b>[</b><span class="uicontrol"><b>Caps Lock</b></span><b>]</b>キーのランプ状態を示します。</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_09.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__scroll"><a name="bmc_help_0008_1__scroll"></a><a name="scroll"></a><b>[</b><span class="uicontrol"><b>Scroll Lock</b></span><b>]</b>（スクロールロック）キーのランプ。現在、サーバーにある<b>[</b><span class="uicontrol"><b>Scroll Lock</b></span><b>]</b>キーのランプ状態を示します。Linux文字モードの場合、Ctrl+s（普通は無意識に間違って押してしまうことです）を押すと、スクリーンがロックされます。この場合、キーボードの<b>[</b><span class="uicontrol"><b>Scroll Lock</b></span><b>]</b>キーを押せば、スクリーンのロックを解除できます。</p>
+<div class="note" id="bmc_help_0008_1__scroll_note"><a name="bmc_help_0008_1__scroll_note"></a><a name="scroll_note"></a><span class="notetitle"> 注記: </span><div class="notebody">KVMによりサーバーを扱う時、キーボードの入力が何らかの異常があった場合、まず、KVMにあるサーバーのキーボードランプ状態が正しいかどうかを確認してください。</div></div>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="31%" headers="mcps1.2.1.5.2.3.1.1 "><span><img src="fig/fig_bmc_help_0008_14.png"></span></td>
+
+<td class="cellrowborder" valign="top" width="69%" headers="mcps1.2.1.5.2.3.1.2 "><p id="bmc_help_0008_1__help"><a name="bmc_help_0008_1__help"></a><a name="help"></a><b>[</b><span class="uicontrol"><b>ヘルプ</b></span><b>]</b>ボタン。KVMページのオンラインヘルプを確認することを示します。</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" colspan="2" valign="top" headers="mcps1.2.1.5.2.3.1.1 mcps1.2.1.5.2.3.1.2 "><p>備考：サーバーの型番によって、提供されている機能も違いますので、実際の画面に準じてください。</p>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+<p><a href="#bmc_help_0008_1__fig_21">図 1</a>に示すように、光学ドライブを例として、光学ドライブを例として、ツールバーにあるイメージファイル、仮想光学ドライブ及び仮想フロッピードライブの使用手順を説明します。</p>
+<div class="fignone" id="bmc_help_0008_1__fig_21"><a name="bmc_help_0008_1__fig_21"></a><a name="fig_21"></a><span class="figcap"><b>図 1 </b>使用手順</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_20.png"></span></div>
+</div>
+
+<div class="section"><h4 class="sectiontitle">画面の説明</h4><p>上辺にあるタイトルバーから<b>[</b><span class="uicontrol"><b>リモートログイン</b></span><b>]</b>を選択し、<span class="menucascade"><b>[</b><b><span class="uicontrol">リモートログイン</span></b><b>]</b></span>画面から<b>[</b><span class="uicontrol"><b>Java統合リモートバーチャルコンソール(専有モード)</b></span><b>]</b>または<b>[</b><span class="uicontrol"><b>Java統合リモートバーチャルコンソール(共有モード)</b></span><b>]</b>リンクをクリックすると、<span class="wintitle"><b>KVM</b></span>ウィンドウが表示されます。</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><b>[</b><span class="uicontrol"><b>リモートバーチャルコンソール(共有モード)</b></span><b>]</b>を有効にしている場合、本機のユーザーが相手側のユーザーの操作を確認することができます。相手側のユーザーも本機のユーザーの操作を確認することができます。ある程度のセキュリティリスクがあります。</div></div>
+<p><span class="wintitle"><b>KVM</b></span>ウィンドウは3つの領域に分かれています。各領域については、<a href="#bmc_help_0008_1__fig_01">図 2</a>を参照してください。各領域の機能説明については<a href="#bmc_help_0008_1__tab_01">表 2</a>を参照してください。</p>
+<div class="fignone" id="bmc_help_0008_1__fig_01"><a name="bmc_help_0008_1__fig_01"></a><a name="fig_01"></a><span class="figcap"><b>図 2 </b><span class="wintitle"><b>KVM</b></span>ウィンドウ</span>
+
+
+
+<br><span><img src="fig/help_0008_rvc_ja.png"></span><br>
+</div>
+
+<div class="tablenoborder"><a name="bmc_help_0008_1__tab_01"></a><a name="tab_01"></a><table cellpadding="4" cellspacing="0" summary="" id="bmc_help_0008_1__tab_01" frame="border" border="1" rules="all"><caption><b>表 2 </b><span class="wintitle"><b>KVM</b></span>画面</caption>
+<thead align="left">
+<tr>
+<th class="cellrowborder" valign="top" width="6.64451827242525%" id="mcps1.2.2.6.2.4.1.1"><p>シリアル番号</p>
+</th>
+
+<th class="cellrowborder" valign="top" width="16.943521594684388%" id="mcps1.2.2.6.2.4.1.2"><p>領域</p>
+</th>
+
+<th class="cellrowborder" valign="top" width="76.41196013289037%" id="mcps1.2.2.6.2.4.1.3"><p>機能</p>
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+<tr>
+<td class="cellrowborder" valign="top" width="6.64451827242525%" headers="mcps1.2.2.6.2.4.1.1 "><p>1</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="16.943521594684388%" headers="mcps1.2.2.6.2.4.1.2 "><p>ツールバー</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="76.41196013289037%" headers="mcps1.2.2.6.2.4.1.3 "><p>リモートからサーバーに対して実行できる操作をすべて表示します。</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="6.64451827242525%" headers="mcps1.2.2.6.2.4.1.1 "><p>2</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="16.943521594684388%" headers="mcps1.2.2.6.2.4.1.2 "><p>リアルタイムデスクトップ</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="76.41196013289037%" headers="mcps1.2.2.6.2.4.1.3 "><p>サーバーのリアルタイムデスクトップが表示されます。リアルタイムデスクトップからマウスを使用してコマンドを操作または実行することができます。</p>
+</td>
+
+</tr>
+
+<tr>
+<td class="cellrowborder" valign="top" width="6.64451827242525%" headers="mcps1.2.2.6.2.4.1.1 "><p>3</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="16.943521594684388%" headers="mcps1.2.2.6.2.4.1.2 "><p>ステータスバー</p>
+</td>
+
+<td class="cellrowborder" valign="top" width="76.41196013289037%" headers="mcps1.2.2.6.2.4.1.3 "><p>リアルタイムデスクトップの提示情報、及びサーバーとローカルPCの間の通信データを表示します。</p>
+<div class="note"><span class="notetitle"> 注記: </span><div class="notebody"><p>KVM画面の上部にあるタイトルバーには、iBMCのIPアドレスとサーバーの製品シリアル番号が表示されます。</p>
+</div></div>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+
+<div class="section"><h4 class="sectiontitle">作業手順</h4><p><strong id="bmc_help_0008_1__combine"><a name="bmc_help_0008_1__combine"></a><a name="combine"></a>特別な組み合せキーの送信</strong></p>
+<ol><li><span class="wintitle"><b>KVM</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_03.png"></span>をクリックします。<p>組み合せキーウィンドウが表示されます。このウィンドウにある組み合せキー及びその意味は次の通りです。</p>
+<ul><li>Ctrl+Shift：入力言語の切り替え。</li><li>Ctrl+Esc：<span class="parmname">[<b>スタート</b>]</span>メニューを表示または非表示します。</li><li>Ctrl+Alt+Del：オペレーティングシステム画面のロック、ユーザーのログオフ、パスワードの変更とタスクマネジメントの起動、サーバーの再起動など。</li><li>Alt+Tab：開いているアイテム内の切り替え。</li><li>Ctrl+Space：入力言語の有効化または無効化。</li><li>ResetKeyboad：キーボードの入力のシミュレーション。</li></ul>
+</li><li id="bmc_help_0008_1__combine_tep2"><a name="bmc_help_0008_1__combine_tep2"></a><a name="combine_tep2"></a><a href="#bmc_help_0008_1__tab_02">表 1</a>に記載されているパラメーター情報によって、送信する組み合せキーをクリックします。<p>サーバーは組み合せキーに対応する操作を実行します。</p>
+</li></ol>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><p id="bmc_help_0008_1__custom"><a name="bmc_help_0008_1__custom"></a><a name="custom"></a>組み合わせキーをカスタマイズする場合、<span class="parmname">[<b>カスタマイズ</b>]</span>後ろにあるテキストボックスにキーを順次入力してから<b>[</b><span class="uicontrol"><b>送信</b></span><b>]</b>をクリックします。</p>
+</div></div>
+<p id="bmc_help_0008_1__keybo_layout_pro01"><a name="bmc_help_0008_1__keybo_layout_pro01"></a><a name="keybo_layout_pro01"></a><strong>クライアントのキーボードレイアウトの指定</strong></p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><p>iBMC 2.98及びその以降のバージョンのみはクライアントのキーボードレイアウトの選択をサポートします。</p>
+</div></div>
+<p><span class="wintitle"><b>KVM</b></span>画面に、ツールバーの<span><img src="fig/help_0008_0001.png"></span>をクリックします。</p>
+<p>プルダウンリストからターゲットのキーボードレイアウトを選択します。キーボードレイアウトを強制的に指定することが成功します。</p>
+<p id="bmc_help_0008_1__install_cdrom"><a name="bmc_help_0008_1__install_cdrom"></a><a name="install_cdrom"></a><strong>仮想光学ドライブのマウント</strong></p>
+<p>この操作ではローカルPCにある光ディスクドライブを使用して、サーバーに仮想光ディスクドライブを作成して提供します。</p>
+<ol><li><span class="wintitle"><b>KVM</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_10.png"></span>をクリックします。<p><a href="#bmc_help_0008_1__fig_17">図 3</a>に示すような画面が表示されます。</p>
+<div class="fignone" id="bmc_help_0008_1__fig_17"><a name="bmc_help_0008_1__fig_17"></a><a name="fig_17"></a><span class="figcap"><b>図 3 </b>仮想光学ドライブのマウント</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_17_ja.png"></span><br>
+</div>
+</li><li><span class="parmname">[<b>光学ドライブ</b>]</span>ラジオボタンを選択します。</li><li>プルダウンリストからローカルPCにある仮想化する光ディスクドライブ、例えば、<span class="parmvalue">[<b>G:</b>]</span>を選択します。</li><li><b>[</b><span class="uicontrol"><b>接続</b></span><b>]</b>をクリックします。<p>仮想光学ドライブがサーバーにマウントされています。</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><p>マウントに成功した場合、<b>[</b><span class="uicontrol"><b>切断</b></span><b>]</b>をクリックし、表示されている<span class="wintitle"><b>オプションを1つ選択する</b></span>ダイアログボックスから<b>[</b><span class="uicontrol"><b>はい</b></span><b>]</b>をクリックして、サーバーにある仮想光学ドライブをアンインストールします。</p>
+</div></div>
+</li></ol>
+<p id="bmc_help_0008_1__use_iso_install_cdrom"><a name="bmc_help_0008_1__use_iso_install_cdrom"></a><a name="use_iso_install_cdrom"></a><strong id="bmc_help_0008_1__iso_01"><a name="bmc_help_0008_1__iso_01"></a><a name="iso_01"></a>仮想光学ドライブによるイメージファイルのマウント</strong></p>
+<p id="bmc_help_0008_1__iso_02"><a name="bmc_help_0008_1__iso_02"></a><a name="iso_02"></a>この操作ではローカルPCにある光ディスクのイメージファイルを使用して、サーバーに仮想光学ドライブを作成して提供し、また、光ディスクのイメージファイルを当該仮想光学ドライブにロードします。</p>
+<ol><li><span class="wintitle"><b>KVM</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_10.png"></span>をクリックします。<p><a href="#bmc_help_0008_1__fig_17">図 3</a>に示すような画面が表示されます。</p>
+</li><li><span class="parmname">[<b>イメージファイル</b>]</span>ラジオボタンを選択します。</li><li><b>[</b><span class="uicontrol"><b>閲覧</b></span><b>]</b>をクリックします。<p><span class="wintitle"><b>開く</b></span>ウィンドウが表示されます。</p>
+</li><li>ローカルPCに保存されている光ディスクのイメージファイルを選択して<b>[</b><span class="uicontrol"><b>開く</b></span><b>]</b>をクリックします。<p><a href="#bmc_help_0008_1__fig_17">図 3</a>に示すような画面に戻します。</p>
+</li><li><b>[</b><span class="uicontrol"><b>接続</b></span><b>]</b>をクリックします。<p>イメージファイルがサーバーにマウントされています。</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><a name="bmc_help_0008_1__iso_04"></a><a name="iso_04"></a><ul id="bmc_help_0008_1__iso_04"><li><p>イメージファイルをマウントすることに成功した場合、<b>[</b><span class="uicontrol"><b>イジェクト</b></span><b>]</b>をクリックすると、光ディスクのイメージファイルが表示されます。光ディスクのイメージファイルが表示されている場合、他の<span class="filepath"><b><i><span class="varname">*</span></i>.iso</b></span>形式のイメージファイルを再選択し、<b>[</b><span class="uicontrol"><b>挿入</b></span><b>]</b>をクリックして、当該光ディスクのイメージファイルをロードします。</p>
+</li><li><p>イメージファイルをマウントすることに成功した場合、<b>[</b><span class="uicontrol"><b>切断</b></span><b>]</b>をクリックし、表示されている<span class="wintitle"><b>オプションを1つ選択する</b></span>ダイアログボックスから<b>[</b><span class="uicontrol"><b>はい</b></span><b>]</b>をクリックして、サーバーにある仮想光学ドライブをアンインストールします。</p>
+</li></ul>
+</div></div>
+</li></ol>
+<p><strong>仮想フロッピードライブのマウント</strong></p>
+<p>この操作では、ローカルPCにあるフロッピードライブまたはフロッピーディスクのイメージファイルを使用して、サーバーに仮想フロッピードライブを作成して提供します。</p>
+<ol><li><span class="wintitle"><b>KVM</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_11.png"></span>をクリックします。<p><a href="#bmc_help_0008_1__fig_18">図 4</a>に示すような画面が表示されます。</p>
+<div class="fignone" id="bmc_help_0008_1__fig_18"><a name="bmc_help_0008_1__fig_18"></a><a name="fig_18"></a><span class="figcap"><b>図 4 </b>仮想フロッピードライブのマウント</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_18_ja.png"></span><br>
+</div>
+</li><li><span class="parmname">[<b>フロッピードライブ</b>]</span>ラジオボタンを選択します。</li><li>プルダウンリストからローカルPCにある仮想化するフロッピーディスクドライブ、例えば、<span class="parmvalue">[<b>A:</b>]</span>を選択します。</li><li><span class="parmname">[<b>書き込み保護</b>]</span>のチェックボックスに チェックを入れます。<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><p>書き込み保護はフロッピードライブへのデータ書き込みを禁止します。書き込み保護は重要データの上書き、削除を防止する保護仕組みの1つです。</p>
+</div></div>
+</li><li><b>[</b><span class="uicontrol"><b>接続</b></span><b>]</b>をクリックします。<p>サーバーに仮想フロッピードライブをマウントすることに成功します。</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><p>マウントに成功した場合、<b>[</b><span class="uicontrol"><b>切断</b></span><b>]</b>をクリックし、表示されている<span class="wintitle"><b>オプションを1つ選択する</b></span>ダイアログボックスから<b>[</b><span class="uicontrol"><b>はい</b></span><b>]</b>をクリックして、サーバーにある仮想フロッピードライブをアンインストールします。</p>
+</div></div>
+</li></ol>
+<p><strong id="bmc_help_0008_1__fdd_img01"><a name="bmc_help_0008_1__fdd_img01"></a><a name="fdd_img01"></a>仮想フロッピードライブによるイメージファイルのマウント</strong></p>
+<p id="bmc_help_0008_1__fdd_img02"><a name="bmc_help_0008_1__fdd_img02"></a><a name="fdd_img02"></a>この操作では、ローカルPCにあるフロッピーディスクのイメージファイルを使用して、サーバーに仮想フロッピードライブを作成して提供し、また、フロッピーディスクのイメージファイルを該当の仮想フロッピードライブにロードします。</p>
+<ol><li><span class="wintitle"><b>KVM</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_11.png"></span>をクリックします。<p><a href="#bmc_help_0008_1__fig_18">図 4</a>に示すような画面が表示されます。</p>
+</li><li><span class="parmname">[<b>イメージファイル</b>]</span>ラジオボタンを選択します。</li><li><b>[</b><span class="uicontrol"><b>閲覧</b></span><b>]</b>をクリックします。<p><span class="wintitle"><b>開く</b></span>ウィンドウが表示されます。</p>
+</li><li>ローカルPCに保存されているフロッピーディスクのイメージファイルを選択して<b>[</b><span class="uicontrol"><b>開く</b></span><b>]</b>をクリックします。<p><a href="#bmc_help_0008_1__fig_18">図 4</a>に示すような画面に戻します。</p>
+</li><li><b>[</b><span class="uicontrol"><b>接続</b></span><b>]</b>をクリックします。<p>仮想フロッピードライブがサーバーにマウントされています。</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><ul><li id="bmc_help_0008_1__fdd_img04"><a name="bmc_help_0008_1__fdd_img04"></a><a name="fdd_img04"></a><p>イメージファイルのロードに成功した場合、<b>[</b><span class="uicontrol"><b>イジェクト</b></span><b>]</b>をクリックすると、フロッピーディスクのイメージファイルが表示されます。フロッピーディスクのイメージファイルが表示されている場合、他の<span class="filepath"><b><i><span class="varname">*</span></i>.img</b></span>形式のイメージファイルを再選択し、<b>[</b><span class="uicontrol"><b>挿入</b></span><b>]</b>をクリックして、当該イメージファイルをマウントします。</p>
+</li><li><p><b>[</b><span class="uicontrol"><b>切断</b></span><b>]</b>をクリックし、表示されている<span class="wintitle"><b>オプションを1つ選択する</b></span>ダイアログボックスから<b>[</b><span class="uicontrol"><b>はい</b></span><b>]</b>をクリックして、サーバーにある仮想フロッピードライブをアンインストールします。</p>
+</li></ul>
+</div></div>
+</li></ol>
+<p id="bmc_help_0008_1__make_iso"><a name="bmc_help_0008_1__make_iso"></a><a name="make_iso"></a><strong>イメージファイルの作成</strong></p>
+<p>この操作では、フロッピードライブまたは光学ドライブにあるフロッピーディスクや光ディスクを使用してイメージファイルを作成します。作成されたイメージファイルをローカルPCに保存します。仮想フロッピードライブまたは光学ドライブをマウント及びロードするために使用されます。</p>
+<p>この操作を実行する前に、ローカルPCのフロッピードライブまたは光学ドライブにフロッピーディスクまたは光ディスクが挿入されていることを確認してください。</p>
+<ol><li><span class="wintitle"><b>KVM</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_12.png"></span>をクリックします。<p><a href="#bmc_help_0008_1__fig_19">図 5</a>に示すような画面が表示されます。</p>
+<div class="fignone" id="bmc_help_0008_1__fig_19"><a name="bmc_help_0008_1__fig_19"></a><a name="fig_19"></a><span class="figcap"><b>図 5 </b>イメージファイルの作成</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_19_ja.png"></span><br>
+</div>
+</li><li><span class="parmname">[<b>ドライブの選択</b>]</span>プルダウンリストからクライアントにあるフロッピードライブまたは光ディスクドライブを選択します。</li><li><b>[</b><span class="uicontrol"><b>閲覧</b></span><b>]</b>をクリックします。<span class="wintitle"><b>保存</b></span>ウィンドウが表示されます。</li><li>イメージファイルがPCに保存されるパスを選択し、<span class="parmname">[<b>ファイル名：</b>]</span>テキストボックスにイメージファイル名を入力します。<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><p>システムがサポートしているのは形式が<span class="filepath"><b><i><span class="varname">*</span></i>.iso</b></span>である光ディスクのイメージファイル及び形式が<span class="filepath"><b><i><span class="varname">*</span></i>.img</b></span>であるフロッピーディスクのイメージファイルのみです。</p>
+</div></div>
+</li><li><b>[</b><span class="uicontrol"><b>保存</b></span><b>]</b>をクリックします。<p><a href="#bmc_help_0008_1__fig_19">図 5</a>に示すような画面に戻します。</p>
+</li><li><b>[</b><span class="uicontrol"><b>作成</b></span><b>]</b>をクリックします。<p>作成が完了したら、システムから「イメージファイルの作成に成功しました。」ウィンドウが表示されます。</p>
+<p><span class="parmname">[<b>作成の進捗</b>]</span>バーにイメージファイルの作成の進み具合をパーセンテージで表示します。</p>
+<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><p>作成中に、<b>[</b><span class="uicontrol"><b>停止</b></span><b>]</b>をクリックすると、イメージファイルの作成を停止することができます。</p>
+</div></div>
+</li></ol>
+<p id="bmc_help_0008_1__install_localpath"><a name="bmc_help_0008_1__install_localpath"></a><a name="install_localpath"></a><strong id="bmc_help_0008_1__iso_local_01"><a name="bmc_help_0008_1__iso_local_01"></a><a name="iso_local_01"></a>仮想フォルダーのマウント</strong></p>
+<p id="bmc_help_0008_1__iso_local_02"><a name="bmc_help_0008_1__iso_local_02"></a><a name="iso_local_02"></a>この操作ではローカルPCのフォルダーをサーバーにマウントし、サーバーのシステムが読み取り専用の方式でローカルフォルダーにアクセスできるようになります。</p>
+<div class="notice"><span class="noticetitle"><img src="../public_sys-resources/icon-notice.gif"> 注意事項: </span><div class="noticebody"><p><span id="bmc_help_0008_1__iso_local_03"><a name="bmc_help_0008_1__iso_local_03"></a><a name="iso_local_03"></a>仮想フォルダーをマウントする前に、まず転送するファイルをタッゲートフォルダーにコピーしておいてください。仮想フォルダーをマウントした場合、ファイルの追加または削除の操作はできません。</span></p>
+</div></div>
+<ol><li><span class="wintitle"><b>Remote Control</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_10.png"></span>をクリックします。<p><a href="#bmc_help_0008_1__fig_20">図 6</a>に示すような画面が表示されます。</p>
+<div class="fignone" id="bmc_help_0008_1__fig_20"><a name="bmc_help_0008_1__fig_20"></a><a name="fig_20"></a><span class="figcap"><b>図 6 </b>仮想フォルダーのマウント</span>
+
+<br><span><img src="fig/fig_bmc_help_0008_17_ja.png"></span></div>
+</li><li><span class="parmname">[<b>ローカルフォルダー</b>]</span>ラジオボタンを選択します。</li><li><b>[</b><span class="uicontrol"><b>閲覧</b></span><b>]</b>をクリックします。<p>ローカルフォルダー選択ウィンドウが表示されます。</p>
+</li><li>マウントするローカルフォルダーを選択して<b>[</b><span class="uicontrol"><b>開く</b></span><b>]</b>をクリックします。</li><li><b>[</b><span class="uicontrol"><b>接続</b></span><b>]</b>をクリックします。<div class="note"><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><a name="bmc_help_0008_1__iso_local_04"></a><a name="iso_local_04"></a><ul id="bmc_help_0008_1__iso_local_04"><li>接続が成功した場合、サーバーのオペレーティングシステムから仮想フォルダーを見ることができます。このフォルダーから直接ファイルをコピーすることができます。</li><li>接続が成功した場合、<b>[</b><span class="uicontrol"><b>切断</b></span><b>]</b>をクリックすると、仮想フォルダーをアンインストールすることができます。</li></ul>
+</div></div>
+</li></ol>
+<p id="bmc_help_0008_1__poweron_01"><a name="bmc_help_0008_1__poweron_01"></a><a name="poweron_01"></a><strong>サーバーの電源投入</strong></p>
+<ol><li><span class="wintitle"><b>KVM</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_13.png"></span>をクリックし、ショートカットメニューから<span class="menucascade"><b>[</b><b><span class="uicontrol">電源ON</span></b><b>]</b></span>を選択します。<p><span class="wintitle"><b>オプションを1つ選択する</b></span>ダイアログボックスが表示されます。</p>
+</li><li><b>[</b><span class="uicontrol"><b>はい</b></span><b>]</b>をクリックします。<p id="bmc_help_0008_1__poweron_03"><a name="bmc_help_0008_1__poweron_03"></a><a name="poweron_03"></a>サーバーは電源を投入します。</p>
+<div class="note" id="bmc_help_0008_1__poweron_02"><a name="bmc_help_0008_1__poweron_02"></a><a name="poweron_02"></a><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><p>サーバーの電源投入時間はサーバーの設定によって違います。</p>
+</div></div>
+</li></ol>
+<p id="bmc_help_0008_1__poweroff_01"><a name="bmc_help_0008_1__poweroff_01"></a><a name="poweroff_01"></a><strong>サーバーの電源切断</strong></p>
+<div class="notice" id="bmc_help_0008_1__poweroff_02"><a name="bmc_help_0008_1__poweroff_02"></a><a name="poweroff_02"></a><span class="noticetitle"><img src="../public_sys-resources/icon-notice.gif"> 注意事項: </span><div class="noticebody"><ul><li><p>電源をオフにする前に、現在の業務を中断するリスクがないことを確認してください。</p>
+</li><li><p>実際の状況によって電源切断の方法を選択してください。<b>[</b><span class="uicontrol"><b>強制電源停止</b></span><b>]</b>及び<b>[</b><span class="uicontrol"><b>電源OFF</b></span><b>]</b>の違いについては、iBMCユーザーガイドの<span class="wintitle"><b>電源管理</b></span>を参照してください。</p>
+</li></ul>
+</div></div>
+<ol><li><span class="wintitle"><b>KVM</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_13.png"></span>をクリックして、ショートカットメニューから<b>[</b><span class="uicontrol"><b>強制電源停止</b></span><b>]</b>または<b>[</b><span class="uicontrol"><b>電源OFF</b></span><b>]</b>を選択します。<p><span class="wintitle"><b>オプションを1つ選択する</b></span>ダイアログボックスが表示されます。</p>
+</li><li><b>[</b><span class="uicontrol"><b>はい</b></span><b>]</b>をクリックします。<p id="bmc_help_0008_1__poweroff_03"><a name="bmc_help_0008_1__poweroff_03"></a><a name="poweroff_03"></a>サーバーは電源を切断します。</p>
+</li></ol>
+<p id="bmc_help_0008_1__force_01"><a name="bmc_help_0008_1__force_01"></a><a name="force_01"></a><strong>強制再起動または電源を強制的にオフにしてからオンにする</strong></p>
+<div class="notice" id="bmc_help_0008_1__force_02"><a name="bmc_help_0008_1__force_02"></a><a name="force_02"></a><span class="noticetitle"><img src="../public_sys-resources/icon-notice.gif"> 注意事項: </span><div class="noticebody"><ul><li><p id="bmc_help_0008_1__force_reset_cycle"><a name="bmc_help_0008_1__force_reset_cycle"></a><a name="force_reset_cycle"></a>強制再起動または電源を強制的にオフにしてからオンにすると、ユーザーのプログラムや保存されていないデータを壊す可能性があります。そのために、オペレーティングシステムの実際状況によって操作方法を慎重に選択してください。</p>
+</li><li><p>現在の業務が中断するリスクがないことを事前に確かめてから<span>[強制再起動または電源を強制的にオフにしてからオンにする]</span>を行ってください。</p>
+</li><li><p>実際の状況によって<span><b>[</b><span class="uicontrol"><b>システム強制リセット</b></span><b>]</b>または<b>[</b><span class="uicontrol"><b>強制電源サイクル</b></span><b>]</b></span>を選択してください。<b>[</b><span class="uicontrol"><b>システム強制リセット</b></span><b>]</b>及び<b>[</b><span class="uicontrol"><b>強制電源サイクル</b></span><b>]</b>の違いについては<span class="menucascade"><b>[</b><b><span class="uicontrol">電力</span></b><b>]</b> &gt; <b>[</b><b><span class="uicontrol">電源管理</span></b><b>]</b></span>を参照してください。</p>
+</li></ul>
+</div></div>
+<ol><li><span class="wintitle"><b>KVM</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_13.png"></span>をクリックして、ショートカットメニューから<b>[</b><span class="uicontrol"><b>システム強制リセット</b></span><b>]</b>または<b>[</b><span class="uicontrol"><b>強制電源サイクル</b></span><b>]</b>を選択します。<p><span class="wintitle"><b>オプションを1つ選択する</b></span>ダイアログボックスが表示されます。</p>
+</li><li><b>[</b><span class="uicontrol"><b>はい</b></span><b>]</b>をクリックします。<p id="bmc_help_0008_1__force_03"><a name="bmc_help_0008_1__force_03"></a><a name="force_03"></a>サーバーは<span>[システム強制リセットまたは強制電源サイクル]</span>を行います。</p>
+<div class="note" id="bmc_help_0008_1__force_04"><a name="bmc_help_0008_1__force_04"></a><a name="force_04"></a><img src="../public_sys-resources/icon-note.gif"><span class="notetitle"> 注記: </span><div class="notebody"><p>サーバーの<span>システム強制リセットまたは強制電源サイクル</span>に要する時間は、サーバーの設定によって違います。</p>
+</div></div>
+</li></ol>
+<p><strong id="bmc_help_0008_1__resetkm1"><a name="bmc_help_0008_1__resetkm1"></a><a name="resetkm1"></a>キーボードとマウスのリセット</strong></p>
+<p id="bmc_help_0008_1__resetkm2"><a name="bmc_help_0008_1__resetkm2"></a><a name="resetkm2"></a>この操作ではUSBキーボード及びUSBマウスの抜き差しをシミュレートします。</p>
+<ol><li><span class="wintitle"><b>KVM</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_16.png"></span>をクリックしてショートカットメニューから<span class="menucascade"><b>[</b><b><span class="uicontrol">キーボードとマウスのリセット</span></b><b>]</b></span>を選択します。<p><span class="wintitle"><b>オプションを1つ選択する</b></span>ダイアログボックスが表示されます。</p>
+</li><li><b>[</b><span class="uicontrol"><b>はい</b></span><b>]</b>をクリックします。<p id="bmc_help_0008_1__resetkm3"><a name="bmc_help_0008_1__resetkm3"></a><a name="resetkm3"></a>サーバーはUSBのリセット操作を実行します。</p>
+</li></ol>
+<p id="bmc_help_0008_1__record"><a name="bmc_help_0008_1__record"></a><a name="record"></a><strong id="bmc_help_0008_1__record01"><a name="bmc_help_0008_1__record01"></a><a name="record01"></a>リアルタイムデスクトップの録画</strong></p>
+<p id="bmc_help_0008_1__record02"><a name="bmc_help_0008_1__record02"></a><a name="record02"></a>この操作では、現在、リモートバーチャルコンソールに表示されている画面を動画として録画します。</p>
+<ol><li><span class="wintitle"><b>KVM</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_15.png"></span>をクリックします。<p><span class="wintitle"><b>オプションを1つ選択する</b></span>ダイアログボックスが表示されます。</p>
+</li><li><b>[</b><span class="uicontrol"><b>はい</b></span><b>]</b>をクリックします。<p><span class="wintitle"><b>保存</b></span>ウィンドウが表示されます。</p>
+</li><li>録画する動画ファイルがPCに保存されるパスを選択し、<span class="parmname">[<b>ファイル名：</b>]</span>テキストボックスに動画ファイルの名称を入力します。</li><li><b>[</b><span class="uicontrol"><b>保存</b></span><b>]</b>をクリックします。<p><span class="wintitle"><b>KVM</b></span>画面に戻して動画の録画を開始します。</p>
+</li><li>録画が完了した後、<span><img src="fig/fig_bmc_help_0008_21.png"></span>をクリックします。<p><span class="wintitle"><b>オプションを1つ選択する</b></span>ダイアログボックスが表示されます。</p>
+</li><li><b>[</b><span class="uicontrol"><b>はい</b></span><b>]</b>をクリックします。<p>動画ファイルが指定のパスに保存されています。</p>
+</li></ol>
+<p id="bmc_help_0008_1__record03"><a name="bmc_help_0008_1__record03"></a><a name="record03"></a>録画した動画ファイルの形式は<span class="filepath"><b><i><span class="varname">*</span></i>.rep</b></span>です。<b>[</b><span class="uicontrol"><b>録画再生</b></span><b>]</b>画面でビデオファイルを再生することやビデオに対するキャプチャーができます。</p>
+<p><strong id="bmc_help_0008_1__sigle_mouse1"><a name="bmc_help_0008_1__sigle_mouse1"></a><a name="sigle_mouse1"></a>シングルマウスの使用</strong></p>
+<p id="bmc_help_0008_1__sigle_mouse2"><a name="bmc_help_0008_1__sigle_mouse2"></a><a name="sigle_mouse2"></a>ローカルPCのマウスとリアルタイムのマウスが同期しない場合、シングルマウスの機能を使用してローカルPCのマウスを非表示することができます。<span class="wintitle"><b>KVM</b></span>画面にはリアルタイムのマウスしか表示されていません。</p>
+<ol><li><span class="wintitle"><b>KVM</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_16.png"></span>をクリックしてショートカットメニューから<span class="menucascade"><b>[</b><b><span class="uicontrol">シングルマウス</span></b><b>]</b></span>を選択します。<p><span class="wintitle"><b>オプションを1つ選択する</b></span>ダイアログボックスが表示されます。</p>
+</li><li><b>[</b><span class="uicontrol"><b>はい</b></span><b>]</b>をクリックします。<p id="bmc_help_0008_1__sigle_mouse3"><a name="bmc_help_0008_1__sigle_mouse3"></a><a name="sigle_mouse3"></a><span class="wintitle"><b>KVM</b></span>画面にはリアルタイムのマウスしか表示されていません。</p>
+</li></ol>
+<p><strong id="bmc_help_0008_1__acce_mouse1"><a name="bmc_help_0008_1__acce_mouse1"></a><a name="acce_mouse1"></a>リモートマウスの加速</strong></p>
+<p id="bmc_help_0008_1__acce_mouse2"><a name="bmc_help_0008_1__acce_mouse2"></a><a name="acce_mouse2"></a>この操作では、リアルタイムデスクトップにあるマウスの速度を速くして、ローカルPCのマウスと同期できるようにします。</p>
+<ol><li><span class="wintitle"><b>KVM</b></span>画面からツールバーにある<span><img src="fig/fig_bmc_help_0008_16.png"></span>をクリックしてショートカットメニューから<span class="menucascade"><b>[</b><b><span class="uicontrol">マウスの加速</span></b><b>]</b></span>を選択します。<p><span class="wintitle"><b>オプションを1つ選択する</b></span>ダイアログボックスが表示されます。</p>
+</li><li><b>[</b><span class="uicontrol"><b>はい</b></span><b>]</b>をクリックします。<p id="bmc_help_0008_1__acce_mouse3"><a name="bmc_help_0008_1__acce_mouse3"></a><a name="acce_mouse3"></a>ローカルPCとサーバーのマウスを同期化します。</p>
+</li></ol>
+</div>
+
+</div>
+
+
+<div class="hrcopyright"><hr size="2"></div><div class="hwcopyright">Copyright &copy; Huawei Technologies Co., Ltd.</div></body>
+</html>
