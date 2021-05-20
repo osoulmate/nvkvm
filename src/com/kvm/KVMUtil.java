@@ -25,6 +25,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.event.ChangeListener;
+
+//need
 public class KVMUtil
 {
   private byte[] bladePreInfo = new byte[2];
@@ -91,7 +93,7 @@ public class KVMUtil
     this.colorBit = colorBit;
   }
   @SuppressWarnings({ "unchecked", "rawtypes" })
-private ArrayList<byte[]> diviBuff = (ArrayList)new ArrayList<>();
+  private ArrayList<byte[]> diviBuff = (ArrayList)new ArrayList<>();
   public ArrayList<byte[]> getDiviBuff() {
     return this.diviBuff;
   }
@@ -146,7 +148,7 @@ private ArrayList<byte[]> diviBuff = (ArrayList)new ArrayList<>();
   private int lenB = 0;
   private byte nowDisplay = 0;
   @SuppressWarnings({ "unchecked", "rawtypes" })
-private ArrayList<byte[]> resultDivi = (ArrayList)new ArrayList<>();
+  private ArrayList<byte[]> resultDivi = (ArrayList)new ArrayList<>();
   public ArrayList<byte[]> getResultDivi() {
     return this.resultDivi;
   }

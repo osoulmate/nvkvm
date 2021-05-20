@@ -1,4 +1,5 @@
 package com.kvm;
+//need
 class GetDiffOSPara
 {
   private static int loginWindowsLength = 355;

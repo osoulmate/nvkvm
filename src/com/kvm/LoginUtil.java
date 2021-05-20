@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+//need
 class LoginUtil
   implements Serializable
 {
@@ -12,24 +13,20 @@ class LoginUtil
   private transient ResourceBundle bundle = null;
   public void setBundle(String Ianguage) {
     if (Ianguage.equals("zh")) {
-      this
-        .bundle = ResourceBundle.getBundle(this.resourcePath, new Locale("zh"), 
-          ResourceBundle.Control.getControl(ResourceBundle.Control.FORMAT_PROPERTIES));
+      this.bundle = ResourceBundle.getBundle(this.resourcePath, new Locale("zh"), 
+      ResourceBundle.Control.getControl(ResourceBundle.Control.FORMAT_PROPERTIES));
     }
     else if (Ianguage.equals("ja")) {
-      this
-        .bundle = ResourceBundle.getBundle(this.resourcePath, new Locale("ja"), 
-          ResourceBundle.Control.getControl(ResourceBundle.Control.FORMAT_PROPERTIES));
+      this.bundle = ResourceBundle.getBundle(this.resourcePath, new Locale("ja"), 
+      ResourceBundle.Control.getControl(ResourceBundle.Control.FORMAT_PROPERTIES));
     }
     else if (Ianguage.equals("fr")) {
-      this
-        .bundle = ResourceBundle.getBundle(this.resourcePath, new Locale("fr"), 
-          ResourceBundle.Control.getControl(ResourceBundle.Control.FORMAT_PROPERTIES));
+      this.bundle = ResourceBundle.getBundle(this.resourcePath, new Locale("fr"), 
+      ResourceBundle.Control.getControl(ResourceBundle.Control.FORMAT_PROPERTIES));
     }
     else {
-      this
-        .bundle = ResourceBundle.getBundle(this.resourcePath, new Locale("en"), 
-          ResourceBundle.Control.getControl(ResourceBundle.Control.FORMAT_PROPERTIES));
+      this.bundle = ResourceBundle.getBundle(this.resourcePath, new Locale("en"), 
+      ResourceBundle.Control.getControl(ResourceBundle.Control.FORMAT_PROPERTIES));
     } 
   }
   public String getString(String key) {

@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Locale;
@@ -71,8 +72,6 @@ public class Main
   private Object[] remindOption = new Object[] { "" };
   private JButton copyrightImagebutton;
   private LoginUtil loginUtil;
-  private JButton ipAddrImagebutton;
-  private JButton usernameImagebutton;
   public Main() {
     init();
     setTitle(this.loginUtil.getString("Login_Name"));
@@ -99,7 +98,7 @@ public class Main
     String IpAddrLabelName = "";
     String UsernameLabelName = "";
     String PwdLabelName = "";
-    String[] IanguageSet = new String[4];
+    String[] IanguageSet = new String[2];
     String shareButtonName = "";
     String onlyButtonName = "";
     String KVMButtonName = "";
@@ -114,13 +113,12 @@ public class Main
     KVMButtonName = this.loginUtil.getString("KVM_Button_Name");
     IanguageSet[0] = this.loginUtil.getString("Ianguage_en");
     IanguageSet[1] = this.loginUtil.getString("Ianguage_zh");
-    IanguageSet[2] = this.loginUtil.getString("Ianguage_ja");
-    IanguageSet[3] = this.loginUtil.getString("Ianguage_fr");
     GetDiffOSPara.osParaInit();
     this.fonts = this.loginUtil.getString("font_name");
     setWordSize(Integer.parseInt(this.loginUtil.getString("Word_Size")));
     Container container = getContentPane();
     this.loginPanel = new JPanel();
+    //bak.JPG 426px x 268px
     Image image = (new ImageIcon(Main.class.getResource("resource/images/bak.JPG"))).getImage();
     this.loginPanel = new BackgroundPanel(image);
     this.loginPanel.setLayout((LayoutManager)null);
@@ -140,13 +138,6 @@ public class Main
     this.ipAddrLabel = new JLabel(IpAddrLabelName);
     this.ipAddrLabel.setBounds(30, 50, 150, 20);
     this.ipAddrLabel.setFont(new Font(this.fonts, 0, wordSize));
-    this.ipAddrImagebutton = new JButton();
-    Image ipImage = (new ImageIcon(Main.class.getResource("resource/images/reminder.png"))).getImage();
-    this.ipAddrImagebutton.setIcon(new ImageIcon(ipImage));
-    this.ipAddrImagebutton.setBounds(310, 50, 20, 20);
-    this.ipAddrImagebutton.setBorder((Border)null);
-    this.ipAddrImagebutton.setContentAreaFilled(false);
-    this.ipAddrImagebutton.setName("IpAddrImagebuttonInput");
     this.username = new JTextField();
     this.username.setBounds(150, 85, 150, 20);
     this.username.setFont(new Font(this.fonts, 0, wordSize));
@@ -155,13 +146,6 @@ public class Main
     this.usernameLabel = new JLabel(UsernameLabelName);
     this.usernameLabel.setBounds(30, 85, 150, 20);
     this.usernameLabel.setFont(new Font(this.fonts, 0, wordSize));
-    this.usernameImagebutton = new JButton();
-    Image unImage = (new ImageIcon(Main.class.getResource("resource/images/reminder.png"))).getImage();
-    this.usernameImagebutton.setIcon(new ImageIcon(unImage));
-    this.usernameImagebutton.setBounds(310, 85, 20, 20);
-    this.usernameImagebutton.setBorder((Border)null);
-    this.usernameImagebutton.setContentAreaFilled(false);
-    this.usernameImagebutton.setName("UsernameImagebuttonInput");
     this.pwdJField = new JPasswordField();
     this.pwdJField.setBounds(150, 120, 150, 20);
     this.pwdJField.setName("pwdInput");
@@ -170,12 +154,6 @@ public class Main
     this.passwordLabel.setFont(new Font(this.fonts, 0, wordSize));
     if (this.ianguage.equals("zh")) {
       IanguageIndex = 1;
-    }
-    else if (this.ianguage.equals("ja")) {
-      IanguageIndex = 2;
-    }
-    else if (this.ianguage.equals("fr")) {
-      IanguageIndex = 3;
     }
     else {
       IanguageIndex = 0;
@@ -247,13 +225,12 @@ public class Main
             } 
           }
           public void focusGained(FocusEvent e) {
-            Main.this.username.setText("");
+        	//重新获取焦点不重置已输入的用户名
+            //Main.this.username.setText("");
             Main.this.username.setForeground(Color.BLACK);
             Main.this.username.setFont(new Font(Main.this.loginUtil.getString("font_name"), 0, Main.wordSize));
           }
         });
-    this.usernameImagebutton.addActionListener(new UsernameHelpButton());
-    this.ipAddrImagebutton.addActionListener(new IpAddrHelpButton());
     this.copyrightImagebutton.addActionListener(new CopyrightButton());
     this.kvmButton.addActionListener(new ActionListener()
         {
@@ -308,6 +285,33 @@ public class Main
             String host = Main.this.getHostFromAddr(Addr);
             String hostIpmi = Main.this.getIpmiHostFromAddr(Addr);
             int firmVersion = 1;
+            try {
+            	if (Main.this.isAliveCheck(host)) {
+            		Collect mycollect = new Collect(hostIpmi,user_name,PwdStrIPMI);
+            		String vendor = mycollect.getVendor();
+            		String model = mycollect.getModel();
+            		String bmc_version = mycollect.getBmcVersion();
+            		LoggerUtil.info( "vendor:"+ vendor + ",model:"+model+",bmc_version:"+bmc_version );
+            		//非华为机型执行下述登陆方法
+            		if (!vendor.toLowerCase().equals("huawei")) {
+            			ClientSubmitLoginCommon commonLogin = new ClientSubmitLoginCommon();
+            			String loginResult = commonLogin.doLogin(vendor, model, bmc_version, hostIpmi,user_name,PwdStrIPMI, KvmMode);
+            			LoggerUtil.info( "loginResult:"+ loginResult);
+            			return;
+            		}
+            	}else {
+                    JOptionPane.showOptionDialog(Main.this.loginPanel, Main.this
+                            .networkAddrError, Main.this
+                            .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
+                            .remindOption, Main.this
+                            .remindOption[0]);
+            		return;
+            	}
+            }
+            catch (Exception e1) {
+            	LoggerUtil.error(e1.getClass().getName());
+            	return;
+            }
             ClientSubmitLoginIofo clientformloginoforosc = new ClientSubmitLoginIofo();
             try {
               Main.getStrFromWeb = clientformloginoforosc.getParaFromWeb(host, user_name, PwdStrHTTPS, KvmMode, port, Main.this
@@ -570,7 +574,8 @@ public class Main
               catch (Exception e2) {
                 LoggerUtil.error(e.getClass().getName());
               } 
-              String[] ParaInput = { verifyValue, mmVerifyValue, decrykey, Main.this.ianguage, compress, vmm_compress, kvm_Port, vmm_Port, privilege, host, host, verifyValueExt };
+              String[] ParaInput = {verifyValue, mmVerifyValue, decrykey, Main.this.ianguage, 
+            		  compress, vmm_compress, kvm_Port, vmm_Port, privilege, host, host, verifyValueExt};
               PwdStrHTTPS = "";
               PwdStrIPMI = "";
               Main.this.pwdJField.setText("");
@@ -591,20 +596,13 @@ public class Main
           public void actionPerformed(ActionEvent e)
           {
             int index = Main.this.ianguageComboBox.getSelectedIndex();
-            if (0 == index) {
-              Main.this.ianguage = "en";
-            }
-            else if (1 == index) {
-              Main.this.ianguage = "zh";
-              JOptionPane.showMessageDialog(null, "If the current OS does not contain the Chinese character set, garbled characters will be displayed after you switch to Chinese. ");
-            }
-            else if (3 == index) {
-              Main.this.ianguage = "fr";
-              JOptionPane.showMessageDialog(null, "If the current OS does not contain the French character set, garbled characters will be displayed after you switch to French. ");
+            if (1 == index) {
+                Main.this.ianguage = "zh";
+                JOptionPane.showMessageDialog(null, "If the current OS does not contain the Chinese character set, \n"
+                		+ "garbled characters will be displayed after you switch to Chinese. ");
             }
             else {
-              Main.this.ianguage = "ja";
-              JOptionPane.showMessageDialog(null, "If the current OS does not contain the Japanese character set, garbled characters will be displayed after you switch to Japanese. ");
+            	 Main.this.ianguage = "en";
             } 
             String ipTempString = Main.this.loginUtil.getString("Ip_addr_remind_text");
             Main.this.loginUtil.setBundle(Main.this.ianguage);
@@ -623,8 +621,8 @@ public class Main
     this.loginPanel.add(this.ipAddrLabel);
     this.loginPanel.add(this.passwordLabel);
     this.backgroundLable.add(this.ianguageComboBox);
-    this.backgroundLable.add(this.ipAddrImagebutton);
-    this.backgroundLable.add(this.usernameImagebutton);
+    //this.backgroundLable.add(this.ipAddrImagebutton);
+    //this.backgroundLable.add(this.usernameImagebutton);
     this.backgroundLable.add(this.copyrightImagebutton);
     this.backgroundLable.add(this.kvmButton);
     this.loginPanel.add(this.ip_addr);
@@ -644,22 +642,6 @@ public class Main
     public void actionPerformed(ActionEvent e) {
       OpenCopyRight openCR = new OpenCopyRight();
       openCR.start();
-    }
-  }
-  private static class UsernameHelpButton
-    implements ActionListener
-  {
-    private UsernameHelpButton() {}
-    public void actionPerformed(ActionEvent arg0) {
-      JOptionPane.showMessageDialog(null, "The iBMC versions earlier than V2 2.28 and iMana versions support logins of local users only. \nThe iBMC V2 2.28 and later versions support logins of local users and LDAP domain users.");
-    }
-  }
-  private static class IpAddrHelpButton
-    implements ActionListener
-  {
-    private IpAddrHelpButton() {}
-    public void actionPerformed(ActionEvent e) {
-      JOptionPane.showMessageDialog(null, "Network address formats:\n    IPv4 address format: Network address:Port number (the default port number can be omitted)\n    IPv6 address format: [Network address]:Port number (the default port number can be omitted)\nThe iBMC versions earlier than V2 2.28 and iMana use the RMCP+ port number.\nThe iBMC V2 2.28 and later versions use the HTTPS port number. ");
     }
   }
   private void widgetMsgUpdate() {
@@ -831,6 +813,50 @@ public class Main
       return false;
     } 
     return false;
+  }
+  public boolean isAliveCheck(String ip) {
+	    try{ 
+	        InetAddress address = InetAddress.getByName(ip);
+	        if(address instanceof java.net.Inet4Address){ 
+	           System.out.println(ip + " is ipv4 address"); 
+	        }else
+	        if(address instanceof java.net.Inet6Address){ 
+	           System.out.println(ip + " is ipv6 address"); 
+	        }else{ 
+	           System.out.println(ip + " is unrecongized"); 
+	        } 
+	        if(address.isReachable(5000)){ 
+	          System.out.println("SUCCESS - ping " + ip + " with no interface specified");
+	          return true; 
+	        }
+	        else{ 
+	           System.out.println("FAILURE - ping " + ip + " with no interface specified"); 
+	           return false;
+	        } 
+	        /*
+	        System.out.println("\n-------Trying different interfaces--------\n"); 
+	        Enumeration<NetworkInterface> netInterfaces = NetworkInterface.getNetworkInterfaces();
+	        while(netInterfaces.hasMoreElements()) {    
+	             NetworkInterface ni = netInterfaces.nextElement();    
+	             System.out.println("Checking interface, DisplayName:" + ni.getDisplayName() + ", Name:" + ni.getName());
+	              if(address.isReachable(ni, 0, 5000)){ 
+	                  System.out.println("SUCCESS - ping " + ip); 
+	              }else{ 
+	                  System.out.println("FAILURE - ping " + ip); 
+	              } 
+	              
+	              Enumeration<InetAddress> ips = ni.getInetAddresses();    
+	              while(ips.hasMoreElements()) {    
+	                System.out.println("IP: " + ips.nextElement().getHostAddress());   
+	              } 
+	            System.out.println("-------------------------------------------"); 
+	          } 
+	          */
+	      }catch(Exception e){ 
+	        System.out.println("error occurs."); 
+	        e.printStackTrace();
+	        return false;
+	      }       
   }
   private void ipmiLoginMethod(String host, String user_name, String PwdStr, String KvmMode, int port, LoginAuthentication clientformlogininforosc, LoginUtil loginutil) {
     String loginAuthResult = "";
