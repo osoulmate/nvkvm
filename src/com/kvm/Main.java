@@ -293,11 +293,30 @@ public class Main
             		String bmc_version = mycollect.getBmcVersion();
             		LoggerUtil.info( "vendor:"+ vendor + ",model:"+model+",bmc_version:"+bmc_version );
             		//非华为机型执行下述登陆方法
-            		if (!vendor.toLowerCase().equals("huawei")) {
+            		if (!vendor.equalsIgnoreCase("huawei")) {
             			ClientSubmitLoginCommon commonLogin = new ClientSubmitLoginCommon();
-            			String loginResult = commonLogin.doLogin(vendor, model, bmc_version, hostIpmi,user_name,PwdStrIPMI, KvmMode);
-            			LoggerUtil.info( "loginResult:"+ loginResult);
-            			return;
+            			String [] loginResult = commonLogin.doLogin(vendor, model, bmc_version, hostIpmi,user_name,PwdStrIPMI, KvmMode);
+            			LoggerUtil.info( "loginResult:"+ loginResult[0]+","+loginResult[1]);
+            			if(loginResult[0].equals("0")) {
+            				//no match vendor
+                            JOptionPane.showOptionDialog(Main.this.loginPanel, Main.this
+                                    .networkAddrError, Main.this
+                                    .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
+                                    .remindOption, Main.this
+                                    .remindOption[0]);
+                    		return;
+            				
+            			}else if (loginResult[0].equals("200")) {
+            				if(commonLogin.run()[0].equals("0")) {
+                                JOptionPane.showOptionDialog(Main.this.loginPanel, Main.this
+                                        .networkAddrError, Main.this
+                                        .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
+                                        .remindOption, Main.this
+                                        .remindOption[0]);
+                        		return;
+            				}
+            			}
+            		  return;
             		}
             	}else {
                     JOptionPane.showOptionDialog(Main.this.loginPanel, Main.this
@@ -307,8 +326,7 @@ public class Main
                             .remindOption[0]);
             		return;
             	}
-            }
-            catch (Exception e1) {
+            }catch (Exception e1) {
             	LoggerUtil.error(e1.getClass().getName());
             	return;
             }
@@ -316,8 +334,7 @@ public class Main
             try {
               Main.getStrFromWeb = clientformloginoforosc.getParaFromWeb(host, user_name, PwdStrHTTPS, KvmMode, port, Main.this
                   .loginUtil);
-            }
-            catch (Exception e1) {
+            }catch (Exception e1) {
               JOptionPane.showOptionDialog(Main.this.loginPanel, Main.this
                   .networkAddrError, Main.this
                   .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
@@ -337,8 +354,7 @@ public class Main
               try {
                 firmVersion = firmwareRevision.getRevision(hostIpmi, user_name, PwdStrIPMI, portIpmi);
                 LoggerUtil.info( "firmVersion: "+ firmVersion );
-              }
-              catch (Exception e3) {
+              }catch (Exception e3) {
                 JOptionPane.showOptionDialog(Main.this.loginPanel, Main.this
                     .obtainProductInfoError, Main.this
                     .loginUtil.getString("Remind_title"), 0, 3, null, Main.this

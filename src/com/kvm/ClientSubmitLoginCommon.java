@@ -2,12 +2,15 @@ package com.kvm;
 import com.library.LoggerUtil;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
@@ -15,14 +18,22 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLHandshakeException;
 import javax.net.ssl.TrustManager;
+import java.io.FileReader; 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException; 
 class ClientSubmitLoginCommon
 {
+  private Boolean isHttps = true;
+  private Boolean useTemplate = false;
+  private Boolean addCookie = false;
   private String loginUrl = "";
   private String downloadUrl = "";
   private String extraUrl = "";
@@ -33,223 +44,464 @@ class ClientSubmitLoginCommon
   private String host = "";
   private String userName = "";
   private String passWord = "";
-  private String KvmMode = "";
+  private String kvmMode = "";
   private String sessionValue = "";
-  String tempInput = "";
-  private String encryStr(String vendor,String data) {
-	String result = "";
-	if (vendor.toLowerCase().equals("inspur")) {
-		for(int i=0;i<data.length();i++) {
-			char ch =data.charAt(i);
-			Integer charCode = Integer.valueOf(ch);
-			charCode = charCode^127;
-			if (result.equals("")) {
-				result = result+String.valueOf(Integer.toHexString(charCode)).replace("0x", "");
-			}else {
-				result = result+"-"+String.valueOf(Integer.toHexString(charCode)).replace("0x", "");
-			}
-		
-		}
-	}
-	return result;
-  }
-  private void getEndPoint() {
-	if (this.vendor.toLowerCase().equals("sugon")) {
-		if(this.model.toLowerCase().equals("i620-g30")) {
-			this.loginUrl = "https://"+this.host+"/api/session";
-			this.downloadUrl = "https://"+this.host+"/api/kvmjnlp?&JNLPSTR=JViewer";
-			this.loginData = "username="+this.userName+"&password="+this.passWord;
-		}else if (this.model.toLowerCase().equals("w780-g20")) {
-			this.loginUrl = "https://"+this.host+"/cgi/login.cgi";
-			this.downloadUrl = "https://"+this.host+"/cgi/url_redirect.cgi?url_name=sol&url_type=jwss";
-			this.loginData = "name="+this.userName+"&pwd="+this.passWord;
-		}else {
-			System.out.println();
-		}	
-	}else if (this.vendor.toLowerCase().equals("inspur")) {
-		if(this.model.toLowerCase() == "nf5288m3") {
-			System.out.println();
-		}else if (this.model.toLowerCase().equals("nf5288m5")) {
-			this.loginUrl = "https://"+this.host+"/api/session";
-			this.downloadUrl = "https://"+this.host+"/video/jviewer.jnlp";
-			this.extraUrl = "https://"+this.host+"/api/kvm/download";
-			this.loginData = "username="+this.encryStr(this.vendor,this.userName)+"&password="
-			                  +this.encryStr(this.vendor,this.passWord);
-		}else {
-			System.out.println();
-		}		
-	}else if (this.vendor.toLowerCase().equals("zte")) {
-		if(this.model.toLowerCase().equals("r5300g4")) {
-			this.loginUrl = "https://"+this.host+"/ext/session";
-			this.downloadUrl = "https://"+this.host+"/Java/jviewer.jnlp";
-			this.loginData = "username="+this.userName+"&password="+this.passWord;
-		}else if (this.model.toLowerCase() == "nf5288m5") {
-			System.out.println();
-		}else {
-			System.out.println();
-		}				
-	}else {
-		System.out.println("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
-	}
-
-  }
-  private String getCSRFToken(String input) {
-	  HashMap<String, String> sites = new HashMap<String, String>();
-	    if (input.charAt(0) == '{' && input.charAt(input.length()-1) == '}'){
-	    	String[] kv = input.replace("}","").replace("{", "").split(",");
-	    	for(String k : kv) {
-	    		String[] subKv = k.split(":");
-	    		if (subKv.length >= 2) {
-	    			sites.put(subKv[0].replace("\"", "").replace(" ", ""), subKv[1].replace("\"", "").replace(" ", ""));
-	    			LoggerUtil.info("k:"+subKv[0].replace("\"", "")+" v:"+subKv[1].replace("\"", ""));
-	    		}	
-	    	}
-	    }
-	    if (sites.get("CSRFToken") != null){
-	    	return sites.get("CSRFToken");
-	    }else {
-	    	return "";
-	    }
-	    
-  }
-  private void run(String csrfToken) throws NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException, IOException {
-	   if (!this.extraUrl.equals("")) {
-	    	this.doNext(csrfToken);
-	   }
-		URL requestUrl = null;
-		try {
-			requestUrl = new URL(this.downloadUrl);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			LoggerUtil.error(e.getClass().getName());
-		}
-		  TrustManager[] tm = { new MyX509TrustManager() };
-	      SSLContext sslContext = SSLContext.getInstance("TLSv1.2", "SunJSSE");
-	      sslContext.init(null, tm, new SecureRandom());
-		  HttpsURLConnection httpsConn = (HttpsURLConnection)requestUrl.openConnection();
-		  httpsConn.setSSLSocketFactory(sslContext.getSocketFactory());
-		  httpsConn.setRequestMethod("GET");
-		  if (this.extraUrl != null) {
-	      httpsConn.setRequestProperty("X-CSRFTOKEN", csrfToken);
-	      }
-	      httpsConn.setRequestProperty("Cookie", this.sessionValue);
-	      httpsConn.connect();
-	      int ResponseCode = httpsConn.getResponseCode();
-	      InputStream iptStream = httpsConn.getInputStream();
-	      BufferedReader response = new BufferedReader(new InputStreamReader(iptStream, "utf-8"));
-	      StringBuffer sb = new StringBuffer();
-	      if (200 == ResponseCode) {
-	        int intC = 0;
-	        try {
-	          while ((intC = response.read()) != -1)
-	          {
-	            char c = (char)intC;
-	            sb.append(c);
-	          }
-	        } catch (Exception e) {
-	          LoggerUtil.error(e.getClass().getName());
-	        } 
-	      } 
-	      try {
-	        response.close();
-	      }
-	      catch (IOException e) {
-	        try {
-	          iptStream.close();
-	        }
-	        catch (IOException e2) {
-	          LoggerUtil.error(e2.getClass().getName());
-	        } 
-	        LoggerUtil.error(e.getClass().getName());
-	      } 
-	      try {
-	        iptStream.close();
-	      }
-	      catch (IOException e2) {
-	        LoggerUtil.error(e2.getClass().getName());
-	      }
-	      String temp = sb.toString();
-	      LoggerUtil.info("downloadUrl response:"+temp);
-	      File f = new File("kvm.jnlp");
-	      FileOutputStream fop = new FileOutputStream(f);
-	      // 构建FileOutputStream对象,文件不存在会自动新建
-	      OutputStreamWriter writer = new OutputStreamWriter(fop, "UTF-8");
-	      writer.append(temp);
-	      writer.close();
-	      fop.close();
-  }
-  private void doNext(String csrfToken) throws IOException, NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException {
-	URL requestUrl = null;
-	try {
-		requestUrl = new URL(this.extraUrl);
-	} catch (MalformedURLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		LoggerUtil.error(e.getClass().getName());
-	}
-	  TrustManager[] tm = { new MyX509TrustManager() };
-      SSLContext sslContext = SSLContext.getInstance("TLSv1.2", "SunJSSE");
-      sslContext.init(null, tm, new SecureRandom());
-	  HttpsURLConnection httpsConn = (HttpsURLConnection)requestUrl.openConnection();
-	  httpsConn.setSSLSocketFactory(sslContext.getSocketFactory());
-	  httpsConn.setRequestMethod("GET");
-      httpsConn.setRequestProperty("X-CSRFTOKEN", csrfToken);
-      httpsConn.setRequestProperty("Cookie", this.sessionValue);
-      httpsConn.connect();
-      int ResponseCode = httpsConn.getResponseCode();
-      InputStream iptStream = httpsConn.getInputStream();
-      BufferedReader response = new BufferedReader(new InputStreamReader(iptStream, "utf-8"));
-      StringBuffer sb = new StringBuffer();
-      if (200 == ResponseCode) {
-        int intC = 0;
-        try {
-          while ((intC = response.read()) != -1)
-          {
-            char c = (char)intC;
-            if (c == '\n') {
-              break;
+  private String csrfToken = "";
+  private String loginRes = "";
+  private String secondAuthRes = "";
+  private String downloadRes = "";
+  HashMap<String, String> extraCookie = new HashMap<String, String>();
+  public void MyThread() {
+      System.out.println("main start...");
+      Thread t = new Thread() {
+          public void run() {
+            System.out.println("thread run...");
+            try {
+                Runtime.getRuntime().exec("javaws kvm.jnlp").getInputStream();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            if (sb.length() >= 1024) {
-              break;
-            }
-            sb.append(c);
+            System.out.println("thread end.");
           }
-        } catch (Exception e) {
-          LoggerUtil.error(e.getClass().getName());
-        } 
-      } 
-      try {
-        response.close();
-      }
-      catch (IOException e) {
-        try {
-          iptStream.close();
-        }
-        catch (IOException e2) {
-          LoggerUtil.error(e2.getClass().getName());
-        } 
-        LoggerUtil.error(e.getClass().getName());
-      } 
-      try {
-        iptStream.close();
-      }
-      catch (IOException e2) {
-        LoggerUtil.error(e2.getClass().getName());
-      }
-      String temp = sb.toString();
-      LoggerUtil.info("extraUrl response:"+temp);
+      };
+      t.start();
+      System.out.println("main end...");
   }
-  public String doLogin(String vendor,String model,String bmcVersion,String host, String userName, String passWord, String KvmMode) throws Exception {
-	this.vendor = vendor;
-	this.model = model;
-	this.bmcVersion = bmcVersion;
-	this.host = host;
-	this.userName = userName;
-	this.passWord = passWord;
-	this.KvmMode = KvmMode;
-	this.getEndPoint();
-	String GetParaFromWebOutput = "";
+
+  private String encryStr(String data) {
+    String result = "";
+    if (this.vendor.equalsIgnoreCase("inspur")) {
+        for(int i=0;i<data.length();i++) {
+            char ch =data.charAt(i);
+            Integer charCode = Integer.valueOf(ch);
+            charCode = charCode^127;
+            if (result.equals("")) {
+              result = result+String.valueOf(Integer.toHexString(charCode)).replace("0x", "");
+            }else {
+              result = result+"-"+String.valueOf(Integer.toHexString(charCode)).replace("0x", "");
+            }
+        
+        }
+    }else if (this.vendor.equalsIgnoreCase("h3c")){
+    	try {
+			result = Base64.getEncoder().encodeToString(data.getBytes("utf-8"));
+			result = Base64.getEncoder().encodeToString(result.getBytes("utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+    }
+    return result;
+  }
+  private Boolean getEndPoint() {
+	if (this.vendor.equalsIgnoreCase("newh3ctechnologiesco.,ltd.") || this.vendor.equalsIgnoreCase("newh3c")) {
+		this.vendor = "h3c";
+	}
+    if (this.vendor.equalsIgnoreCase("sugon")) {
+        if(this.model.equalsIgnoreCase("i620-g30")) {
+            this.loginUrl = "/api/session";
+            this.downloadUrl = "/api/kvmjnlp?&JNLPSTR=JViewer";
+            this.loginData = "username="+this.userName+"&password="+this.passWord;
+        }else if (this.model.equalsIgnoreCase("w780-g20")) {
+            this.loginUrl = "/cgi/login.cgi";
+            this.downloadUrl = "/cgi/url_redirect.cgi?url_name=sol&url_type=jwss";
+            this.loginData = "name="+this.userName+"&pwd="+this.passWord;
+        }else {
+        	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
+        }   
+    }else if (this.vendor.equalsIgnoreCase("inspur")) {
+        if(this.model.equalsIgnoreCase("nf5280m5")) {
+            System.out.println();
+        }else if (this.model.equalsIgnoreCase("nf5288m5")) {
+            this.loginUrl = "/api/session";
+            this.downloadUrl = "/video/jviewer.jnlp";
+            this.extraUrl = "/api/kvm/download";
+            this.loginData = "username="+this.encryStr(this.userName)+"&password="
+                              +this.encryStr(this.passWord);
+        }else {
+        	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
+        }       
+    }else if (this.vendor.equalsIgnoreCase("zte")) {
+        if(this.model.equalsIgnoreCase("r5300g4")) {
+            this.loginUrl = "/ext/session";
+            this.downloadUrl = "/Java/jviewer.jnlp";
+            this.loginData = "username="+this.userName+"&password="+this.passWord;
+        }else if (this.model.toLowerCase() == "nf5288m5") {
+        	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
+        }else {
+        	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
+        }               
+    }else if (this.vendor.equalsIgnoreCase("h3c")) {
+        if(this.model.equalsIgnoreCase("uniserverr4900g3")) {
+        	this.useTemplate = true;
+        	this.addCookie = true;
+            this.loginUrl = "/api/session";
+            this.downloadUrl = "/api/settings/media/instance";
+            this.extraUrl = "/api/kvm/token";
+            this.loginData = "username="+this.encryStr(this.userName)+"&password="
+                              +this.encryStr(this.passWord)+"&log_type=1";
+        }else if (this.model.equalsIgnoreCase("uniserverr4900g4")) {
+            this.loginUrl = "/api/session";
+            this.downloadUrl = "/video/jviewer.jnlp";
+            this.extraUrl = "/api/kvm/download";
+            this.loginData = "username="+this.encryStr(this.userName)+"&password="
+                              +this.encryStr(this.passWord);
+        }else {
+        	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
+        }       
+    }else {
+    	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
+        return false;
+    }
+    return true;
+  }
+  private HashMap<String, String> strToJson(String input) {
+    HashMap<String, String> sites = new HashMap<String, String>();
+      if (input.charAt(0) == '{' && input.charAt(input.length()-1) == '}'){
+        String[] kv = input.replace("}","").replace("{", "").split(",");
+        for(String k : kv) {
+          String[] subKv = k.split(":");
+          if (subKv.length >= 2) {
+            sites.put(subKv[0].replace("\"", "").replace(" ", ""), subKv[1].replace("\"", "").replace(" ", ""));
+            //LoggerUtil.info("k:"+subKv[0].replace("\"", "")+" v:"+subKv[1].replace("\"", ""));
+          }
+        }
+      }
+      return sites;
+  }
+  private void resetSession(){
+    if(this.model.equalsIgnoreCase("uniserverr4900g3")) {
+	  this.sessionValue = "product_board_id=g3; "+
+	          		"node_board_id=255; "+
+	          		"productID_num=16978692; "+
+	          		"lang=auto; "+
+	          		"safe_switch=0; "+
+	          		"oem_flag=1; "+
+	          		"buid_time=2021; "+
+	          		"extended_privilege=259; "+
+	          		"privilege_id=4; "+
+	          		"un=admin; "+
+	          		"ldap_user=0; "+
+	          		"ad_user=0; "+
+	          		"network_access=0; "+
+	          		"user_access=0; "+
+	          		"basic_access=0; "+
+	          		"power_access=0; "+
+	          		"firmware_access=0; "+
+	          		"health_access=0; "+
+	          		"remote_access=0; "+
+	          		"kvm_access=1; "+
+	          		"vmedia_access=1; "+
+	          		"custom_id=6; "+
+	          		"CSRF="+this.csrfToken+";"+
+	          		"session_id="+this.extraCookie.get("racsession_id")+"; "+this.sessionValue;   	
+	 }
+  }
+  public String[] run() throws NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException {
+	    String exceptionSite = "";
+	    String[] downloadRes= {"",""};
+	    String[] doNextRes = null;
+	    URL requestUrl = null;
+	    //如果addCookie为真，执行resetSession方法重写Cookies;
+	    if(this.addCookie) {
+	      this.resetSession();
+	    }
+	    //如果this.extraUrl不为空，执行doNext()方法进行二次认证;
+	    if (!this.extraUrl.equals("")) {
+	      if (this.isHttps) {
+	          this.extraUrl = "https://"+this.host+this.extraUrl;
+	          exceptionSite = "https://"+this.host;
+	      }else {
+	          this.extraUrl = "http://"+this.host+this.extraUrl;
+	          exceptionSite = "http://"+this.host;
+	      }
+	      try {
+	          doNextRes = this.doNext();
+	      } catch (KeyManagementException e) {
+	       e.printStackTrace();
+	      } catch (NoSuchAlgorithmException e) {
+	       e.printStackTrace();
+	      } catch (NoSuchProviderException e) {
+	       e.printStackTrace();
+	      } catch (IOException e) {
+	       e.printStackTrace();
+	      }
+	      if(doNextRes[0].equals("0")) {
+	        LoggerUtil.info("doNext: failure");
+	        downloadRes[0] = "0";
+	        downloadRes[1] = doNextRes[1];
+	        return downloadRes;
+	      };
+	    }else {
+	      if (this.isHttps) {
+	          exceptionSite = "https://"+this.host;
+	      }else {
+	          exceptionSite = "http://"+this.host;
+	      }       
+	    }
+	    try {
+	      requestUrl = new URL(this.downloadUrl);
+	    }catch (MalformedURLException e) {
+	      LoggerUtil.error(e.getClass().getName());
+	      downloadRes[0] = "0";
+	      downloadRes[1] = e.getClass().getName();
+	      return downloadRes;
+	    }
+	    TrustManager[] tm = { new MyX509TrustManager() };
+	    SSLContext sslContext = SSLContext.getInstance("TLSv1.2", "SunJSSE");
+	    sslContext.init(null, tm, new SecureRandom());
+	    HttpsURLConnection httpsConn = null;
+	    try {
+	        httpsConn = (HttpsURLConnection)requestUrl.openConnection();
+	    } catch (IOException e1) {
+	        // TODO Auto-generated catch block
+	        e1.printStackTrace();
+	        LoggerUtil.info( "requestUrl.openConnection(): "+ e1.getClass().getName() );
+	    }
+	    httpsConn.setSSLSocketFactory(sslContext.getSocketFactory());
+	    try {
+	        httpsConn.setRequestMethod("GET");
+	    } catch (ProtocolException e1) {
+	        // TODO Auto-generated catch block
+	        e1.printStackTrace();
+	        LoggerUtil.info( "httpsConn.setRequestMethod: "+ e1.getClass().getName() );
+	    }
+	    //已知需要二次认证的设备型号http请求头需添加X-CSRFTOKEN字段。
+	    if (!this.csrfToken.equals("notfound")) {
+	      LoggerUtil.info("extraUrl:"+this.extraUrl);
+	      httpsConn.setRequestProperty("X-CSRFTOKEN", this.csrfToken);
+	      LoggerUtil.info("add X-CSRFTOKEN:"+this.csrfToken);
+	    }
+	    LoggerUtil.info("sessionValue:"+this.sessionValue);
+	    httpsConn.setRequestProperty("Cookie", this.sessionValue);
+	    try {
+	        httpsConn.connect();
+	    } catch (IOException e1) {
+	        e1.printStackTrace();
+	        LoggerUtil.info( "httpsConn.connect: "+ e1.getClass().getName() );
+	    }
+	    int ResponseCode = 0;
+	    try {
+	        ResponseCode = httpsConn.getResponseCode();
+	    } catch (IOException e1) {
+	        // TODO Auto-generated catch block
+	        e1.printStackTrace();
+	    }
+	    InputStream iptStream = null;
+	    try {
+	        iptStream = httpsConn.getInputStream();
+	    } catch (IOException e1) {
+	        // TODO Auto-generated catch block
+	    	LoggerUtil.info( "httpsConn.getInputStream: "+ e1.getClass().getName()+";ResponseCode:"+ResponseCode );
+	        //e1.printStackTrace();
+	    }
+	    BufferedReader response = null;
+	    try {
+	        response = new BufferedReader(new InputStreamReader(iptStream, "utf-8"));
+	    } catch (UnsupportedEncodingException e1) {
+	        // TODO Auto-generated catch block
+	        e1.printStackTrace();
+	    }
+	    StringBuffer sb = new StringBuffer();
+	    if (200 == ResponseCode) {
+	      int intC = 0;
+	      try {
+	        while ((intC = response.read()) != -1)
+	        {
+	          char c = (char)intC;
+	          sb.append(c);
+	        }
+	      } catch (Exception e) {
+	        LoggerUtil.error(e.getClass().getName());
+	        downloadRes[0] = "0";
+	        downloadRes[1] = e.getClass().getName();
+	        return downloadRes;
+	      } 
+	    } 
+	    try {
+	      response.close();
+	      iptStream.close();
+	    }catch (IOException e) {
+	      LoggerUtil.error(e.getClass().getName());
+	      downloadRes[0] = "0";
+	      downloadRes[1] = e.getClass().getName();
+	      return downloadRes;
+	    } 
+	    String temp = sb.toString();
+	    this.downloadRes = temp;
+	    LoggerUtil.info("downloadUrl response:"+temp);
+	    if(this.useTemplate) {
+	        JnlpTemplate myTemplate = new JnlpTemplate(this.vendor,
+	                                                   this.model,
+	                                                   this.host,
+	                                                   this.isHttps,
+	                                                   this.loginRes,
+	                                                   this.secondAuthRes,
+	                                                   this.downloadRes);
+	        String myjnlp = myTemplate.getTemplate();
+	        temp = myjnlp;
+	    }
+	    //获取java例外站点文件
+	    String exceptionSites =System.getProperty("user.home")+File.separator+"AppData"
+	                                                    +File.separator+"LocalLow"
+	                                                    +File.separator+"Sun"
+	                                                    +File.separator+"Java"
+	                                                    +File.separator+"Deployment"
+	                                                    +File.separator+"security"
+	                                                    +File.separator+"exception.sites";
+	    LoggerUtil.info("javaTempPath:"+exceptionSites);
+	    File file=new File(exceptionSites);    
+	    if(!file.exists())    
+	    {    
+	        try{    
+	            file.createNewFile();    
+	        } catch (IOException e) {     
+	            e.printStackTrace();    
+	        }    
+	    }else {
+	        try {
+	        FileInputStream fi = new FileInputStream(file);
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(fi,"UTF-8"));
+	        String line = null;
+	        Boolean flag = false;
+	        String initExceptionSite = exceptionSite;
+	        while ((line = reader.readLine()) != null) {
+	            if(line.replace(" ", "").equalsIgnoreCase(initExceptionSite)) {
+	                flag = true;
+	                break;
+	            }else {
+	                exceptionSite = exceptionSite +"\r\n"+line;
+	            }
+	        }
+	        fi.close();
+	        reader.close();
+	        if(!flag) {
+	            LoggerUtil.info("Add Java exceptionSites:"+exceptionSites);
+	            FileOutputStream fo = new FileOutputStream(file);
+	            OutputStreamWriter writer = new OutputStreamWriter(fo, "UTF-8");
+	            writer.append(exceptionSite+"\r\n"); 
+	            writer.close();
+	            fo.close();
+	        }
+	       }catch(IOException e) {
+	           LoggerUtil.info("Add Java exceptionSites occurs error:"+e);
+	       }
+	    }
+	    File f = new File("kvm.jnlp");
+	    FileOutputStream fop = null;
+	    try {
+	        fop = new FileOutputStream(f);
+	    } catch (FileNotFoundException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    OutputStreamWriter w = null;
+	    try {
+	        w = new OutputStreamWriter(fop, "UTF-8");
+	    } catch (UnsupportedEncodingException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    try {
+	        w.append(temp);
+	    } catch (IOException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    try {
+	        w.close();
+	    } catch (IOException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    try {
+	        fop.close();
+	    } catch (IOException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    this.MyThread();
+	    downloadRes[0] = String.valueOf(ResponseCode);
+	    downloadRes[1] = "success";
+	    return downloadRes;
+	  }
+  private String[] doNext() throws IOException, NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException {
+    URL requestUrl = null;
+    String[] nextRes = {"",""};
+    try {
+    	LoggerUtil.info("extraUrl:"+this.extraUrl);
+        requestUrl = new URL(this.extraUrl);
+    } catch (MalformedURLException e) {
+        LoggerUtil.error(e.getClass().getName());
+        nextRes[0]="0";
+        nextRes[1]=e.getClass().getName();
+        return nextRes;
+    }
+    TrustManager[] tm = { new MyX509TrustManager() };
+    SSLContext sslContext = SSLContext.getInstance("TLSv1.2", "SunJSSE");
+    sslContext.init(null, tm, new SecureRandom());
+    HttpsURLConnection httpsConn = (HttpsURLConnection)requestUrl.openConnection();
+    httpsConn.setSSLSocketFactory(sslContext.getSocketFactory());
+    httpsConn.setRequestMethod("GET");
+    httpsConn.setRequestProperty("X-CSRFTOKEN", this.csrfToken);
+    httpsConn.setRequestProperty("Cookie", this.sessionValue);
+    httpsConn.connect();
+    int ResponseCode = httpsConn.getResponseCode();
+    LoggerUtil.info("Second Auth ResponseCode:"+ResponseCode);
+    InputStream iptStream = httpsConn.getInputStream();
+    BufferedReader response = new BufferedReader(new InputStreamReader(iptStream, "utf-8"));
+    StringBuffer sb = new StringBuffer();
+    if (200 == ResponseCode) {
+      int intC = 0;
+      try {
+        while ((intC = response.read()) != -1)
+        {
+          char c = (char)intC;
+          sb.append(c);
+        }
+      }catch (Exception e) {
+        LoggerUtil.error(e.getClass().getName());
+        nextRes[0]="0";
+        nextRes[1]=e.getClass().getName();
+        return nextRes;
+      } 
+    } 
+    try {
+      response.close();
+      iptStream.close();
+    }catch (IOException e) {
+      LoggerUtil.error(e.getClass().getName());
+      nextRes[0]="0";
+      nextRes[1]=e.getClass().getName();
+      return nextRes;
+    } 
+    String temp = sb.toString();
+    this.secondAuthRes = temp;
+    LoggerUtil.info("Second Auth response:"+temp);
+    nextRes[0]=String.valueOf(ResponseCode);
+    nextRes[1]=temp;
+    return nextRes;
+  }
+  public String[] doLogin(String vendor,String model,String bmcVersion,String host, String userName, String passWord, String kvmMode) throws Exception {
+    this.vendor = vendor;
+    this.model = model;
+    this.bmcVersion = bmcVersion;
+    this.host = host;
+    this.userName = userName;
+    this.passWord = passWord;
+    this.kvmMode = kvmMode;
+    String [] GetParaFromWebOutput = {"",""};
+    if(!this.getEndPoint()) {
+    	GetParaFromWebOutput[0] = "0";
+    	GetParaFromWebOutput[1] = "no match vendor";
+    	return GetParaFromWebOutput;
+    }
+    if (this.isHttps) {
+    	this.loginUrl = "https://"+this.host+this.loginUrl;
+    	this.downloadUrl = "https://"+this.host+this.downloadUrl;
+    }else {
+    	this.loginUrl = "http://"+this.host+this.loginUrl;
+    	this.downloadUrl = "http://"+this.host+this.downloadUrl;
+    }
     String url = this.loginUrl;
     LoggerUtil.info( "loginUrl:"+ url);
     LoggerUtil.info( "loginData:"+ this.loginData);
@@ -269,50 +521,27 @@ class ClientSubmitLoginCommon
     HttpsURLConnection httpsConn = (HttpsURLConnection)requestUrl.openConnection();
     httpsConn.setRequestMethod("POST");
     httpsConn.setDoOutput(true);
-    boolean HasCertFlag = true;
-    OutputStream opStream1 = null;
+    httpsConn.setSSLSocketFactory(sslContext.getSocketFactory());
+    OutputStream opsStream1 = null;
     try {
-      opStream1 = httpsConn.getOutputStream();
-      opStream1.write(PostListBypes);
-      LoggerUtil.info( "PostListBypes: "+ PostListBypes );
-    }
-    catch (SSLHandshakeException e) {
-      LoggerUtil.info( "SSLHandshakeException:"+ e );
-      HasCertFlag = false;
-    }
-    catch (IOException e1) {
+      opsStream1 = httpsConn.getOutputStream();
+      opsStream1.write(PostListBypes);
+    }catch (IOException e) {
+      LoggerUtil.error(e.getClass().getName());
+  	  GetParaFromWebOutput[0] = "0";
+  	  GetParaFromWebOutput[1] = e.getClass().getName();
       return GetParaFromWebOutput;
-    }
-    finally {
-      if (opStream1 != null) {
+    }finally {
+      if (opsStream1 != null) {
         try {
-          opStream1.close();
+          opsStream1.close();
         }
-        catch (Exception e2) {
-          LoggerUtil.error(e2.getClass().getName());
+        catch (Exception e) {
+          LoggerUtil.error(e.getClass().getName());
+      	  GetParaFromWebOutput[0] = "0";
+      	  GetParaFromWebOutput[1] = e.getClass().getName();
         } 
       }
-    } 
-    if (!HasCertFlag) {
-      httpsConn.setSSLSocketFactory(sslContext.getSocketFactory());
-      OutputStream opsStream2 = null;
-      try {
-        opsStream2 = httpsConn.getOutputStream();
-        opsStream2.write(PostListBypes);
-      }
-      catch (IOException e) {
-        return GetParaFromWebOutput;
-      }
-      finally {
-        if (opsStream2 != null) {
-          try {
-            opsStream2.close();
-          }
-          catch (Exception e2) {
-            LoggerUtil.error(e2.getClass().getName());
-          } 
-        }
-      } 
     } 
     BufferedReader response = null;
     InputStream iptStream = null;
@@ -321,25 +550,14 @@ class ClientSubmitLoginCommon
       ResponseCode = httpsConn.getResponseCode();
       iptStream = httpsConn.getInputStream();
       /*
-      this.statusCode = httpsConn.getResponseCode();
-      this.expiration = httpsConn.getExpiration();
-      this.request = httpsConn.getURL();
-      this.expiration = httpsConn.getExpiration();
-      this.lastModified = httpsConn.getLastModified();
-      this.responseHeaders = httpsConn.getHeaderFields();
-      this.contentType = httpsConn.getContentType();
-      this.contentEncoding = httpsConn.getContentEncoding();
-      */
-      Map em = httpsConn.getHeaderFields();
-      System.out.println("header Values:" + em.toString());
-      //System.out.println("CSRFTOKEN:" + em1.get("CSRFToken"));
       String headerName = null;   
       for (int i = 1; (headerName = httpsConn.getHeaderFieldKey(i)) != null; i++) 
       {
-           System.out.println(headerName+": "+httpsConn.getHeaderField(i));
-      }
-    }
-    catch (Exception e) {
+    	  LoggerUtil.info(headerName+": "+httpsConn.getHeaderField(i));
+      }*/
+    }catch (Exception e) {
+      GetParaFromWebOutput[0] = "0";
+      GetParaFromWebOutput[1] = e.getClass().getName();
       return GetParaFromWebOutput;
     } 
     response = new BufferedReader(new InputStreamReader(iptStream, "utf-8"));
@@ -361,37 +579,29 @@ class ClientSubmitLoginCommon
           }
           sb.append(c);
         }
-      } catch (Exception e) {
+      }catch (Exception e) {
         LoggerUtil.error(e.getClass().getName());
+    	GetParaFromWebOutput[0] = "0";
+      	GetParaFromWebOutput[1] = e.getClass().getName();
+      	return GetParaFromWebOutput;
       } 
     } 
     try {
       response.close();
-    }
-    catch (IOException e) {
-      try {
-        iptStream.close();
-      }
-      catch (IOException e2) {
-        LoggerUtil.error(e2.getClass().getName());
-      } 
+      iptStream.close();
+    }catch (IOException e) {
       LoggerUtil.error(e.getClass().getName());
     } 
-    try {
-      iptStream.close();
-    }
-    catch (IOException e2) {
-      LoggerUtil.error(e2.getClass().getName());
-    }
     String temp = sb.toString();
-    LoggerUtil.info("temp:"+temp);
-    String csrfToken = this.getCSRFToken(temp);
-    LoggerUtil.info("csrfToken:"+csrfToken);
-    LoggerUtil.info( "extraUrl:"+ this.extraUrl);
-    if (this.downloadUrl != null) {
-    	this.run(csrfToken);
-    }
-    GetParaFromWebOutput = GetParaFromWebOutput + temp;
+    this.loginRes = temp;
+    LoggerUtil.info("Login Response:"+temp);
+    this.extraCookie= this.strToJson(temp);
+    this.csrfToken =this.extraCookie.getOrDefault("CSRFToken","notfound"); 
+    LoggerUtil.info("csrfToken:"+this.csrfToken);
+    GetParaFromWebOutput[0] = String.valueOf(ResponseCode);
+    GetParaFromWebOutput[1] = GetParaFromWebOutput[1] + temp;
     return GetParaFromWebOutput;
   }
 }
+
+
