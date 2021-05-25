@@ -15,6 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Locale;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
@@ -53,6 +54,7 @@ public class Main
   private JLabel noNetworkAddrRemind;
   private JLabel noUsernameRemind;
   private JLabel noPassword;
+  private JLabel unSupportVendor;
   private JLabel networkAddrError;
   private JLabel wrongBMCversion;
   private JLabel loginRestricted;
@@ -291,16 +293,17 @@ public class Main
             		String vendor = mycollect.getVendor();
             		String model = mycollect.getModel();
             		String bmc_version = mycollect.getBmcVersion();
-            		LoggerUtil.info( "vendor:"+ vendor + ",model:"+model+",bmc_version:"+bmc_version );
+            		HashMap<String, String> extra = mycollect.getExtra();
+            		LoggerUtil.info( "vendor:"+ vendor + ",model:"+model+",bmc_version:"+bmc_version+",extra:"+extra );
             		//非华为机型执行下述登陆方法
             		if (!vendor.equalsIgnoreCase("huawei")) {
             			ClientSubmitLoginCommon commonLogin = new ClientSubmitLoginCommon();
-            			String [] loginResult = commonLogin.doLogin(vendor, model, bmc_version, hostIpmi,user_name,PwdStrIPMI, KvmMode);
+            			String [] loginResult = commonLogin.doLogin(vendor, model, bmc_version,extra,hostIpmi,user_name,PwdStrIPMI, KvmMode);
             			LoggerUtil.info( "loginResult:"+ loginResult[0]+","+loginResult[1]);
             			if(loginResult[0].equals("0")) {
             				//no match vendor
                             JOptionPane.showOptionDialog(Main.this.loginPanel, Main.this
-                                    .networkAddrError, Main.this
+                                    .unSupportVendor, Main.this
                                     .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
                                     .remindOption, Main.this
                                     .remindOption[0]);
@@ -308,8 +311,7 @@ public class Main
             				
             			}else if (loginResult[0].equals("200")) {
             				if(commonLogin.run()[0].equals("0")) {
-                                JOptionPane.showOptionDialog(Main.this.loginPanel, Main.this
-                                        .networkAddrError, Main.this
+                                JOptionPane.showOptionDialog(Main.this.loginPanel,loginResult[1] , Main.this
                                         .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
                                         .remindOption, Main.this
                                         .remindOption[0]);
@@ -681,6 +683,8 @@ public class Main
     this.noUsernameRemind.setFont(new Font(this.loginUtil.getString("font_name"), 0, wordSize));
     this.noPassword = new JLabel(this.loginUtil.getString("NoPassword"));
     this.noPassword.setFont(new Font(this.loginUtil.getString("font_name"), 0, wordSize));
+    this.unSupportVendor = new JLabel(this.loginUtil.getString("unsupport_vendor"));
+    this.unSupportVendor.setFont(new Font(this.loginUtil.getString("font_name"), 0, wordSize));
     this.networkAddrError = new JLabel(this.loginUtil.getString("network_Addr_Error"));
     this.networkAddrError.setFont(new Font(this.loginUtil.getString("font_name"), 0, wordSize));
     this.wrongBMCversion = new JLabel(this.loginUtil.getString("wrong_BMC_version"));

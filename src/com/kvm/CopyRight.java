@@ -58,7 +58,7 @@ class CopyRight
     Image image2 = (new ImageIcon(getClass().getResource("resource/images/logo.jpg"))).getImage();
     this.jLogo.setIcon(new ImageIcon(image2));
     this.jLogo.setBounds(18, 14, 45, 45);
-    this.titleLabel = new JLabel("NVKMC");
+    this.titleLabel = new JLabel("nvkvm");
     this.titleLabel.setBounds(65, 28, 220, 20);
     this.titleLabel.setFont(new Font("Times New Roman", 1, 11));
     this.versionsLabel = new JLabel("V1.0.0");

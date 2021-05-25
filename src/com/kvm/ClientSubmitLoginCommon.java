@@ -21,6 +21,9 @@ import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -41,6 +44,7 @@ class ClientSubmitLoginCommon
   private String vendor = "";
   private String model = "";
   private String bmcVersion = "";
+  private HashMap<?, ?> extraVendor;
   private String host = "";
   private String userName = "";
   private String passWord = "";
@@ -113,10 +117,14 @@ class ClientSubmitLoginCommon
             System.out.println();
         }else if (this.model.equalsIgnoreCase("nf5288m5")) {
             this.loginUrl = "/api/session";
-            this.downloadUrl = "/video/jviewer.jnlp";
             this.extraUrl = "/api/kvm/download";
-            this.loginData = "username="+this.encryStr(this.userName)+"&password="
+            this.downloadUrl = "/video/jviewer.jnlp";
+            if(!this.extraVendor.get("productPartNumber").equals("0")) {
+              this.loginData = "username="+this.encryStr(this.userName)+"&password="
                               +this.encryStr(this.passWord);
+            }else {
+                this.loginData = "username="+this.userName+"&password="+this.passWord;
+            }
         }else {
         	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
         }       
@@ -124,7 +132,11 @@ class ClientSubmitLoginCommon
         if(this.model.equalsIgnoreCase("r5300g4")) {
             this.loginUrl = "/ext/session";
             this.downloadUrl = "/Java/jviewer.jnlp";
-            this.loginData = "username="+this.userName+"&password="+this.passWord;
+            if(this.bmcVersion.equalsIgnoreCase("03.13.0200")) {
+            	this.loginData = "username=zteroot&password=nZ2MK3ly4yzff0C5cykeRIlPyLE2vyd4HbLtQa4p%2F0yn5cBmWCef%2FcS3zkH2%2FdC6xU3IcvkYeP%2BUfrGfHpsWkhL%2B%2BQoRVWtJIPM%2F9rOX2yjGeZ%2FBTht9n9rj0B6ornffEYew49twbGrt%2B0gX2sSVx9HlshDIHgbPtvnKg4l%2BGtvh4fO5oU5Mj%2BR5m8Kfq2TcX4BeKQD2G6Nwh6GbtXJPVg1j2%2FwvFMm6IC%2BKtDNAHf99dBYdolrjOCSQIxoJDMBdQwWrrw7KzP732rakUKM64WcmZZMzXl7nG%2BsN169Di5KDFPZwHDhHE5Zkv24QtSX5Jon3KoqYa10SWSWyY1dUPA%3D%3D";
+            }else {
+              this.loginData = "username="+this.userName+"&password="+this.passWord;
+            }
         }else if (this.model.toLowerCase() == "nf5288m5") {
         	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
         }else {
@@ -148,13 +160,52 @@ class ClientSubmitLoginCommon
         }else {
         	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
         }       
-    }else {
+    }else if (this.vendor.equalsIgnoreCase("dell")) {
+         this.loginUrl = "/data/login";
+         this.downloadUrl = "/viewer.jnlp";
+         this.loginData = "user="+this.userName+"&password="+this.passWord;     
+    }
+    else {
     	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
         return false;
     }
     return true;
   }
-  private HashMap<String, String> strToJson(String input) {
+  private void getSvcTag() throws IOException, NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException {
+	  URL requestUrl = new URL("https://"+this.host+"/data?get=svcTag,sysDesc");
+	  TrustManager[] tm = { new MyX509TrustManager() };
+	  SSLContext sslContext = SSLContext.getInstance("TLSv1.2", "SunJSSE");
+	  sslContext.init(null, tm, new SecureRandom());
+	  //HttpsURLConnection.setDefaultHostnameVerifier(new MyHostnameVerifier());
+	  HttpsURLConnection con = (HttpsURLConnection)requestUrl.openConnection();
+	  con.setSSLSocketFactory(sslContext.getSocketFactory());
+	  String st2 = this.extraCookie.getOrDefault("ST","notfound").split(",")[1].split("=")[1];
+	  String st1 = this.extraCookie.getOrDefault("ST","notfound").split(",")[0].split("=")[1];
+	  LoggerUtil.info("ST2:"+st2);
+	  LoggerUtil.info("sessionValue:"+this.sessionValue);
+	  con.setRequestMethod("POST");
+	  con.setRequestProperty("Cookie", this.sessionValue);
+	  con.setRequestProperty("ST2", st2);
+	  int status = con.getResponseCode();
+	  BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+	  String inputLine;
+	  StringBuffer content = new StringBuffer();
+	  while((inputLine = in.readLine()) != null) {
+	  	content.append(inputLine);
+	  }
+	  in.close();
+	  con.disconnect();
+	  System.out.println("Response status: " + status);
+	  System.out.println(content.toString());
+	  HashMap<String, String> mysites= this.strToJson(content.toString());
+	  this.downloadUrl ="https://"+this.host+"/viewer.jnlp("+this.host
+			  +"@0@idrac-"+mysites.get("svcTag")
+			  +"%2C+PowerEdge+R730xd%2C+@1621845998222@ST1="+st1+")";
+	  LoggerUtil.info("downloadUrl:"+this.downloadUrl);
+	
+}
+
+private HashMap<String, String> strToJson(String input) {
     HashMap<String, String> sites = new HashMap<String, String>();
       if (input.charAt(0) == '{' && input.charAt(input.length()-1) == '}'){
         String[] kv = input.replace("}","").replace("{", "").split(",");
@@ -165,6 +216,20 @@ class ClientSubmitLoginCommon
             //LoggerUtil.info("k:"+subKv[0].replace("\"", "")+" v:"+subKv[1].replace("\"", ""));
           }
         }
+      }
+      if (this.vendor.equalsIgnoreCase("dell")) {
+    	  String stPattern = "<forwardUrl>(.*)</forwardUrl>";
+    	  String sysDescPattern = "<sysDesc>(.*)</sysDesc>";
+    	  String svcTagPattern = "<svcTag>BMCVersion(.*)</svcTag>";
+    	  Pattern r1 = Pattern.compile(stPattern);
+    	  Pattern r2 = Pattern.compile(sysDescPattern);
+    	  Pattern r3 = Pattern.compile(svcTagPattern);
+    	  Matcher m1 = r1.matcher(input);
+    	  Matcher m2 = r2.matcher(input);
+    	  Matcher m3 = r3.matcher(input);
+    	  if(m1.find()) {sites.put("ST",m1.group(1));}
+    	  if(m2.find()) {sites.put("sysDesc",m2.group(1));}
+    	  if(m3.find()) {sites.put("svcTag",m3.group(1));}
       }
       return sites;
   }
@@ -253,7 +318,6 @@ class ClientSubmitLoginCommon
 	    try {
 	        httpsConn = (HttpsURLConnection)requestUrl.openConnection();
 	    } catch (IOException e1) {
-	        // TODO Auto-generated catch block
 	        e1.printStackTrace();
 	        LoggerUtil.info( "requestUrl.openConnection(): "+ e1.getClass().getName() );
 	    }
@@ -261,12 +325,11 @@ class ClientSubmitLoginCommon
 	    try {
 	        httpsConn.setRequestMethod("GET");
 	    } catch (ProtocolException e1) {
-	        // TODO Auto-generated catch block
 	        e1.printStackTrace();
 	        LoggerUtil.info( "httpsConn.setRequestMethod: "+ e1.getClass().getName() );
 	    }
 	    //已知需要二次认证的设备型号http请求头需添加X-CSRFTOKEN字段。
-	    if (!this.csrfToken.equals("notfound")) {
+	    if (!this.csrfToken.equals("notfound") && !this.bmcVersion.equalsIgnoreCase("03.13.0200")) {	
 	      LoggerUtil.info("extraUrl:"+this.extraUrl);
 	      httpsConn.setRequestProperty("X-CSRFTOKEN", this.csrfToken);
 	      LoggerUtil.info("add X-CSRFTOKEN:"+this.csrfToken);
@@ -283,22 +346,18 @@ class ClientSubmitLoginCommon
 	    try {
 	        ResponseCode = httpsConn.getResponseCode();
 	    } catch (IOException e1) {
-	        // TODO Auto-generated catch block
 	        e1.printStackTrace();
 	    }
 	    InputStream iptStream = null;
 	    try {
 	        iptStream = httpsConn.getInputStream();
 	    } catch (IOException e1) {
-	        // TODO Auto-generated catch block
 	    	LoggerUtil.info( "httpsConn.getInputStream: "+ e1.getClass().getName()+";ResponseCode:"+ResponseCode );
-	        //e1.printStackTrace();
 	    }
 	    BufferedReader response = null;
 	    try {
 	        response = new BufferedReader(new InputStreamReader(iptStream, "utf-8"));
 	    } catch (UnsupportedEncodingException e1) {
-	        // TODO Auto-generated catch block
 	        e1.printStackTrace();
 	    }
 	    StringBuffer sb = new StringBuffer();
@@ -391,32 +450,27 @@ class ClientSubmitLoginCommon
 	    try {
 	        fop = new FileOutputStream(f);
 	    } catch (FileNotFoundException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
 	    }
 	    OutputStreamWriter w = null;
 	    try {
 	        w = new OutputStreamWriter(fop, "UTF-8");
 	    } catch (UnsupportedEncodingException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
 	    }
 	    try {
 	        w.append(temp);
 	    } catch (IOException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
 	    }
 	    try {
 	        w.close();
 	    } catch (IOException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
 	    }
 	    try {
 	        fop.close();
 	    } catch (IOException e) {
-	        // TODO Auto-generated catch block
 	        e.printStackTrace();
 	    }
 	    this.MyThread();
@@ -443,6 +497,7 @@ class ClientSubmitLoginCommon
     httpsConn.setSSLSocketFactory(sslContext.getSocketFactory());
     httpsConn.setRequestMethod("GET");
     httpsConn.setRequestProperty("X-CSRFTOKEN", this.csrfToken);
+    LoggerUtil.info("Cookie:"+this.sessionValue);
     httpsConn.setRequestProperty("Cookie", this.sessionValue);
     httpsConn.connect();
     int ResponseCode = httpsConn.getResponseCode();
@@ -481,10 +536,11 @@ class ClientSubmitLoginCommon
     nextRes[1]=temp;
     return nextRes;
   }
-  public String[] doLogin(String vendor,String model,String bmcVersion,String host, String userName, String passWord, String kvmMode) throws Exception {
+  public String[] doLogin(String vendor,String model,String bmcVersion,HashMap<?, ?> extraVendor,String host, String userName, String passWord, String kvmMode) throws Exception {
     this.vendor = vendor;
     this.model = model;
     this.bmcVersion = bmcVersion;
+    this.extraVendor = extraVendor;
     this.host = host;
     this.userName = userName;
     this.passWord = passWord;
@@ -596,10 +652,13 @@ class ClientSubmitLoginCommon
     this.loginRes = temp;
     LoggerUtil.info("Login Response:"+temp);
     this.extraCookie= this.strToJson(temp);
-    this.csrfToken =this.extraCookie.getOrDefault("CSRFToken","notfound"); 
+    this.csrfToken = this.extraCookie.getOrDefault("CSRFToken","notfound"); 
     LoggerUtil.info("csrfToken:"+this.csrfToken);
     GetParaFromWebOutput[0] = String.valueOf(ResponseCode);
     GetParaFromWebOutput[1] = GetParaFromWebOutput[1] + temp;
+    if (this.vendor.equalsIgnoreCase("dell")) {
+    	this.getSvcTag();
+    }
     return GetParaFromWebOutput;
   }
 }
