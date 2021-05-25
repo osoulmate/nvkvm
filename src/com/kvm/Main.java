@@ -6,11 +6,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.LayoutManager;
+import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.URL;
@@ -63,6 +66,7 @@ public class Main
   private JLabel userLocked;
   private JLabel loginFailed;
   private JLabel obtainProductInfoError;
+  private ConsoleTextArea consoleTextArea;
   static int wordSize = 0;
   public static int getWordSize() {
     return wordSize;
@@ -79,7 +83,8 @@ public class Main
     setTitle(this.loginUtil.getString("Login_Name"));
     setDefaultCloseOperation(3);
     setLayout((LayoutManager)null);
-    setBounds(0, 0, GetDiffOSPara.getLoginLength(), GetDiffOSPara.getLoginWidth());
+    //setBounds(0, 0, GetDiffOSPara.getLoginLength(), GetDiffOSPara.getLoginWidth());
+    setBounds(0, 0, 400, 300);
     URL url = Main.class.getResource("resource/images/vconsole.png");
     Image image = (new ImageIcon(url)).getImage();
     setIconImage(image);
@@ -125,23 +130,25 @@ public class Main
     this.loginPanel = new BackgroundPanel(image);
     this.loginPanel.setLayout((LayoutManager)null);
     this.loginPanel.setBorder(BorderFactory.createTitledBorder("Login"));
-    this.loginPanel.setBounds(5, 0, 338, 228);
-    this.loginPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.GRAY, 1), "", 1, 2, new Font("Times new roman", 0, 12)));
+    //this.loginPanel.setBounds(5, 0, 338, 228);
+    this.loginPanel.setBounds(1, 0, 400, 300);
+    this.loginPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray, 1), "", 1, 2, new Font("Times new roman", 0, 12)));
     this.loginPanel.setName("LoginPanel");
     Image image1 = (new ImageIcon(Main.class.getResource("resource/images/floor.JPG"))).getImage();
     this.backgroundLable = new JLabel();
     this.backgroundLable.setIcon(new ImageIcon(image1));
-    this.backgroundLable.setBounds(0, 0, 348, 240);
+    //this.backgroundLable.setBounds(0, 0, 348, 240);
+    this.backgroundLable.setBounds(0, 0, 400, 300);
     this.backgroundLable.setName("BackgroundLable");
     this.ip_addr = new JTextField();
-    this.ip_addr.setBounds(150, 50, 150, 20);
+    this.ip_addr.setBounds(150, 50, 210, 20);
     this.ip_addr.setFont(new Font(this.fonts, 0, wordSize));
     this.ip_addr.setName("ipInput");
     this.ipAddrLabel = new JLabel(IpAddrLabelName);
-    this.ipAddrLabel.setBounds(30, 50, 150, 20);
+    this.ipAddrLabel.setBounds(30, 50, 210, 20);
     this.ipAddrLabel.setFont(new Font(this.fonts, 0, wordSize));
     this.username = new JTextField();
-    this.username.setBounds(150, 85, 150, 20);
+    this.username.setBounds(150, 85, 210, 20);
     this.username.setFont(new Font(this.fonts, 0, wordSize));
     this.username.setForeground(Color.GRAY);
     this.username.setName("usernameInput");
@@ -149,7 +156,7 @@ public class Main
     this.usernameLabel.setBounds(30, 85, 150, 20);
     this.usernameLabel.setFont(new Font(this.fonts, 0, wordSize));
     this.pwdJField = new JPasswordField();
-    this.pwdJField.setBounds(150, 120, 150, 20);
+    this.pwdJField.setBounds(150, 120, 210, 20);
     this.pwdJField.setName("pwdInput");
     this.passwordLabel = new JLabel(PwdLabelName);
     this.passwordLabel.setBounds(30, 120, 150, 20);
@@ -162,27 +169,28 @@ public class Main
     } 
     this.ianguageComboBox = new JComboBox<>(IanguageSet);
     if (KVMUtil.isMacOS()) {
-      this.ianguageComboBox.setBounds(235, 10, 100, 22);
+      this.ianguageComboBox.setBounds(265, 10, 70, 24);
     }
     else {
-      this.ianguageComboBox.setBounds(255, 10, 80, 22);
+      this.ianguageComboBox.setBounds(285, 10, 70, 24);
     } 
     this.ianguageComboBox.setOpaque(false);
     this.ianguageComboBox.setBackground(Color.white);
     this.ianguageComboBox.setSelectedIndex(IanguageIndex);
     this.kvmButton = new JButton(KVMButtonName);
-    this.kvmButton.setBounds(235, 190, 85, 25);
+    //this.kvmButton.setBounds(235, 190, 85, 25);
+    this.kvmButton.setBounds(285, 155, 75, 25);
     this.kvmButton.setFont(new Font(this.fonts, 0, wordSize));
     this.kvmButton.setName("connectButton");
     this.shareButton = new JRadioButton(shareButtonName);
-    this.shareButton.setBounds(20, 160, 100, 20);
+    this.shareButton.setBounds(28, 160, 100, 20);
     this.shareButton.setBorder((Border)null);
     this.shareButton.setContentAreaFilled(false);
     this.shareButton.setSelected(true);
     this.shareButton.setFont(new Font(this.fonts, 0, wordSize));
     this.shareButton.setName("shareButtonInput");
     this.onlyButton = new JRadioButton(onlyButtonName);
-    this.onlyButton.setBounds(150, 160, 150, 20);
+    this.onlyButton.setBounds(150, 160, 100, 20);
     this.onlyButton.setBorder((Border)null);
     this.onlyButton.setContentAreaFilled(false);
     this.onlyButton.setFont(new Font(this.fonts, 0, wordSize));
@@ -198,6 +206,17 @@ public class Main
     this.copyrightImagebutton.setBorder((Border)null);
     this.copyrightImagebutton.setContentAreaFilled(false);
     this.copyrightImagebutton.setName("CopyrightImagebuttonInput");
+    try {
+        this.consoleTextArea = new ConsoleTextArea();
+        this.consoleTextArea.setFont(java.awt.Font.decode("monospaced"));
+        //this.consoleTextArea.setBounds(2, 182, 379, 80);
+        this.consoleTextArea.setForeground(Color.gray);
+    }
+    catch(IOException e) {
+        System.err.println(
+            "不能创建LoopedStreams：" + e);
+        //System.exit(1);
+    }
     this.ip_addr.addFocusListener(new FocusListener()
         {
           public void focusLost(FocusEvent e)
@@ -295,6 +314,7 @@ public class Main
             		String bmc_version = mycollect.getBmcVersion();
             		HashMap<String, String> extra = mycollect.getExtra();
             		LoggerUtil.info( "vendor:"+ vendor + ",model:"+model+",bmc_version:"+bmc_version+",extra:"+extra );
+            		System.out.println("vendor:"+ vendor + ",model:"+model+",bmc_version:"+bmc_version+",extra:"+extra );
             		//非华为机型执行下述登陆方法
             		if (!vendor.equalsIgnoreCase("huawei")) {
             			ClientSubmitLoginCommon commonLogin = new ClientSubmitLoginCommon();
@@ -310,6 +330,7 @@ public class Main
                     		return;
             				
             			}else if (loginResult[0].equals("200")) {
+            				System.out.println("Login in "+host+" Success!");
             				if(commonLogin.run()[0].equals("0")) {
                                 JOptionPane.showOptionDialog(Main.this.loginPanel,loginResult[1] , Main.this
                                         .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
@@ -639,8 +660,6 @@ public class Main
     this.loginPanel.add(this.ipAddrLabel);
     this.loginPanel.add(this.passwordLabel);
     this.backgroundLable.add(this.ianguageComboBox);
-    //this.backgroundLable.add(this.ipAddrImagebutton);
-    //this.backgroundLable.add(this.usernameImagebutton);
     this.backgroundLable.add(this.copyrightImagebutton);
     this.backgroundLable.add(this.kvmButton);
     this.loginPanel.add(this.ip_addr);
@@ -649,6 +668,11 @@ public class Main
     this.loginPanel.add(this.usernameLabel);
     this.loginPanel.add(this.shareButton);
     this.loginPanel.add(this.onlyButton);
+    this.loginPanel.add(this.consoleTextArea);
+    ScrollPane sp=new ScrollPane();
+    sp.add(this.consoleTextArea);
+    sp.setBounds(2, 182, 379, 80);
+    this.loginPanel.add(sp);
     this.backgroundLable.add(this.loginPanel);
     getRootPane().setDefaultButton(this.kvmButton);
     this.ip_addr.requestFocus();

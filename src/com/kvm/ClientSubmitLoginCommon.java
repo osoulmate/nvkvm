@@ -56,7 +56,7 @@ class ClientSubmitLoginCommon
   private String downloadRes = "";
   HashMap<String, String> extraCookie = new HashMap<String, String>();
   public void MyThread() {
-      System.out.println("main start...");
+      //System.out.println("main start...");
       Thread t = new Thread() {
           public void run() {
             System.out.println("thread run...");
@@ -69,7 +69,7 @@ class ClientSubmitLoginCommon
           }
       };
       t.start();
-      System.out.println("main end...");
+      //System.out.println("main end...");
   }
 
   private String encryStr(String data) {
@@ -350,6 +350,7 @@ private HashMap<String, String> strToJson(String input) {
 	    }
 	    InputStream iptStream = null;
 	    try {
+	    	System.out.println("Downloading jnlp...");
 	        iptStream = httpsConn.getInputStream();
 	    } catch (IOException e1) {
 	    	LoggerUtil.info( "httpsConn.getInputStream: "+ e1.getClass().getName()+";ResponseCode:"+ResponseCode );
@@ -473,6 +474,7 @@ private HashMap<String, String> strToJson(String input) {
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
+	    System.out.println("Download jnlp success!");
 	    this.MyThread();
 	    downloadRes[0] = String.valueOf(ResponseCode);
 	    downloadRes[1] = "success";
@@ -656,6 +658,7 @@ private HashMap<String, String> strToJson(String input) {
     LoggerUtil.info("csrfToken:"+this.csrfToken);
     GetParaFromWebOutput[0] = String.valueOf(ResponseCode);
     GetParaFromWebOutput[1] = GetParaFromWebOutput[1] + temp;
+    System.out.println("Login in Response:  "+temp);
     if (this.vendor.equalsIgnoreCase("dell")) {
     	this.getSvcTag();
     }
