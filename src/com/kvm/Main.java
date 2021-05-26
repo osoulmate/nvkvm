@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.URL;
@@ -206,6 +205,7 @@ public class Main
     this.copyrightImagebutton.setBorder((Border)null);
     this.copyrightImagebutton.setContentAreaFilled(false);
     this.copyrightImagebutton.setName("CopyrightImagebuttonInput");
+    /*
     try {
         this.consoleTextArea = new ConsoleTextArea();
         this.consoleTextArea.setFont(java.awt.Font.decode("monospaced"));
@@ -216,7 +216,7 @@ public class Main
         System.err.println(
             "不能创建LoopedStreams：" + e);
         //System.exit(1);
-    }
+    }*/
     this.ip_addr.addFocusListener(new FocusListener()
         {
           public void focusLost(FocusEvent e)
@@ -263,6 +263,7 @@ public class Main
             String PwdStrHTTPS = "";
             PwdStrIPMI = String.valueOf(Main.this.pwdJField.getPassword());
             LoggerUtil.info( "PwdStrIPMI: "+ PwdStrIPMI );
+            System.out.println(user_name+" "+PwdStrIPMI);
             try {
               PwdStrHTTPS = URLEncoder.encode(String.valueOf(Main.this.pwdJField.getPassword()), "UTF-8");
               LoggerUtil.info( "PwdStrHTTPS: "+ PwdStrHTTPS );
@@ -618,7 +619,7 @@ public class Main
               PwdStrHTTPS = "";
               PwdStrIPMI = "";
               Main.this.pwdJField.setText("");
-              //Main.this.disposeLoginFrame();
+              Main.this.disposeLoginFrame();
               OpenKvmWindow openKvm = new OpenKvmWindow();
               LoggerUtil.info( "paraInput: "+ ParaInput );
               openKvm.setPara(ParaInput, host, SerialNumber, firmVersion);
@@ -668,15 +669,27 @@ public class Main
     this.loginPanel.add(this.usernameLabel);
     this.loginPanel.add(this.shareButton);
     this.loginPanel.add(this.onlyButton);
-    this.loginPanel.add(this.consoleTextArea);
+    //this.loginPanel.add(this.consoleTextArea);
+    /*
     ScrollPane sp=new ScrollPane();
     sp.add(this.consoleTextArea);
     sp.setBounds(2, 182, 379, 80);
     this.loginPanel.add(sp);
+    */
+    javax.swing.JScrollPane scrollPane; 
+    javax.swing.JTextArea textArea;
+    scrollPane = new javax.swing.JScrollPane();
+    textArea = new javax.swing.JTextArea();
+    textArea.setColumns(20); 
+    textArea.setRows(5);
+    scrollPane.setViewportView(textArea);
+    scrollPane.setBounds(2, 182, 379, 80);
+    this.loginPanel.add(scrollPane);
     this.backgroundLable.add(this.loginPanel);
     getRootPane().setDefaultButton(this.kvmButton);
     this.ip_addr.requestFocus();
     container.add(this.backgroundLable);
+    System.setOut(new GUIPrintStream(System.out, textArea));
   }
   private static class CopyrightButton
     implements ActionListener {

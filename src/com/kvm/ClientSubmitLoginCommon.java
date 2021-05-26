@@ -165,6 +165,11 @@ class ClientSubmitLoginCommon
          this.downloadUrl = "/viewer.jnlp";
          this.loginData = "user="+this.userName+"&password="+this.passWord;     
     }
+    else if (this.vendor.equalsIgnoreCase("lenovo")) {
+        this.loginUrl = "/data/login";
+        this.downloadUrl = "/viewer.jnlp";
+        this.loginData = "user="+this.userName+"&password="+this.passWord;     
+   }
     else {
     	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
         return false;
@@ -578,6 +583,9 @@ private HashMap<String, String> strToJson(String input) {
     HttpsURLConnection.setDefaultHostnameVerifier(new MyHostnameVerifier());
     HttpsURLConnection httpsConn = (HttpsURLConnection)requestUrl.openConnection();
     httpsConn.setRequestMethod("POST");
+    if (this.vendor.equalsIgnoreCase("lenovo")) {
+    	httpsConn.setRequestProperty("Referer", "https://"+this.host+"/designs/imm/index.php");
+    }
     httpsConn.setDoOutput(true);
     httpsConn.setSSLSocketFactory(sslContext.getSocketFactory());
     OutputStream opsStream1 = null;
@@ -661,6 +669,11 @@ private HashMap<String, String> strToJson(String input) {
     System.out.println("Login in Response:  "+temp);
     if (this.vendor.equalsIgnoreCase("dell")) {
     	this.getSvcTag();
+    }else if (this.vendor.equalsIgnoreCase("lenovo")) {
+    	this.downloadUrl = "https://"+this.host
+    			+"/designs/imm/viewer("+this.host+"@443@0@1622021861882@1@0@0@jnlp@USERID@0@0@0@0@1).jnlp?"
+    			+this.extraCookie.getOrDefault("token1_name","notfound")+"="
+    			+this.extraCookie.getOrDefault("token1_value","notfound");
     }
     return GetParaFromWebOutput;
   }

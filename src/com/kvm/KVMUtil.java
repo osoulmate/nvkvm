@@ -2758,6 +2758,7 @@ public class KVMUtil
     if (osType != null && "".equals(osType)) {
       osType = System.getProperty("os.name");
       LoggerUtil.info( "osType: "+ osType );
+      System.out.println(osType);
       if (null != osType)
       {
         osType = osType.toLowerCase(Locale.getDefault());

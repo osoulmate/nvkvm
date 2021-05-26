@@ -50,7 +50,10 @@ public class ImageDecoder
     this.imageCreater = new ImageCreater(); 
     }
   public ImageDecoder(int imageWidth, int imageHeight) { 
-	this.zipImages = (ArrayList)new ArrayList<>(10); this.num = 0; this.tnum = 0; this.zipImage = null;
+	this.zipImages = (ArrayList)new ArrayList<>(10); 
+	this.num = 0; 
+	this.tnum = 0; 
+	this.zipImage = null;
     init(imageWidth, imageHeight);
     this.imageCreater = new ImageCreater(); }
   public Object decodeRLEorJPEG0(byte[] zipDatas, int imageWidth, int imageHeight) throws LibException { Object obj = null;

@@ -115,12 +115,12 @@ public class BladeCommu
   }
   public void sentData(byte[] bytes) {
     try {
-      LoggerUtil.info( "sentData(byte[] bytes): "+ bytes);
+      //LoggerUtil.info( "sentData(byte[] bytes): "+ bytes);
       this.dout.write(bytes);
       this.dout.flush();
-      LoggerUtil.info( "this.dout.flush()");
+      //LoggerUtil.info( "this.dout.flush()");
       this.client.setSent(this.client.getSent() + bytes.length);
-      LoggerUtil.info( "this.client.setSent:"+this.client.getSent() +","+ bytes.length);
+      //LoggerUtil.info( "this.client.setSent:"+this.client.getSent() +","+ bytes.length);
     }
     catch (IOException ioe) {
       Debug.printExc(ioe.getClass().getName());

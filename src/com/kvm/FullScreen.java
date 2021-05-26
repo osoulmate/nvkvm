@@ -123,7 +123,12 @@ public class FullScreen
   public FullScreen(JDialog dialog, ImagePane imagePane, KVMInterface kvmInterface2) {
     super(dialog, true);
     this.vlistener = new VListener(this);
-    this.hlistener = new HListener(this); this.kvmInterface = kvmInterface2; this.imagePane = imagePane; this.imageParentPane.setLayout(new BorderLayout()); this.actionBlade = imagePane.getBladeNumber(); imagePane.setShowtoolBar(true);
+    this.hlistener = new HListener(this); 
+    this.kvmInterface = kvmInterface2; 
+    this.imagePane = imagePane; 
+    this.imageParentPane.setLayout(new BorderLayout());
+    this.actionBlade = imagePane.getBladeNumber(); 
+    imagePane.setShowtoolBar(true);
     this.imageParentPane.setPreferredSize(new Dimension(imagePane.getImagePaneWidth(), imagePane.getImagePaneHeight()));
     this.imageParentPane.add(imagePane);
     jbInit();
