@@ -38,6 +38,7 @@ class ClientSubmitLoginCommon
   private Boolean isHttps = true;
   private Boolean useTemplate = false;
   private Boolean addCookie = false;
+  private Boolean isResetDownloadUrl = false;
   private String loginUrl = "";
   private String downloadUrl = "";
   private String extraUrl = "";
@@ -52,6 +53,7 @@ class ClientSubmitLoginCommon
   private String kvmMode = "";
   private String sessionValue = "";
   private String csrfToken = "";
+  private Boolean addCsrfToken = false;
   private String loginRes = "";
   private String secondAuthRes = "";
   private String downloadRes = "";
@@ -103,20 +105,24 @@ class ClientSubmitLoginCommon
 	}
     if (this.vendor.equalsIgnoreCase("sugon")) {
         if(this.model.equalsIgnoreCase("i620-g30")) {
+        	this.addCsrfToken = true;
             this.loginUrl = "/api/session";
             this.downloadUrl = "/api/kvmjnlp?&JNLPSTR=JViewer";
             this.loginData = "username="+this.userName+"&password="+this.passWord;
         }else if (this.model.equalsIgnoreCase("w780-g20")) {
+        	this.addCsrfToken = true;
             this.loginUrl = "/cgi/login.cgi";
             this.downloadUrl = "/cgi/url_redirect.cgi?url_name=sol&url_type=jwss";
             this.loginData = "name="+this.userName+"&pwd="+this.passWord;
         }else {
+        	this.addCsrfToken = true;
+            this.loginUrl = "/api/session";
+            this.downloadUrl = "/api/kvmjnlp?&JNLPSTR=JViewer";
+            this.loginData = "username="+this.userName+"&password="+this.passWord;
         	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
         }   
     }else if (this.vendor.equalsIgnoreCase("inspur")) {
-        if(this.model.equalsIgnoreCase("nf5280m5")) {
-            System.out.println();
-        }else if (this.model.equalsIgnoreCase("nf5288m5")) {
+       if (this.model.equalsIgnoreCase("nf5288m5")) {
             this.loginUrl = "/api/session";
             this.extraUrl = "/api/kvm/download";
             this.downloadUrl = "/video/jviewer.jnlp";
@@ -126,23 +132,31 @@ class ClientSubmitLoginCommon
             }else {
                 this.loginData = "username="+this.userName+"&password="+this.passWord;
             }
+        }else if (this.model.equalsIgnoreCase("NF8420M3")) {
+            this.loginUrl = "/rpc/WEBSES/create.asp";
+            this.downloadUrl = "/Java/jviewer.jnlp?EXTRNIP="+this.host+"&JNLPSTR=JViewer";
+            this.loginData = "WEBVAR_USERNAME="+this.userName+"&WEBVAR_PASSWORD="+this.passWord;
         }else {
-        	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
+            this.loginUrl = "/api/session";
+            this.extraUrl = "/api/kvm/download";
+            this.downloadUrl = "/video/jviewer.jnlp";
+            if(!this.extraVendor.get("productPartNumber").equals("0")) {
+              this.loginData = "username="+this.encryStr(this.userName)+"&password="
+                              +this.encryStr(this.passWord);
+            }else {
+                this.loginData = "username="+this.userName+"&password="+this.passWord;
+            }
         }       
     }else if (this.vendor.equalsIgnoreCase("zte")) {
-        if(this.model.equalsIgnoreCase("r5300g4")) {
+    	    //r5300g4
             this.loginUrl = "/ext/session";
             this.downloadUrl = "/Java/jviewer.jnlp";
             if(this.bmcVersion.equalsIgnoreCase("03.13.0200")) {
+            	this.addCsrfToken = true;
             	this.loginData = "username=zteroot&password=nZ2MK3ly4yzff0C5cykeRIlPyLE2vyd4HbLtQa4p%2F0yn5cBmWCef%2FcS3zkH2%2FdC6xU3IcvkYeP%2BUfrGfHpsWkhL%2B%2BQoRVWtJIPM%2F9rOX2yjGeZ%2FBTht9n9rj0B6ornffEYew49twbGrt%2B0gX2sSVx9HlshDIHgbPtvnKg4l%2BGtvh4fO5oU5Mj%2BR5m8Kfq2TcX4BeKQD2G6Nwh6GbtXJPVg1j2%2FwvFMm6IC%2BKtDNAHf99dBYdolrjOCSQIxoJDMBdQwWrrw7KzP732rakUKM64WcmZZMzXl7nG%2BsN169Di5KDFPZwHDhHE5Zkv24QtSX5Jon3KoqYa10SWSWyY1dUPA%3D%3D";
             }else {
               this.loginData = "username="+this.userName+"&password="+this.passWord;
-            }
-        }else if (this.model.toLowerCase() == "nf5288m5") {
-        	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
-        }else {
-        	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
-        }               
+            }              
     }else if (this.vendor.equalsIgnoreCase("huawei")) {
          this.loginUrl = "/bmc/php/processparameter.php";
          this.downloadUrl = "/bmc/pages/remote/kvm.php?kvmway=0";
@@ -150,49 +164,43 @@ class ClientSubmitLoginCommon
                             +"&logtype=0&user_name="+this.userName
             		        +"&func=AddSession&IsKvmApp=0";              
     }else if (this.vendor.equalsIgnoreCase("h3c")) {
-        if(this.model.equalsIgnoreCase("uniserverr4900g3")) {
-        	this.useTemplate = true;
-        	this.addCookie = true;
-            this.loginUrl = "/api/session";
-            this.downloadUrl = "/api/settings/media/instance";
-            this.extraUrl = "/api/kvm/token";
-            this.loginData = "username="+this.encryStr(this.userName)+"&password="
-                              +this.encryStr(this.passWord)+"&log_type=1";
-        }else if (this.model.equalsIgnoreCase("uniserverr4900g4")) {
-            this.loginUrl = "/api/session";
-            this.downloadUrl = "/video/jviewer.jnlp";
-            this.extraUrl = "/api/kvm/download";
-            this.loginData = "username="+this.encryStr(this.userName)+"&password="
-                              +this.encryStr(this.passWord);
-        }else {
-        	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
-        }       
+        //uniserverr4900g3
+        this.useTemplate = true;
+        this.addCookie = true;
+        this.addCsrfToken = true;
+        this.loginUrl = "/api/session";
+        this.downloadUrl = "/api/settings/media/instance";
+        this.extraUrl = "/api/kvm/token";
+        this.loginData = "username="+this.encryStr(this.userName)
+                         +"&password="+this.encryStr(this.passWord)+"&log_type=1";
     }else if (this.vendor.equalsIgnoreCase("dell")) {
          this.loginUrl = "/data/login";
-         this.downloadUrl = "/viewer.jnlp";
+         this.isResetDownloadUrl = true;
          this.loginData = "user="+this.userName+"&password="+this.passWord;     
     }else if (this.vendor.equalsIgnoreCase("hp")) {
         this.loginUrl = "/json/login_session";
         this.downloadUrl = "/html/java_irc.html?lang=cn";
         this.useTemplate = true;
-        //this.loginData = "user="+this.userName+"&password="+this.passWord;     
+        this.loginData =  "{\n" + "\"method\": \"login\",\n"
+                          + "\"user_login\": \""+this.userName+"\",\n"
+                          + "\"password\": \""+this.passWord+"\"\n"
+                          + "}";
    }else if (this.vendor.equalsIgnoreCase("lenovo")) {
         this.loginUrl = "/data/login";
-        this.downloadUrl = "/viewer.jnlp";
+        this.isResetDownloadUrl = true;
         this.loginData = "user="+this.userName+"&password="+this.passWord;     
-   }
-    else {
+   }else {
     	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
         return false;
     }
     return true;
   }
-  private void getSvcTag() throws IOException, NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException {
+  private void resetDownloadUrl() throws IOException, NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException {
+	  if(this.vendor.equalsIgnoreCase("dell")) {
 	  URL requestUrl = new URL("https://"+this.host+"/data?get=svcTag,sysDesc");
 	  TrustManager[] tm = { new MyX509TrustManager() };
 	  SSLContext sslContext = SSLContext.getInstance("TLSv1.2", "SunJSSE");
 	  sslContext.init(null, tm, new SecureRandom());
-	  //HttpsURLConnection.setDefaultHostnameVerifier(new MyHostnameVerifier());
 	  HttpsURLConnection con = (HttpsURLConnection)requestUrl.openConnection();
 	  con.setSSLSocketFactory(sslContext.getSocketFactory());
 	  String st2 = this.extraCookie.getOrDefault("ST","notfound").split(",")[1].split("=")[1];
@@ -218,7 +226,14 @@ class ClientSubmitLoginCommon
 			  +"@0@idrac-"+mysites.get("svcTag")
 			  +"%2C+PowerEdge+R730xd%2C+@1621845998222@ST1="+st1+")";
 	  LoggerUtil.info("downloadUrl:"+this.downloadUrl);
-	
+	  }else if (this.vendor.equalsIgnoreCase("lenovo")) {
+	    	this.downloadUrl = "https://"+this.host
+	    			+"/designs/imm/viewer("+this.host+"@443@0@1622021861882@1@0@0@jnlp@"
+	    			+this.userName
+	    			+"@0@0@0@0@1).jnlp?"
+	    			+this.extraCookie.getOrDefault("token1_name","notfound")+"="
+	    			+this.extraCookie.getOrDefault("token1_value","notfound");
+	  }
 }
 
 private HashMap<String, String> strToJson(String input) {
@@ -250,7 +265,7 @@ private HashMap<String, String> strToJson(String input) {
       return sites;
   }
   private void resetSession(){
-    if(this.model.equalsIgnoreCase("uniserverr4900g3")) {
+    if(this.vendor.equalsIgnoreCase("h3c")) {
 	  this.sessionValue = "product_board_id=g3; "+
 	          		"node_board_id=255; "+
 	          		"productID_num=16978692; "+
@@ -348,8 +363,7 @@ private HashMap<String, String> strToJson(String input) {
 	        e1.printStackTrace();
 	        LoggerUtil.info( "httpsConn.setRequestMethod: "+ e1.getClass().getName() );
 	    }
-	    //已知需要二次认证的设备型号http请求头需添加X-CSRFTOKEN字段。
-	    if (!this.csrfToken.equals("notfound") && !this.bmcVersion.equalsIgnoreCase("03.13.0200")) {	
+	    if (this.addCsrfToken) {	
 	      LoggerUtil.info("extraUrl:"+this.extraUrl);
 	      httpsConn.setRequestProperty("X-CSRFTOKEN", this.csrfToken);
 	      LoggerUtil.info("add X-CSRFTOKEN:"+this.csrfToken);
@@ -607,16 +621,6 @@ private HashMap<String, String> strToJson(String input) {
     httpsConn.setSSLSocketFactory(sslContext.getSocketFactory());
     OutputStream opsStream1 = null;
     try {
-      if(this.vendor.equalsIgnoreCase("hp")) {
-    	    StringBuffer PostList = new StringBuffer();
-    	    PostList.append("{\n")
-    	      .append("\"method\": \"login\",\n")
-    	      .append("\"user_login\": \""+this.userName+"\",\n")
-    	      .append("\"password\": \""+this.passWord+"\"\n")
-    	      .append("}");	
-    	    LoggerUtil.info(PostList.toString());
-    	    PostListBypes = PostList.toString().getBytes("UTF-8");
-      }
       opsStream1 = httpsConn.getOutputStream();
       opsStream1.write(PostListBypes);
     }catch (IOException e) {
@@ -642,12 +646,6 @@ private HashMap<String, String> strToJson(String input) {
     try {
       ResponseCode = httpsConn.getResponseCode();
       iptStream = httpsConn.getInputStream();
-      /*
-      String headerName = null;   
-      for (int i = 1; (headerName = httpsConn.getHeaderFieldKey(i)) != null; i++) 
-      {
-    	  LoggerUtil.info(headerName+": "+httpsConn.getHeaderField(i));
-      }*/
     }catch (Exception e) {
       GetParaFromWebOutput[0] = "0";
       GetParaFromWebOutput[1] = e.getClass().getName();
@@ -694,15 +692,8 @@ private HashMap<String, String> strToJson(String input) {
     GetParaFromWebOutput[0] = String.valueOf(ResponseCode);
     GetParaFromWebOutput[1] = GetParaFromWebOutput[1] + temp;
     System.out.println("Login in "+this.host+" ResponseCode:  "+ResponseCode);
-    if (this.vendor.equalsIgnoreCase("dell")) {
-    	this.getSvcTag();
-    }else if (this.vendor.equalsIgnoreCase("lenovo")) {
-    	this.downloadUrl = "https://"+this.host
-    			+"/designs/imm/viewer("+this.host+"@443@0@1622021861882@1@0@0@jnlp@"+this.userName
-    			+"@0@0@0@0@1).jnlp?"
-    			+this.extraCookie.getOrDefault("token1_name","notfound")+"="
-    			+this.extraCookie.getOrDefault("token1_value","notfound");
-    }
+    if(this.isResetDownloadUrl)
+    	this.resetDownloadUrl();
     return GetParaFromWebOutput;
   }
 }

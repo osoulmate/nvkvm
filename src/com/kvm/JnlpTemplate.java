@@ -59,9 +59,15 @@ public class JnlpTemplate {
 
 	public String getTemplate() {
 		String jnlpTemplate = "";
-		if(this.vendor.equalsIgnoreCase("h3c") && this.model.equalsIgnoreCase("uniserverr4900g3")) {
+		if(this.vendor.equalsIgnoreCase("h3c")) {
+			String codebase = this.host+"/remote_console";
+			if(this.model.equalsIgnoreCase("uniserverr4900g3")) {
+				codebase = this.host+"/remote_console";
+			}else if (this.model.equalsIgnoreCase("uniserverr4700g3")) {
+				codebase = this.host+"/Java";
+			}
 			String newh3cJnlp="<?xml version='1.0' encoding='UTF-8'?>"
-		            +"<jnlp spec='1.0+' codebase='https://"+this.host+"/remote_console'>"
+		            +"<jnlp spec='1.0+' codebase='https://"+codebase+"'>"
 		            +"<information>"
 		            +"<title>JViewer</title>"
 		            +"<vendor>American Megatrends, Inc.</vendor>"
@@ -87,11 +93,11 @@ public class JnlpTemplate {
 		            +"<argument>-kvmtoken</argument>"
 		            +"<argument>"+this.myJson.get("token")+"</argument>"
 		            +"<argument>-kvmsecure</argument>"
-		            +"<argument>"+this.myJson.get("kvmsecure")+"</argument>"
+		            +"<argument>"+this.myJson.getOrDefault("kvmsecure","0")+"</argument>"
 		            +"<argument>-kvmport</argument>"
-		            +"<argument>"+this.myJson.get("kvm_port")+"</argument>"
+		            +"<argument>"+this.myJson.getOrDefault("kvm_port","7578")+"</argument>"
 		            +"<argument>-vmsecure</argument>"
-		            +"<argument>"+this.myJson.get("vmsecure")+"</argument>"
+		            +"<argument>"+this.myJson.getOrDefault("vmsecure","0")+"</argument>"
 		            +"<argument>-cdstate</argument>"
 		            +"<argument>"+this.myJson.get("cd_status")+"</argument>"
 		            +"<argument>-fdstate</argument>"
