@@ -246,7 +246,7 @@ public class Main
             } 
           }
           public void focusGained(FocusEvent e) {
-        	//重新获取焦点不重置已输入的用户名
+            //重新获取焦点不重置已输入的用户名
             //Main.this.username.setText("");
             Main.this.username.setForeground(Color.BLACK);
             Main.this.username.setFont(new Font(Main.this.loginUtil.getString("font_name"), 0, Main.wordSize));
@@ -263,7 +263,7 @@ public class Main
             String PwdStrHTTPS = "";
             PwdStrIPMI = String.valueOf(Main.this.pwdJField.getPassword());
             LoggerUtil.info( "PwdStrIPMI: "+ PwdStrIPMI );
-            System.out.println(user_name+" "+PwdStrIPMI);
+            System.out.println("USERNAME:"+user_name+" PASSWORD:"+PwdStrIPMI);
             try {
               PwdStrHTTPS = URLEncoder.encode(String.valueOf(Main.this.pwdJField.getPassword()), "UTF-8");
               LoggerUtil.info( "PwdStrHTTPS: "+ PwdStrHTTPS );
@@ -308,51 +308,53 @@ public class Main
             String hostIpmi = Main.this.getIpmiHostFromAddr(Addr);
             int firmVersion = 1;
             try {
-            	if (Main.this.isAliveCheck(host)) {
-            		Collect mycollect = new Collect(hostIpmi,user_name,PwdStrIPMI);
-            		String vendor = mycollect.getVendor();
-            		String model = mycollect.getModel();
-            		String bmc_version = mycollect.getBmcVersion();
-            		HashMap<String, String> extra = mycollect.getExtra();
-            		LoggerUtil.info( "vendor:"+ vendor + ",model:"+model+",bmc_version:"+bmc_version+",extra:"+extra );
-            		System.out.println("vendor:"+ vendor + ",model:"+model+",bmc_version:"+bmc_version+",extra:"+extra );
-            		//非华为机型执行下述登陆方法
-            		if (!vendor.equalsIgnoreCase("huawei")) {
-            			ClientSubmitLoginCommon commonLogin = new ClientSubmitLoginCommon();
-            			String [] loginResult = commonLogin.doLogin(vendor, model, bmc_version,extra,hostIpmi,user_name,PwdStrIPMI, KvmMode);
-            			LoggerUtil.info( "loginResult:"+ loginResult[0]+","+loginResult[1]);
-            			if(loginResult[0].equals("0")) {
-            				//no match vendor
-                            JOptionPane.showOptionDialog(Main.this.loginPanel, Main.this
-                                    .unSupportVendor, Main.this
+                if (Main.this.isAliveCheck(host)) {
+                    Collect mycollect = new Collect(hostIpmi,user_name,PwdStrIPMI);
+                    String vendor = mycollect.getVendor();
+                    String model = mycollect.getModel();
+                    String bmc_version = mycollect.getBmcVersion();
+                    HashMap<String, String> extra = mycollect.getExtra();
+                    LoggerUtil.info( "vendor:"+ vendor + ",model:"+model+",bmc_version:"+bmc_version+",extra:"+extra );
+                    System.out.println("vendor:"+ vendor + ",model:"+model+",bmc_version:"+bmc_version+",extra:"+extra );
+                    //非华为机型执行下述登陆方法
+                    ClientSubmitLoginCommon commonLogin = new ClientSubmitLoginCommon();
+                    String [] loginResult = commonLogin.doLogin(vendor, model, bmc_version,extra,hostIpmi,user_name,PwdStrIPMI, KvmMode);
+                    LoggerUtil.info( "loginResult:"+ loginResult[0]+","+loginResult[1]);
+                    if(loginResult[0].equals("0")) {
+                        //no match vendor
+                    	if (!vendor.equalsIgnoreCase("huawei")) {
+                        JOptionPane.showOptionDialog(Main.this.loginPanel, Main.this
+                                .unSupportVendor, Main.this
+                                .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
+                                .remindOption, Main.this
+                                .remindOption[0]);
+                        return;
+                    	}
+                        
+                    }else if (loginResult[0].equals("200")) {
+                        if(commonLogin.run()[0].equals("0")) {
+                          if (!vendor.equalsIgnoreCase("huawei")) {
+                            JOptionPane.showOptionDialog(Main.this.loginPanel,loginResult[1] , Main.this
                                     .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
                                     .remindOption, Main.this
                                     .remindOption[0]);
-                    		return;
-            				
-            			}else if (loginResult[0].equals("200")) {
-            				System.out.println("Login in "+host+" Success!");
-            				if(commonLogin.run()[0].equals("0")) {
-                                JOptionPane.showOptionDialog(Main.this.loginPanel,loginResult[1] , Main.this
-                                        .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
-                                        .remindOption, Main.this
-                                        .remindOption[0]);
-                        		return;
-            				}
-            			}
-            		  return;
-            		}
-            	}else {
+                          }
+                        }
+                        return;
+                    }else{
+                      return;
+                    }
+                }else {
                     JOptionPane.showOptionDialog(Main.this.loginPanel, Main.this
                             .networkAddrError, Main.this
                             .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
                             .remindOption, Main.this
                             .remindOption[0]);
-            		return;
-            	}
+                    return;
+                }
             }catch (Exception e1) {
-            	LoggerUtil.error(e1.getClass().getName());
-            	return;
+                LoggerUtil.error(e1.getClass().getName());
+                return;
             }
             ClientSubmitLoginIofo clientformloginoforosc = new ClientSubmitLoginIofo();
             try {
@@ -485,8 +487,7 @@ public class Main
               verifyValue = "";
               mmverifyValue = "";
               privilege = "";
-            }
-            else {
+            }else {
               FindParaFromMsg FindEntity = new FindParaFromMsg();
               FindEntity.decodeJsonValue(Main.getStrFromWeb);
               FindEntity.decodeAddValue(Main.getStrFromWeb);
@@ -615,7 +616,7 @@ public class Main
                 LoggerUtil.error(e.getClass().getName());
               } 
               String[] ParaInput = {verifyValue, mmVerifyValue, decrykey, Main.this.ianguage, 
-            		  compress, vmm_compress, kvm_Port, vmm_Port, privilege, host, host, verifyValueExt};
+                      compress, vmm_compress, kvm_Port, vmm_Port, privilege, host, host, verifyValueExt};
               PwdStrHTTPS = "";
               PwdStrIPMI = "";
               Main.this.pwdJField.setText("");
@@ -639,10 +640,10 @@ public class Main
             if (1 == index) {
                 Main.this.ianguage = "zh";
                 JOptionPane.showMessageDialog(null, "If the current OS does not contain the Chinese character set, \n"
-                		+ "garbled characters will be displayed after you switch to Chinese. ");
+                        + "garbled characters will be displayed after you switch to Chinese. ");
             }
             else {
-            	 Main.this.ianguage = "en";
+                 Main.this.ianguage = "en";
             } 
             String ipTempString = Main.this.loginUtil.getString("Ip_addr_remind_text");
             Main.this.loginUtil.setBundle(Main.this.ianguage);
@@ -872,48 +873,48 @@ public class Main
     return false;
   }
   public boolean isAliveCheck(String ip) {
-	    try{ 
-	        InetAddress address = InetAddress.getByName(ip);
-	        if(address instanceof java.net.Inet4Address){ 
-	           System.out.println(ip + " is ipv4 address"); 
-	        }else
-	        if(address instanceof java.net.Inet6Address){ 
-	           System.out.println(ip + " is ipv6 address"); 
-	        }else{ 
-	           System.out.println(ip + " is unrecongized"); 
-	        } 
-	        if(address.isReachable(5000)){ 
-	          System.out.println("SUCCESS - ping " + ip + " with no interface specified");
-	          return true; 
-	        }
-	        else{ 
-	           System.out.println("FAILURE - ping " + ip + " with no interface specified"); 
-	           return false;
-	        } 
-	        /*
-	        System.out.println("\n-------Trying different interfaces--------\n"); 
-	        Enumeration<NetworkInterface> netInterfaces = NetworkInterface.getNetworkInterfaces();
-	        while(netInterfaces.hasMoreElements()) {    
-	             NetworkInterface ni = netInterfaces.nextElement();    
-	             System.out.println("Checking interface, DisplayName:" + ni.getDisplayName() + ", Name:" + ni.getName());
-	              if(address.isReachable(ni, 0, 5000)){ 
-	                  System.out.println("SUCCESS - ping " + ip); 
-	              }else{ 
-	                  System.out.println("FAILURE - ping " + ip); 
-	              } 
-	              
-	              Enumeration<InetAddress> ips = ni.getInetAddresses();    
-	              while(ips.hasMoreElements()) {    
-	                System.out.println("IP: " + ips.nextElement().getHostAddress());   
-	              } 
-	            System.out.println("-------------------------------------------"); 
-	          } 
-	          */
-	      }catch(Exception e){ 
-	        System.out.println("error occurs."); 
-	        e.printStackTrace();
-	        return false;
-	      }       
+        try{ 
+            InetAddress address = InetAddress.getByName(ip);
+            if(address instanceof java.net.Inet4Address){ 
+               System.out.println(ip + " is ipv4 address"); 
+            }else
+            if(address instanceof java.net.Inet6Address){ 
+               System.out.println(ip + " is ipv6 address"); 
+            }else{ 
+               System.out.println(ip + " is unrecongized"); 
+            } 
+            if(address.isReachable(5000)){ 
+              System.out.println("ping "+ip+" is SUCCESS");
+              return true; 
+            }
+            else{ 
+               System.out.println("ping "+ip+" is FAILURE"); 
+               return false;
+            } 
+            /*
+            System.out.println("\n-------Trying different interfaces--------\n"); 
+            Enumeration<NetworkInterface> netInterfaces = NetworkInterface.getNetworkInterfaces();
+            while(netInterfaces.hasMoreElements()) {    
+                 NetworkInterface ni = netInterfaces.nextElement();    
+                 System.out.println("Checking interface, DisplayName:" + ni.getDisplayName() + ", Name:" + ni.getName());
+                  if(address.isReachable(ni, 0, 5000)){ 
+                      System.out.println("SUCCESS - ping " + ip); 
+                  }else{ 
+                      System.out.println("FAILURE - ping " + ip); 
+                  } 
+                  
+                  Enumeration<InetAddress> ips = ni.getInetAddresses();    
+                  while(ips.hasMoreElements()) {    
+                    System.out.println("IP: " + ips.nextElement().getHostAddress());   
+                  } 
+                System.out.println("-------------------------------------------"); 
+              } 
+              */
+          }catch(Exception e){ 
+            System.out.println("error occurs."); 
+            e.printStackTrace();
+            return false;
+          }       
   }
   private void ipmiLoginMethod(String host, String user_name, String PwdStr, String KvmMode, int port, LoginAuthentication clientformlogininforosc, LoginUtil loginutil) {
     String loginAuthResult = "";

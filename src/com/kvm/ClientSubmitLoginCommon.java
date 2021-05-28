@@ -1,6 +1,7 @@
 package com.kvm;
 import com.library.LoggerUtil;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -59,13 +60,13 @@ class ClientSubmitLoginCommon
       //System.out.println("main start...");
       Thread t = new Thread() {
           public void run() {
-            System.out.println("thread run...");
+            //System.out.println("thread run...");
             try {
                 Runtime.getRuntime().exec("javaws kvm.jnlp").getInputStream();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("thread end.");
+            //System.out.println("thread end.");
           }
       };
       t.start();
@@ -142,6 +143,12 @@ class ClientSubmitLoginCommon
         }else {
         	LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
         }               
+    }else if (this.vendor.equalsIgnoreCase("huawei")) {
+         this.loginUrl = "/bmc/php/processparameter.php";
+         this.downloadUrl = "/bmc/pages/remote/kvm.php?kvmway=0";
+         this.loginData ="check_pwd="+this.passWord
+                            +"&logtype=0&user_name="+this.userName
+            		        +"&func=AddSession&IsKvmApp=0";              
     }else if (this.vendor.equalsIgnoreCase("h3c")) {
         if(this.model.equalsIgnoreCase("uniserverr4900g3")) {
         	this.useTemplate = true;
@@ -164,8 +171,12 @@ class ClientSubmitLoginCommon
          this.loginUrl = "/data/login";
          this.downloadUrl = "/viewer.jnlp";
          this.loginData = "user="+this.userName+"&password="+this.passWord;     
-    }
-    else if (this.vendor.equalsIgnoreCase("lenovo")) {
+    }else if (this.vendor.equalsIgnoreCase("hp")) {
+        this.loginUrl = "/json/login_session";
+        this.downloadUrl = "/html/java_irc.html?lang=cn";
+        this.useTemplate = true;
+        //this.loginData = "user="+this.userName+"&password="+this.passWord;     
+   }else if (this.vendor.equalsIgnoreCase("lenovo")) {
         this.loginUrl = "/data/login";
         this.downloadUrl = "/viewer.jnlp";
         this.loginData = "user="+this.userName+"&password="+this.passWord;     
@@ -264,6 +275,10 @@ private HashMap<String, String> strToJson(String input) {
 	          		"custom_id=6; "+
 	          		"CSRF="+this.csrfToken+";"+
 	          		"session_id="+this.extraCookie.get("racsession_id")+"; "+this.sessionValue;   	
+	 }else if(this.vendor.equalsIgnoreCase("hp")) {
+		 this.sessionValue ="sessionUrl=https%253A%2F%2F"+this.host
+				 +"%2F; sessionLang=en; sessionKey="+this.extraCookie.get("session_key")
+				 +"; irc=last%3Djrc";
 	 }
   }
   public String[] run() throws NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException {
@@ -355,7 +370,7 @@ private HashMap<String, String> strToJson(String input) {
 	    }
 	    InputStream iptStream = null;
 	    try {
-	    	System.out.println("Downloading jnlp...");
+	    	System.out.println("Downloading from host "+this.host+" jnlp...");
 	        iptStream = httpsConn.getInputStream();
 	    } catch (IOException e1) {
 	    	LoggerUtil.info( "httpsConn.getInputStream: "+ e1.getClass().getName()+";ResponseCode:"+ResponseCode );
@@ -479,7 +494,7 @@ private HashMap<String, String> strToJson(String input) {
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
-	    System.out.println("Download jnlp success!");
+	    System.out.println("Download jnlp from "+this.host+" success!");
 	    this.MyThread();
 	    downloadRes[0] = String.valueOf(ResponseCode);
 	    downloadRes[1] = "success";
@@ -585,11 +600,23 @@ private HashMap<String, String> strToJson(String input) {
     httpsConn.setRequestMethod("POST");
     if (this.vendor.equalsIgnoreCase("lenovo")) {
     	httpsConn.setRequestProperty("Referer", "https://"+this.host+"/designs/imm/index.php");
+    }else if(this.vendor.equalsIgnoreCase("hp")) {
+        httpsConn.setRequestProperty("Content-Type", "application/json");
     }
     httpsConn.setDoOutput(true);
     httpsConn.setSSLSocketFactory(sslContext.getSocketFactory());
     OutputStream opsStream1 = null;
     try {
+      if(this.vendor.equalsIgnoreCase("hp")) {
+    	    StringBuffer PostList = new StringBuffer();
+    	    PostList.append("{\n")
+    	      .append("\"method\": \"login\",\n")
+    	      .append("\"user_login\": \""+this.userName+"\",\n")
+    	      .append("\"password\": \""+this.passWord+"\"\n")
+    	      .append("}");	
+    	    LoggerUtil.info(PostList.toString());
+    	    PostListBypes = PostList.toString().getBytes("UTF-8");
+      }
       opsStream1 = httpsConn.getOutputStream();
       opsStream1.write(PostListBypes);
     }catch (IOException e) {
@@ -666,12 +693,13 @@ private HashMap<String, String> strToJson(String input) {
     LoggerUtil.info("csrfToken:"+this.csrfToken);
     GetParaFromWebOutput[0] = String.valueOf(ResponseCode);
     GetParaFromWebOutput[1] = GetParaFromWebOutput[1] + temp;
-    System.out.println("Login in Response:  "+temp);
+    System.out.println("Login in "+this.host+" ResponseCode:  "+ResponseCode);
     if (this.vendor.equalsIgnoreCase("dell")) {
     	this.getSvcTag();
     }else if (this.vendor.equalsIgnoreCase("lenovo")) {
     	this.downloadUrl = "https://"+this.host
-    			+"/designs/imm/viewer("+this.host+"@443@0@1622021861882@1@0@0@jnlp@USERID@0@0@0@0@1).jnlp?"
+    			+"/designs/imm/viewer("+this.host+"@443@0@1622021861882@1@0@0@jnlp@"+this.userName
+    			+"@0@0@0@0@1).jnlp?"
     			+this.extraCookie.getOrDefault("token1_name","notfound")+"="
     			+this.extraCookie.getOrDefault("token1_value","notfound");
     }

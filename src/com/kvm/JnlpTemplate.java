@@ -1,6 +1,8 @@
 package com.kvm;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.library.LoggerUtil;
 
@@ -14,10 +16,30 @@ public class JnlpTemplate {
 		this.vendor = vendor;
 		this.model = model;
 		this.myJson = getJson(loginRes);
-		HashMap<String, String> myJson2 = getJson(secondAuthRes);
-		HashMap<String, String> myJson3 = getJson(downloadRes);
-		this.myJson.putAll(myJson2);
-		this.myJson.putAll(myJson3);
+		if(this.vendor.equalsIgnoreCase("h3c")){
+		  HashMap<String, String> myJson2 = getJson(secondAuthRes);
+		  HashMap<String, String> myJson3 = getJson(downloadRes);
+		  this.myJson.putAll(myJson2);
+		  this.myJson.putAll(myJson3);
+		}else if(this.vendor.equalsIgnoreCase("hp")) {
+	    	  String jarPattern = "\"archive=(.*)\s+width=";
+	    	  String info0Pattern = "\"INFO0\\\\=\\\\(.*)\\\\\"";
+	    	  LoggerUtil.info("info0Pattern:"+info0Pattern);
+	    	  String info1Pattern = "\"INFO1\\\\=\\\\(.*)\\\\\"";
+	    	  String info2Pattern = "\"INFO2\\\\=\\\\(.*)\\\\\"";
+	    	  Pattern jar = Pattern.compile(jarPattern);
+	    	  Pattern info0 = Pattern.compile(info0Pattern);
+	    	  Pattern info1 = Pattern.compile(info1Pattern);
+	    	  Pattern info2 = Pattern.compile(info2Pattern);
+	    	  Matcher m1 = jar.matcher(downloadRes);
+	    	  Matcher m2 = info0.matcher(downloadRes);
+	    	  Matcher m3 = info1.matcher(downloadRes);
+	    	  Matcher m4 = info2.matcher(downloadRes);
+	    	  if(m1.find()) {this.myJson.put("jar", m1.group(1));}
+	    	  if(m2.find()) {this.myJson.put("info0", m2.group(1).replace("\"", ""));}
+	    	  if(m3.find()) {this.myJson.put("info1", m3.group(1).replace("\"", ""));}
+	    	  if(m4.find()) {this.myJson.put("info2", m4.group(1).replace("\"", ""));}
+		}
 		LoggerUtil.info("myJson:"+this.myJson);
 	}
 	private HashMap<String, String> getJson(String input) {
@@ -122,6 +144,37 @@ public class JnlpTemplate {
 		            +"</jnlp>";
 			jnlpTemplate = newh3cJnlp;
 			LoggerUtil.info("newh3cjnlp:"+newh3cJnlp);
+		}else if(this.vendor.equalsIgnoreCase("hp")) {
+			String hpJnlp="<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+					+"<jnlp spec=\"1.0+\" codebase=\"https://"+this.host+"/\" href=\"\">"
+					+"<information><title>Integrated Remote Console</title>"
+					+"<vendor>HPE</vendor>"
+					+"<offline-allowed>"
+					+"</offline-allowed>"
+					+"</information>"
+					+"<security>"
+					+"<all-permissions>"
+					+"</all-permissions>"
+					+"</security>"
+					+"<resources>"
+					+"<j2se version=\"1.5+\" href=\"http://java.sun.com/products/autodl/j2se\">"
+					+"</j2se><jar href=\"https://"+this.host+this.myJson.get("jar")+"\" main=\"false\" />"
+					+"</resources>"
+					+"<property name=\"deployment.trace.level property\" value=\"basic\">"
+					+"</property>"
+					+"<applet-desc main-class=\"com.hp.ilo2.intgapp.intgapp\" name=\"iLOJIRC\" documentbase=\"https://"+this.host
+					+"/html/java_irc.html\" width=\"1\" height=\"1\">"
+					+"<param name=\"RCINFO1\" value=\""+this.myJson.get("session_key")+"\"/>"
+					+"<param name=\"RCINFOLANG\" value=\"en\"/>"
+					+"<param name=\"INFO0\" value=\""+this.myJson.get("info0")+"\"/>"
+					+"<param name=\"INFO1\" value=\""+this.myJson.get("info1")+"\"/>"
+					+"<param name=\"INFO2\" value=\""+this.myJson.get("info2")+"\"/>"
+					+"</applet-desc>"
+					+"<update check=\"background\">"
+					+"</update>"
+					+"</jnlp>";
+			jnlpTemplate = hpJnlp;
+			LoggerUtil.info("hpjnlp:"+hpJnlp);
 		}
 		return jnlpTemplate;
 
