@@ -104,7 +104,6 @@ class ClientSubmitLoginCommon
                 this.downloadUrl = "/api/kvmjnlp?&JNLPSTR=JViewer";
                 this.loginData = "username="+this.userName+"&password="+this.passWord;
             }else if (this.model.equalsIgnoreCase("w780-g20")) {
-                //this.addCsrfToken = true;
                 this.loginUrl = "/cgi/login.cgi";
                 //this.downloadUrl = "/cgi/url_redirect.cgi?url_name=sol&url_type=jwss";
                 this.downloadUrl = "/cgi/url_redirect.cgi?url_name=ikvm&url_type=jwsk";
@@ -145,7 +144,7 @@ class ClientSubmitLoginCommon
                 this.loginUrl = "/ext/session";
                 this.downloadUrl = "/Java/jviewer.jnlp";
                 if(this.bmcVersion.equalsIgnoreCase("03.13.0200")) {
-                    this.addCsrfToken = true;
+                    //this.addCsrfToken = true;
                     this.loginData = "username=zteroot&password=nZ2MK3ly4yzff0C5cykeRIlPyLE2vyd4HbLtQa4p%2F0yn5cBmWCef%2FcS3zkH2%2FdC6xU3IcvkYeP%2BUfrGfHpsWkhL%2B%2BQoRVWtJIPM%2F9rOX2yjGeZ%2FBTht9n9rj0B6ornffEYew49twbGrt%2B0gX2sSVx9HlshDIHgbPtvnKg4l%2BGtvh4fO5oU5Mj%2BR5m8Kfq2TcX4BeKQD2G6Nwh6GbtXJPVg1j2%2FwvFMm6IC%2BKtDNAHf99dBYdolrjOCSQIxoJDMBdQwWrrw7KzP732rakUKM64WcmZZMzXl7nG%2BsN169Di5KDFPZwHDhHE5Zkv24QtSX5Jon3KoqYa10SWSWyY1dUPA%3D%3D";
                 }else {
                   this.loginData = "username="+this.userName+"&password="+this.passWord;

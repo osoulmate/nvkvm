@@ -355,8 +355,7 @@ public class Main
                     if(loginResult[0].equals("0")) {
                         //no match vendor
                     	if (!vendor.equalsIgnoreCase("huawei")) {
-                        JOptionPane.showOptionDialog(Main.this.loginPanel, Main.this
-                                .unSupportVendor, Main.this
+                        JOptionPane.showOptionDialog(Main.this.loginPanel, loginResult[1], Main.this
                                 .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
                                 .remindOption, Main.this
                                 .remindOption[0]);
@@ -366,7 +365,7 @@ public class Main
                     }else if (loginResult[0].equals("200")) {
                         if(commonLogin.run()[0].equals("0")) {
                           if (!vendor.equalsIgnoreCase("huawei")) {
-                            JOptionPane.showOptionDialog(Main.this.loginPanel,loginResult[1] , Main.this
+                            JOptionPane.showOptionDialog(Main.this.loginPanel,commonLogin.run()[1] , Main.this
                                     .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
                                     .remindOption, Main.this
                                     .remindOption[0]);
