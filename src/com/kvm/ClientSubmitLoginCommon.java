@@ -103,6 +103,12 @@ class ClientSubmitLoginCommon
                 this.loginUrl = "/api/session";
                 this.downloadUrl = "/api/kvmjnlp?&JNLPSTR=JViewer";
                 this.loginData = "username="+this.userName+"&password="+this.passWord;
+            }else if (this.model.equalsIgnoreCase("i620-g20")) {
+          	    this.addCookie = true;
+          	    this.isHttps = false;
+                this.loginUrl = "/rpc/WEBSES/create.asp";
+                this.downloadUrl = "/Java/jviewer.jnlp?EXTRNIP="+this.host+"&JNLPSTR=JViewer";
+                this.loginData = "WEBVAR_USERNAME="+this.userName+"&WEBVAR_PASSWORD="+this.passWord;
             }else if (this.model.equalsIgnoreCase("w780-g20")) {
                 this.loginUrl = "/cgi/login.cgi";
                 //this.downloadUrl = "/cgi/url_redirect.cgi?url_name=sol&url_type=jwss";
@@ -281,6 +287,11 @@ class ClientSubmitLoginCommon
 	    	  Pattern cookie = Pattern.compile(sessionCookiePattern);
 	    	  Matcher m1 = cookie.matcher(input);
 	    	  if(m1.find()) {this.sessionValue="SessionCookie="+m1.group(1)+";";}
+          }else if(this.vendor.equalsIgnoreCase("sugon")) {
+	    	  String sessionCookiePattern = "'SESSION_COOKIE' : '(.*)' }";
+	    	  Pattern cookie = Pattern.compile(sessionCookiePattern);
+	    	  Matcher m1 = cookie.matcher(input);
+	    	  if(m1.find()) {this.sessionValue="SessionCookie="+m1.group(1).split("'")[0]+";";}
           }
           return sites;
     }
@@ -610,18 +621,16 @@ class ClientSubmitLoginCommon
                 this.httpConn = (HttpURLConnection)requestUrl.openConnection();
                 this.httpConn.setRequestMethod("POST");
                 this.httpConn.setDoOutput(true);
-                this.httpConn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                if (this.vendor.equalsIgnoreCase("lenovo")) {
-                    this.httpsConn.setRequestProperty("Referer", "https://"+this.host+"/designs/imm/index.php");
-                }else if(this.vendor.equalsIgnoreCase("hp")) {
-                    this.httpsConn.setRequestProperty("Content-Type", "application/json");
-                }
                 opsStream = this.httpConn.getOutputStream();
-                opsStream.write(PostListBypes);
+                opsStream.write(this.loginData.getBytes());
+                //LoggerUtil.info( "write data:"+ this.loginData.getBytes());
                 opsStream.close();
                 responseCode = this.httpConn.getResponseCode();
+                LoggerUtil.info( "responseCode:"+ responseCode);
                 iptStream = this.httpConn.getInputStream();
+                //LoggerUtil.info( "iptStream:"+ iptStream);
                 response = new BufferedReader(new InputStreamReader(iptStream, "utf-8"));
+                //LoggerUtil.info( "response:"+ response);
             }catch (Exception e) {
                 LoggerUtil.error(e.getClass().getName());
                 GetParaFromWebOutput[0] = "0";
@@ -630,7 +639,12 @@ class ClientSubmitLoginCommon
             } 
         }
         if(200 == responseCode) {
-            String resCookice = this.httpsConn.getHeaderField("Set-Cookie");
+        	String resCookice="";
+        	if (this.isHttps) {
+        		resCookice = this.httpsConn.getHeaderField("Set-Cookie");
+        	}else {
+        		resCookice = this.httpConn.getHeaderField("Set-Cookie");
+        	}
             String[] sessionId = resCookice.split(";");
             this.sessionValue = sessionId[0]+";";
             int intC = 0;
