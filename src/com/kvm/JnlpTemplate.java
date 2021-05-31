@@ -11,6 +11,7 @@ public class JnlpTemplate {
 	private String vendor;
 	private String model;
 	HashMap<String, String> myJson;
+	private String myJnlp;
 	public JnlpTemplate(String vendor, String model, String host, Boolean isHttps, String loginRes,String secondAuthRes, String downloadRes) {
 		this.host = host;
 		this.vendor = vendor;
@@ -39,6 +40,8 @@ public class JnlpTemplate {
 	    	  if(m2.find()) {this.myJson.put("info0", m2.group(1).replace("\"", ""));}
 	    	  if(m3.find()) {this.myJson.put("info1", m3.group(1).replace("\"", ""));}
 	    	  if(m4.find()) {this.myJson.put("info2", m4.group(1).replace("\"", ""));}
+		}else if(this.vendor.equalsIgnoreCase("inspur")) {
+			this.myJnlp = downloadRes.replace("https", "http").replace(":443", "");
 		}
 		LoggerUtil.info("myJson:"+this.myJson);
 	}
@@ -181,6 +184,8 @@ public class JnlpTemplate {
 					+"</jnlp>";
 			jnlpTemplate = hpJnlp;
 			LoggerUtil.info("hpjnlp:"+hpJnlp);
+		}else if(this.vendor.equalsIgnoreCase("inspur")) {
+			jnlpTemplate = this.myJnlp;
 		}
 		return jnlpTemplate;
 

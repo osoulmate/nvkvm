@@ -217,6 +217,38 @@ public class Main
             "不能创建LoopedStreams：" + e);
         //System.exit(1);
     }*/
+    this.loginPanel.add(this.ipAddrLabel);
+    this.loginPanel.add(this.passwordLabel);
+    this.backgroundLable.add(this.ianguageComboBox);
+    this.backgroundLable.add(this.copyrightImagebutton);
+    this.backgroundLable.add(this.kvmButton);
+    this.loginPanel.add(this.ip_addr);
+    this.loginPanel.add(this.username);
+    this.loginPanel.add(this.pwdJField);
+    this.loginPanel.add(this.usernameLabel);
+    this.loginPanel.add(this.shareButton);
+    this.loginPanel.add(this.onlyButton);
+    //this.loginPanel.add(this.consoleTextArea);
+    /*
+    ScrollPane sp=new ScrollPane();
+    sp.add(this.consoleTextArea);
+    sp.setBounds(2, 182, 379, 80);
+    this.loginPanel.add(sp);
+    */
+    javax.swing.JScrollPane scrollPane; 
+    javax.swing.JTextArea textArea;
+    scrollPane = new javax.swing.JScrollPane();
+    textArea = new javax.swing.JTextArea();
+    textArea.setColumns(20); 
+    textArea.setRows(5);
+    scrollPane.setViewportView(textArea);
+    scrollPane.setBounds(2, 182, 379, 80);
+    this.loginPanel.add(scrollPane);
+    this.backgroundLable.add(this.loginPanel);
+    getRootPane().setDefaultButton(this.kvmButton);
+    this.ip_addr.requestFocus();
+    container.add(this.backgroundLable);
+    System.setOut(new GUIPrintStream(System.out, textArea));
     this.ip_addr.addFocusListener(new FocusListener()
         {
           public void focusLost(FocusEvent e)
@@ -659,38 +691,6 @@ public class Main
             Main.this.changeTitle();
           }
         });
-    this.loginPanel.add(this.ipAddrLabel);
-    this.loginPanel.add(this.passwordLabel);
-    this.backgroundLable.add(this.ianguageComboBox);
-    this.backgroundLable.add(this.copyrightImagebutton);
-    this.backgroundLable.add(this.kvmButton);
-    this.loginPanel.add(this.ip_addr);
-    this.loginPanel.add(this.username);
-    this.loginPanel.add(this.pwdJField);
-    this.loginPanel.add(this.usernameLabel);
-    this.loginPanel.add(this.shareButton);
-    this.loginPanel.add(this.onlyButton);
-    //this.loginPanel.add(this.consoleTextArea);
-    /*
-    ScrollPane sp=new ScrollPane();
-    sp.add(this.consoleTextArea);
-    sp.setBounds(2, 182, 379, 80);
-    this.loginPanel.add(sp);
-    */
-    javax.swing.JScrollPane scrollPane; 
-    javax.swing.JTextArea textArea;
-    scrollPane = new javax.swing.JScrollPane();
-    textArea = new javax.swing.JTextArea();
-    textArea.setColumns(20); 
-    textArea.setRows(5);
-    scrollPane.setViewportView(textArea);
-    scrollPane.setBounds(2, 182, 379, 80);
-    this.loginPanel.add(scrollPane);
-    this.backgroundLable.add(this.loginPanel);
-    getRootPane().setDefaultButton(this.kvmButton);
-    this.ip_addr.requestFocus();
-    container.add(this.backgroundLable);
-    System.setOut(new GUIPrintStream(System.out, textArea));
   }
   private static class CopyrightButton
     implements ActionListener {
