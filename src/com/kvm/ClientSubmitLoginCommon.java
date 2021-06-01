@@ -97,6 +97,9 @@ class ClientSubmitLoginCommon
         if (this.vendor.equalsIgnoreCase("newh3ctechnologiesco.,ltd.") || this.vendor.equalsIgnoreCase("newh3c")) {
             this.vendor = "h3c";
         }
+        if (this.vendor.equalsIgnoreCase("lnvo")) {
+            this.vendor = "lenovo";
+        }
         if (this.vendor.equalsIgnoreCase("sugon")) {
             if(this.model.equalsIgnoreCase("i620-g30")) {
                 this.addCsrfToken = true;
@@ -114,12 +117,30 @@ class ClientSubmitLoginCommon
                 //this.downloadUrl = "/cgi/url_redirect.cgi?url_name=sol&url_type=jwss";
                 this.downloadUrl = "/cgi/url_redirect.cgi?url_name=ikvm&url_type=jwsk";
                 this.loginData = "name="+this.userName+"&pwd="+this.passWord;
+            }else if (this.model.equalsIgnoreCase("w580-g20")) {
+                this.loginUrl = "/cgi/login.cgi";
+                this.downloadUrl = "/cgi/url_redirect.cgi?url_name=ikvm&url_type=jwsk";
+                this.loginData = "name="+this.userName+"&pwd="+this.passWord;
+            }else if (this.model.equalsIgnoreCase("i640-g15")) {
+            	this.useTemplate = true;
+                this.loginUrl = "/cgi/login.cgi";
+                this.downloadUrl = "/cgi/url_redirect.cgi?url_name=ikvm&url_type=jwsk";
+                this.loginData = "name="+this.userName+"&pwd="+this.passWord;
             }else {
-                this.addCsrfToken = true;
-                this.loginUrl = "/api/session";
-                this.downloadUrl = "/api/kvmjnlp?&JNLPSTR=JViewer";
-                this.loginData = "username="+this.userName+"&password="+this.passWord;
-                LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
+            	// W580-G20
+                this.loginUrl = "/cgi/login.cgi";
+                this.downloadUrl = "/cgi/url_redirect.cgi?url_name=ikvm&url_type=jwsk";
+                this.loginData = "name="+this.userName+"&pwd="+this.passWord;
+            }
+        }else if (this.vendor.equalsIgnoreCase("fiberhome")) {
+            if (this.model.equalsIgnoreCase("fitserver")) {
+                this.loginUrl = "/cgi/login.cgi";
+                this.downloadUrl = "/cgi/url_redirect.cgi?url_name=ikvm&url_type=jwsk";
+                this.loginData = "name="+this.userName+"&pwd="+this.passWord;
+            }else {
+                this.loginUrl = "/cgi/login.cgi";
+                this.downloadUrl = "/cgi/url_redirect.cgi?url_name=ikvm&url_type=jwsk";
+                this.loginData = "name="+this.userName+"&pwd="+this.passWord;
             }
         }else if (this.vendor.equalsIgnoreCase("inspur")) {
               if (this.model.equalsIgnoreCase("nf5288m5")) {
@@ -212,7 +233,7 @@ class ClientSubmitLoginCommon
             this.isResetDownloadUrl = true;
             this.loginData = "user="+this.userName+"&password="+this.passWord;
         }else {
-            LoggerUtil.info("no match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
+            LoggerUtil.info("not match:"+this.vendor.toLowerCase()+","+this.model.toLowerCase());
             return false;
         }
         return true;
@@ -344,6 +365,9 @@ class ClientSubmitLoginCommon
             if(this.model.equalsIgnoreCase("nf8420m3")) {
             	exceptionSite = "http://"+this.host;
             }
+            if (this.model.equalsIgnoreCase("i640-g15")) {
+            	exceptionSite = "http://"+this.host;
+            }
             this.downloadUrl = "https://"+this.host+this.downloadUrl;
             try {
                 if(this.isResetDownloadUrl)
@@ -359,6 +383,9 @@ class ClientSubmitLoginCommon
                 if (this.addCsrfToken) {
                 	LoggerUtil.info("add X-CSRFTOKEN:"+this.extraCookie.get("CSRFToken"));
                 	this.httpsConn.setRequestProperty("X-CSRFTOKEN", this.extraCookie.get("CSRFToken"));
+                }
+                if (this.model.equalsIgnoreCase("i640-g15")) {
+                	this.httpsConn.setRequestProperty("Referer", "https://"+this.host+"/cgi/url_redirect.cgi?url_name=man_ikvm");
                 }
                 responseCode = this.httpsConn.getResponseCode();
                 System.out.println("Downloading from host "+this.host+" jnlp...");

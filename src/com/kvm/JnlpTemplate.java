@@ -42,6 +42,8 @@ public class JnlpTemplate {
 	    	  if(m4.find()) {this.myJson.put("info2", m4.group(1).replace("\"", ""));}
 		}else if(this.vendor.equalsIgnoreCase("inspur")) {
 			this.myJnlp = downloadRes.replace("https", "http").replace(":443", "");
+		}else if (this.vendor.equalsIgnoreCase("sugon")) {
+			this.myJnlp = downloadRes.replace("https", "http").replace(":443", "");
 		}
 		LoggerUtil.info("myJson:"+this.myJson);
 	}
@@ -185,6 +187,8 @@ public class JnlpTemplate {
 			jnlpTemplate = hpJnlp;
 			LoggerUtil.info("hpjnlp:"+hpJnlp);
 		}else if(this.vendor.equalsIgnoreCase("inspur")) {
+			jnlpTemplate = this.myJnlp;
+		}else if (this.vendor.equalsIgnoreCase("sugon")) {
 			jnlpTemplate = this.myJnlp;
 		}
 		return jnlpTemplate;
