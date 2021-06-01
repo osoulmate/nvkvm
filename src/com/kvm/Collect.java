@@ -29,7 +29,7 @@ class Collect
       .append(passWord)
       .append(" ")
       .append("fru list 0");
-    LoggerUtil.info( "ipmiOEM: "+ ipmiOEM );
+    //LoggerUtil.info( "ipmiOEM: "+ ipmiOEM );
     Process process = null;
     SendIPMIInDiffOS sendIPMIInDiffOS = new SendIPMIInDiffOS();
     if (sendIPMIInDiffOS.useIpmitoolInDiffOS(ipmiOEM.toString()) == null)
@@ -59,6 +59,7 @@ class Collect
     	  Matcher m2 = r2.matcher(outPutMsg);
     	  Matcher m3 = r3.matcher(outPutMsg);
     	  Matcher m4 = r4.matcher(outPutMsg);
+    	  LoggerUtil.info( "ipmi output: "+ outPutMsg );
     	  if(m1.find()) {this.VENDOR = m1.group(1);}
     	  if(m2.find()) {this.MODEL = m2.group(1);}
     	  if(m3.find()) {this.BMC_VERSION = m3.group(1);}

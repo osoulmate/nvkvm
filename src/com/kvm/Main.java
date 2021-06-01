@@ -6,13 +6,11 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.LayoutManager;
-import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.URL;
@@ -31,6 +29,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
@@ -66,6 +66,8 @@ public class Main
   private JLabel loginFailed;
   private JLabel obtainProductInfoError;
   private ConsoleTextArea consoleTextArea;
+  private JScrollPane scrollPane; 
+  private JTextArea textArea;
   static int wordSize = 0;
   public static int getWordSize() {
     return wordSize;
@@ -205,18 +207,6 @@ public class Main
     this.copyrightImagebutton.setBorder((Border)null);
     this.copyrightImagebutton.setContentAreaFilled(false);
     this.copyrightImagebutton.setName("CopyrightImagebuttonInput");
-    /*
-    try {
-        this.consoleTextArea = new ConsoleTextArea();
-        this.consoleTextArea.setFont(java.awt.Font.decode("monospaced"));
-        //this.consoleTextArea.setBounds(2, 182, 379, 80);
-        this.consoleTextArea.setForeground(Color.gray);
-    }
-    catch(IOException e) {
-        System.err.println(
-            "不能创建LoopedStreams：" + e);
-        //System.exit(1);
-    }*/
     this.loginPanel.add(this.ipAddrLabel);
     this.loginPanel.add(this.passwordLabel);
     this.backgroundLable.add(this.ianguageComboBox);
@@ -228,27 +218,32 @@ public class Main
     this.loginPanel.add(this.usernameLabel);
     this.loginPanel.add(this.shareButton);
     this.loginPanel.add(this.onlyButton);
-    //this.loginPanel.add(this.consoleTextArea);
     /*
-    ScrollPane sp=new ScrollPane();
-    sp.add(this.consoleTextArea);
-    sp.setBounds(2, 182, 379, 80);
-    this.loginPanel.add(sp);
+    try {
+        this.consoleTextArea = new ConsoleTextArea();
+        this.consoleTextArea.setFont(java.awt.Font.decode("monospaced"));
+        this.consoleTextArea.setForeground(Color.gray);
+        this.loginPanel.add(this.consoleTextArea);
+    	this.scrollPane.add(this.consoleTextArea);
+    	this.scrollPane.setBounds(2, 182, 379, 80);
+    	this.loginPanel.add(this.scrollPane);
+    }
+    catch(IOException e) {
+        System.exit(1);
+    }
     */
-    javax.swing.JScrollPane scrollPane; 
-    javax.swing.JTextArea textArea;
-    scrollPane = new javax.swing.JScrollPane();
-    textArea = new javax.swing.JTextArea();
-    textArea.setColumns(20); 
-    textArea.setRows(5);
-    scrollPane.setViewportView(textArea);
-    scrollPane.setBounds(2, 182, 379, 80);
-    this.loginPanel.add(scrollPane);
+    this.scrollPane = new JScrollPane();
+    this.textArea = new JTextArea();
+    this.textArea.setColumns(20); 
+    this.textArea.setRows(5);
+    this.scrollPane.setViewportView(textArea);
+    this.scrollPane.setBounds(2, 182, 379, 80);
+    this.loginPanel.add(this.scrollPane);
+    System.setOut(new GUIPrintStream(System.out, textArea));
     this.backgroundLable.add(this.loginPanel);
     getRootPane().setDefaultButton(this.kvmButton);
     this.ip_addr.requestFocus();
     container.add(this.backgroundLable);
-    System.setOut(new GUIPrintStream(System.out, textArea));
     this.ip_addr.addFocusListener(new FocusListener()
         {
           public void focusLost(FocusEvent e)
@@ -294,11 +289,9 @@ public class Main
             String PwdStrIPMI = "";
             String PwdStrHTTPS = "";
             PwdStrIPMI = String.valueOf(Main.this.pwdJField.getPassword());
-            LoggerUtil.info( "PwdStrIPMI: "+ PwdStrIPMI );
-            System.out.println("USERNAME:"+user_name+" PASSWORD:"+PwdStrIPMI);
+            //System.out.println("USERNAME:"+user_name+" PASSWORD:"+PwdStrIPMI);
             try {
               PwdStrHTTPS = URLEncoder.encode(String.valueOf(Main.this.pwdJField.getPassword()), "UTF-8");
-              LoggerUtil.info( "PwdStrHTTPS: "+ PwdStrHTTPS );
             }
             catch (UnsupportedEncodingException e2) {
               LoggerUtil.error(e.getClass().getName());
@@ -351,7 +344,7 @@ public class Main
                     //非华为机型执行下述登陆方法
                     ClientSubmitLoginCommon commonLogin = new ClientSubmitLoginCommon();
                     String [] loginResult = commonLogin.doLogin(vendor, model, bmc_version,extra,hostIpmi,user_name,PwdStrIPMI, KvmMode);
-                    LoggerUtil.info( "loginResult:"+ loginResult[0]+","+loginResult[1]);
+                    //LoggerUtil.info( "loginResult:"+ loginResult[0]+","+loginResult[1]);
                     if(loginResult[0].equals("0")) {
                         //no match vendor
                     	if (!vendor.equalsIgnoreCase("huawei")) {
@@ -875,12 +868,12 @@ public class Main
         try{ 
             InetAddress address = InetAddress.getByName(ip);
             if(address instanceof java.net.Inet4Address){ 
-               System.out.println(ip + " is ipv4 address"); 
+               //System.out.println(ip + " is ipv4 address"); 
             }else
             if(address instanceof java.net.Inet6Address){ 
-               System.out.println(ip + " is ipv6 address"); 
+               //System.out.println(ip + " is ipv6 address"); 
             }else{ 
-               System.out.println(ip + " is unrecongized"); 
+               //System.out.println(ip + " is unrecongized"); 
             } 
             if(address.isReachable(5000)){ 
               System.out.println("ping "+ip+" is SUCCESS");

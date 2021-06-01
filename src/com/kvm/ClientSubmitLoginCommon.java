@@ -395,10 +395,10 @@ class ClientSubmitLoginCommon
                 this.httpsConn = (HttpsURLConnection)requestUrl.openConnection();
                 this.httpsConn.setSSLSocketFactory(this.sslContext.getSocketFactory());
                 this.httpsConn.setRequestMethod("GET");
-                LoggerUtil.info("sessionValue:"+this.sessionValue);
+                //LoggerUtil.info("sessionValue:"+this.sessionValue);
                 this.httpsConn.setRequestProperty("Cookie", this.sessionValue);
                 if (this.addCsrfToken) {
-                	LoggerUtil.info("add X-CSRFTOKEN:"+this.extraCookie.get("CSRFToken"));
+                	//LoggerUtil.info("add X-CSRFTOKEN:"+this.extraCookie.get("CSRFToken"));
                 	this.httpsConn.setRequestProperty("X-CSRFTOKEN", this.extraCookie.get("CSRFToken"));
                 }
                 if (this.model.equalsIgnoreCase("i640-g15")) {
@@ -421,18 +421,18 @@ class ClientSubmitLoginCommon
                 requestUrl = new URL(this.downloadUrl);
                 this.httpConn = (HttpURLConnection)requestUrl.openConnection();
                 this.httpConn.setRequestMethod("GET");
-                LoggerUtil.info("sessionValue:"+this.sessionValue);
+                //LoggerUtil.info("sessionValue:"+this.sessionValue);
                 this.httpConn.setRequestProperty("Cookie", this.sessionValue);
                 if (this.addCsrfToken) {
                     this.httpsConn.setRequestProperty("X-CSRFTOKEN", this.extraCookie.get("CSRFToken"));
-                    LoggerUtil.info("add X-CSRFTOKEN:"+this.extraCookie.get("CSRFToken"));
+                    //LoggerUtil.info("add X-CSRFTOKEN:"+this.extraCookie.get("CSRFToken"));
                 }
                 responseCode = this.httpConn.getResponseCode();
                 System.out.println("Downloading from host "+this.host+" jnlp...");
                 iptStream = this.httpConn.getInputStream();
                 response = new BufferedReader(new InputStreamReader(iptStream, "utf-8"));
             }catch (IOException e) {
-                LoggerUtil.info( "requestUrl.openConnection(): "+ e.getClass().getName() );
+                LoggerUtil.info(e.getClass().getName());
             }
         }
         if (200 == responseCode) {
@@ -474,7 +474,8 @@ class ClientSubmitLoginCommon
                                 +File.separator+"Deployment"
                                 +File.separator+"security"
                                 +File.separator+"exception.sites";
-        LoggerUtil.info("javaTempPath:"+exceptionSites);
+        //LoggerUtil.info("javaTempPath:"+exceptionSites);
+        if (KVMUtil.isWindowsOS()) {
         File file=new File(exceptionSites);
         if(!file.exists())
         {
@@ -501,7 +502,7 @@ class ClientSubmitLoginCommon
                 fi.close();
                 reader.close();
                 if(!flag) {
-                    LoggerUtil.info("Add Java exceptionSites:"+exceptionSites);
+                    //LoggerUtil.info("Add Java exceptionSites:"+exceptionSites);
                     FileOutputStream fo = new FileOutputStream(file);
                     OutputStreamWriter writer = new OutputStreamWriter(fo, "UTF-8");
                     writer.append(exceptionSite+"\r\n"); 
@@ -511,7 +512,7 @@ class ClientSubmitLoginCommon
            }catch(IOException e) {
                LoggerUtil.info("Add Java exceptionSites occurs error:"+e);
            }
-        }
+        }}
         File f = new File("kvm.jnlp");
         FileOutputStream fop = null;
         OutputStreamWriter w = null;
@@ -540,7 +541,7 @@ class ClientSubmitLoginCommon
         if (this.isHttps) {
             this.extraUrl = "https://"+this.host+this.extraUrl;
             try {
-                LoggerUtil.info("extraUrl:"+this.extraUrl);
+                //LoggerUtil.info("extraUrl:"+this.extraUrl);
                 requestUrl = new URL(this.extraUrl);
                 this.sslContext = SSLContext.getInstance("TLSv1.2", "SunJSSE");
                 this.sslContext.init(null, this.tm, new SecureRandom());
@@ -548,10 +549,9 @@ class ClientSubmitLoginCommon
                 this.httpsConn.setSSLSocketFactory(sslContext.getSocketFactory());
                 this.httpsConn.setRequestMethod("GET");
                 this.httpsConn.setRequestProperty("X-CSRFTOKEN", this.extraCookie.get("CSRFToken"));
-                LoggerUtil.info("Cookie:"+this.sessionValue);
+                //LoggerUtil.info("Cookie:"+this.sessionValue);
                 this.httpsConn.setRequestProperty("Cookie", this.sessionValue);
                 responseCode = this.httpsConn.getResponseCode();
-                LoggerUtil.info("Second Auth ResponseCode:"+responseCode);
                 iptStream = this.httpsConn.getInputStream();
                 response = new BufferedReader(new InputStreamReader(iptStream, "utf-8"));
             } catch (Exception e) {
@@ -563,15 +563,14 @@ class ClientSubmitLoginCommon
         }else {
             this.extraUrl = "http://"+this.host+this.extraUrl;
             try {
-                LoggerUtil.info("extraUrl:"+this.extraUrl);
+                //LoggerUtil.info("extraUrl:"+this.extraUrl);
                 requestUrl = new URL(this.extraUrl);
                 this.httpConn = (HttpURLConnection)requestUrl.openConnection();
                 this.httpConn.setRequestMethod("GET");
                 this.httpConn.setRequestProperty("X-CSRFTOKEN", this.extraCookie.get("CSRFToken"));
-                LoggerUtil.info("Cookie:"+this.sessionValue);
+                //LoggerUtil.info("Cookie:"+this.sessionValue);
                 this.httpConn.setRequestProperty("Cookie", this.sessionValue);
                 responseCode = this.httpConn.getResponseCode();
-                LoggerUtil.info("Second Auth ResponseCode:"+responseCode);
                 iptStream = this.httpsConn.getInputStream();
                 response = new BufferedReader(new InputStreamReader(iptStream, "utf-8"));
             } catch (Exception e) {
@@ -599,7 +598,7 @@ class ClientSubmitLoginCommon
             } 
         } 
         this.secondAuthRes = sb.toString();
-        LoggerUtil.info("Second Auth response:"+this.secondAuthRes);
+        LoggerUtil.info("Second Auth response:"+responseCode);
         nextRes[0]=String.valueOf(responseCode);
         nextRes[1]=this.secondAuthRes;
         return nextRes;
@@ -626,12 +625,12 @@ class ClientSubmitLoginCommon
             GetParaFromWebOutput[1] = "notMatch";
             return GetParaFromWebOutput;
         }
-        LoggerUtil.info( "loginData:"+ this.loginData);
+        //LoggerUtil.info( "loginData:"+ this.loginData);
         byte[] PostListBypes = this.loginData.getBytes("UTF-8");
         if (this.isHttps) {
             try {
                 this.loginUrl = "https://"+this.host+this.loginUrl;
-                LoggerUtil.info( "loginUrl:"+ this.loginUrl);
+                //LoggerUtil.info( "loginUrl:"+ this.loginUrl);
                 requestUrl = new URL(this.loginUrl);
                 this.sslContext = SSLContext.getInstance("TLSv1.2", "SunJSSE");
                 this.sslContext.init(null, this.tm, new SecureRandom());
@@ -660,7 +659,7 @@ class ClientSubmitLoginCommon
         }else {
             try {
                 this.loginUrl = "http://"+this.host+this.loginUrl;
-                LoggerUtil.info( "loginUrl:"+ this.loginUrl);
+                //LoggerUtil.info( "loginUrl:"+ this.loginUrl);
                 requestUrl = new URL(this.loginUrl);
                 this.httpConn = (HttpURLConnection)requestUrl.openConnection();
                 this.httpConn.setRequestMethod("POST");
@@ -670,7 +669,7 @@ class ClientSubmitLoginCommon
                 //LoggerUtil.info( "write data:"+ this.loginData.getBytes());
                 opsStream.close();
                 responseCode = this.httpConn.getResponseCode();
-                LoggerUtil.info( "responseCode:"+ responseCode);
+                //LoggerUtil.info( "responseCode:"+ responseCode);
                 iptStream = this.httpConn.getInputStream();
                 //LoggerUtil.info( "iptStream:"+ iptStream);
                 response = new BufferedReader(new InputStreamReader(iptStream, "utf-8"));
@@ -708,7 +707,7 @@ class ClientSubmitLoginCommon
             } 
         } 
         this.loginRes = sb.toString();
-        LoggerUtil.info("Login Response:"+this.loginRes);
+        LoggerUtil.info("Login Response:"+responseCode);
         this.extraCookie=this.strToJson(this.loginRes);
         GetParaFromWebOutput[0] = String.valueOf(responseCode);
         GetParaFromWebOutput[1] = this.loginRes;
