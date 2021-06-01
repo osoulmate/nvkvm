@@ -142,6 +142,18 @@ class ClientSubmitLoginCommon
                 this.downloadUrl = "/cgi/url_redirect.cgi?url_name=ikvm&url_type=jwsk";
                 this.loginData = "name="+this.userName+"&pwd="+this.passWord;
             }
+        }else if (this.vendor.equalsIgnoreCase("CMSOFT")) {
+            if (this.model.equalsIgnoreCase("BCS2000")) {
+            	this.addCookie = true;
+                this.loginUrl = "/rpc/WEBSES/create.asp";
+                this.downloadUrl = "/Java/jviewer.jnlp";
+                this.loginData = "WEBVAR_USERNAME="+this.userName+"&WEBVAR_PASSWORD="+this.passWord;
+            }else {
+            	this.addCookie = true;
+                this.loginUrl = "/cgi/login.cgi";
+                this.downloadUrl = "/cgi/url_redirect.cgi?url_name=ikvm&url_type=jwsk";
+                this.loginData = "WEBVAR_USERNAME="+this.userName+"&WEBVAR_PASSWORD="+this.passWord;
+            }
         }else if (this.vendor.equalsIgnoreCase("inspur")) {
               if (this.model.equalsIgnoreCase("nf5288m5")) {
                   this.loginUrl = "/api/session";
@@ -309,6 +321,11 @@ class ClientSubmitLoginCommon
 	    	  Matcher m1 = cookie.matcher(input);
 	    	  if(m1.find()) {this.sessionValue="SessionCookie="+m1.group(1)+";";}
           }else if(this.vendor.equalsIgnoreCase("sugon")) {
+	    	  String sessionCookiePattern = "'SESSION_COOKIE' : '(.*)' }";
+	    	  Pattern cookie = Pattern.compile(sessionCookiePattern);
+	    	  Matcher m1 = cookie.matcher(input);
+	    	  if(m1.find()) {this.sessionValue="SessionCookie="+m1.group(1).split("'")[0]+";";}
+          }else if(this.vendor.equalsIgnoreCase("CMSOFT")) {
 	    	  String sessionCookiePattern = "'SESSION_COOKIE' : '(.*)' }";
 	    	  Pattern cookie = Pattern.compile(sessionCookiePattern);
 	    	  Matcher m1 = cookie.matcher(input);
