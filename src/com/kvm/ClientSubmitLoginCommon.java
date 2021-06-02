@@ -165,6 +165,13 @@ class ClientSubmitLoginCommon
                   }else {
                       this.loginData = "username="+this.userName+"&password="+this.passWord;
                   }
+              }else if (this.model.equalsIgnoreCase("nf5270m3")) {
+            	  //this.isHttps = false;
+            	  this.addCookie = true;
+            	  this.useTemplate = true;
+                  this.loginUrl = "/rpc/WEBSES/create.asp";
+                  this.downloadUrl = "/Java/jviewer.jnlp?EXTRNIP="+this.host+"&JNLPSTR=JViewer";
+                  this.loginData = "WEBVAR_USERNAME="+this.userName+"&WEBVAR_PASSWORD="+this.passWord;
               }else if (this.model.equalsIgnoreCase("nf8420m3")) {
             	  //this.isHttps = false;
             	  this.addCookie = true;
@@ -378,12 +385,14 @@ class ClientSubmitLoginCommon
             };
         }
         if (this.isHttps) {
-            exceptionSite = "https://"+this.host;
             if(this.model.equalsIgnoreCase("nf8420m3")) {
             	exceptionSite = "http://"+this.host;
-            }
-            if (this.model.equalsIgnoreCase("i640-g15")) {
+            }else if (this.model.equalsIgnoreCase("nf5270m3")) {
             	exceptionSite = "http://"+this.host;
+            }else if (this.model.equalsIgnoreCase("i640-g15")) {
+            	exceptionSite = "http://"+this.host;
+            }else {
+            	exceptionSite = "https://"+this.host;
             }
             this.downloadUrl = "https://"+this.host+this.downloadUrl;
             try {

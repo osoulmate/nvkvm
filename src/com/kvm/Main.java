@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.URL;
@@ -179,10 +181,13 @@ public class Main
     this.ianguageComboBox.setBackground(Color.white);
     this.ianguageComboBox.setSelectedIndex(IanguageIndex);
     this.kvmButton = new JButton(KVMButtonName);
-    //this.kvmButton.setBounds(235, 190, 85, 25);
     this.kvmButton.setBounds(285, 155, 75, 25);
+    this.kvmButton.setForeground(Color.black);
+    this.kvmButton.setBackground(new Color(240,240,240));
+    this.kvmButton.setBorder(BorderFactory.createLineBorder(Color.gray));
     this.kvmButton.setFont(new Font(this.fonts, 0, wordSize));
     this.kvmButton.setName("connectButton");
+    this.kvmButton.setFocusPainted(false);
     this.shareButton = new JRadioButton(shareButtonName);
     this.shareButton.setBounds(28, 160, 100, 20);
     this.shareButton.setBorder((Border)null);
@@ -280,6 +285,18 @@ public class Main
           }
         });
     this.copyrightImagebutton.addActionListener(new CopyrightButton());
+    this.kvmButton.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            Main.this.kvmButton.setBackground(new Color(245,245,245));
+            Main.this.kvmButton.setBorder(BorderFactory.createLineBorder(Color.blue,1));
+        }
+        @Override
+        public void mouseExited(MouseEvent e) {
+            Main.this.kvmButton.setBackground(Color.white);
+            Main.this.kvmButton.setBorder(BorderFactory.createLineBorder(Color.gray,1));
+        }
+    });
     this.kvmButton.addActionListener(new ActionListener()
         {
           public void actionPerformed(ActionEvent e)
