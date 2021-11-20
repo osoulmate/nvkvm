@@ -1,7 +1,6 @@
 # nvkvm
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/1031/203815_b8673c6b_5658491.png "微信图片_20211031203734.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2021/1031/203831_c73c4c6d_5658491.png "微信图片_20211031203739.png")
 #### 介绍
 nvkvm(No Vendor kvm)跨厂商的ipmi远程控制台应用
 #### 支持机型
