@@ -13,3 +13,7 @@ nvkvm(No Vendor kvm)跨厂商的ipmi远程控制台应用
 - 中兴[r5300g4,]
 - 惠普
 - 戴尔
+
+https://opendev.org/openstack/diskimage-builder.git
+https://blog.csdn.net/m0_47541842/article/details/113779139
+https://blog.csdn.net/zhongbeida_xue/article/details/84394488
