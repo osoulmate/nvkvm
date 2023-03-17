@@ -14,6 +14,7 @@ class SendIPMIInDiffOS
       ipmitoolPath = "ipmitool/ipmitool.exe";
       File file = new File(ipmitoolPath);
       absolutePath = file.getAbsolutePath();
+      LoggerUtil.info(absolutePath);
       command = absolutePath + " " + ipmiOEM;
       try {
         process = Runtime.getRuntime().exec(command);

@@ -361,7 +361,7 @@ public class Main
                     //非华为机型执行下述登陆方法
                     ClientSubmitLoginCommon commonLogin = new ClientSubmitLoginCommon();
                     String [] loginResult = commonLogin.doLogin(vendor, model, bmc_version,extra,hostIpmi,user_name,PwdStrIPMI, KvmMode);
-                    //LoggerUtil.info( "loginResult:"+ loginResult[0]+","+loginResult[1]);
+                    LoggerUtil.info( "loginResult:"+ loginResult[0]+","+loginResult[1]);
                     if(loginResult[0].equals("0")) {
                         //no match vendor
                     	if (!vendor.equalsIgnoreCase("huawei")) {

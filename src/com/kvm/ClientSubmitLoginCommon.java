@@ -675,7 +675,7 @@ class ClientSubmitLoginCommon
         }else {
             try {
                 this.loginUrl = "http://"+this.host+this.loginUrl;
-                //LoggerUtil.info( "loginUrl:"+ this.loginUrl);
+                LoggerUtil.info( "loginUrl:"+ this.loginUrl);
                 requestUrl = new URL(this.loginUrl);
                 this.httpConn = (HttpURLConnection)requestUrl.openConnection();
                 this.httpConn.setRequestMethod("POST");

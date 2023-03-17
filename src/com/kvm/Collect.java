@@ -29,7 +29,7 @@ class Collect
       .append(passWord)
       .append(" ")
       .append("fru list 0");
-    //LoggerUtil.info( "ipmiOEM: "+ ipmiOEM );
+    LoggerUtil.info( "ipmiOEM: "+ ipmiOEM );
     Process process = null;
     SendIPMIInDiffOS sendIPMIInDiffOS = new SendIPMIInDiffOS();
     if (sendIPMIInDiffOS.useIpmitoolInDiffOS(ipmiOEM.toString()) == null)

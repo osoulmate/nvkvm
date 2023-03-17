@@ -23,7 +23,7 @@ public class JnlpTemplate {
 		  this.myJson.putAll(myJson2);
 		  this.myJson.putAll(myJson3);
 		}else if(this.vendor.equalsIgnoreCase("hp")) {
-	    	  String jarPattern = "\"archive=(.*)\s+width=";
+	    	  String jarPattern = "\"archive=(.*)\\s+width=";
 	    	  String info0Pattern = "\"INFO0\\\\=\\\\(.*)\\\\\"";
 	    	  LoggerUtil.info("info0Pattern:"+info0Pattern);
 	    	  String info1Pattern = "\"INFO1\\\\=\\\\(.*)\\\\\"";
