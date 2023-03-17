@@ -357,14 +357,14 @@ public class Main
                     String bmc_version = mycollect.getBmcVersion();
                     HashMap<String, String> extra = mycollect.getExtra();
                     LoggerUtil.info( "vendor:"+ vendor + ",model:"+model+",bmc_version:"+bmc_version+",extra:"+extra );
-                    System.out.println("vendor:"+ vendor + ",model:"+model+",bmc_version:"+bmc_version+",extra:"+extra );
+                    //System.out.println("vendor:"+ vendor + ",model:"+model+",bmc_version:"+bmc_version+",extra:"+extra );
                     //非华为机型执行下述登陆方法
                     ClientSubmitLoginCommon commonLogin = new ClientSubmitLoginCommon();
                     String [] loginResult = commonLogin.doLogin(vendor, model, bmc_version,extra,hostIpmi,user_name,PwdStrIPMI, KvmMode);
                     LoggerUtil.info( "loginResult:"+ loginResult[0]+","+loginResult[1]);
                     if(loginResult[0].equals("0")) {
                         //no match vendor
-                    	if (!vendor.equalsIgnoreCase("huawei")) {
+                    	if (!vendor.toLowerCase().contains("huawei")) {
                         JOptionPane.showOptionDialog(Main.this.loginPanel, loginResult[1], Main.this
                                 .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
                                 .remindOption, Main.this
@@ -374,7 +374,7 @@ public class Main
                         
                     }else if (loginResult[0].equals("200")) {
                         if(commonLogin.run()[0].equals("0")) {
-                          if (!vendor.equalsIgnoreCase("huawei")) {
+                          if (!vendor.toLowerCase().contains("huawei")) {
                             JOptionPane.showOptionDialog(Main.this.loginPanel,commonLogin.run()[1] , Main.this
                                     .loginUtil.getString("Remind_title"), 0, 3, null, Main.this
                                     .remindOption, Main.this

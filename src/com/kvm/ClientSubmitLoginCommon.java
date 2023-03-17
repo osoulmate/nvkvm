@@ -94,9 +94,6 @@ class ClientSubmitLoginCommon
       return result;
     }
     private Boolean getEndPoint() {
-        if (this.vendor.equalsIgnoreCase("newh3ctechnologiesco.,ltd.") || this.vendor.equalsIgnoreCase("newh3c")) {
-            this.vendor = "h3c";
-        }
         if (this.vendor.equalsIgnoreCase("lnvo")) {
             this.vendor = "lenovo";
         }
@@ -207,13 +204,13 @@ class ClientSubmitLoginCommon
                 this.downloadUrl = "/Java/jviewer.jnlp";
                 this.loginData = "username="+this.userName+"&password="+this.passWord;
           }
-        }else if (this.vendor.equalsIgnoreCase("huawei")) {
+        }else if (this.vendor.toLowerCase().contains("huawei")) {
              this.loginUrl = "/bmc/php/processparameter.php";
              this.downloadUrl = "/bmc/pages/remote/kvm.php?kvmway=0";
              this.loginData ="check_pwd="+this.passWord
                                 +"&logtype=0&user_name="+this.userName
                                 +"&func=AddSession&IsKvmApp=0";
-        }else if (this.vendor.equalsIgnoreCase("h3c")) {
+        }else if (this.vendor.toLowerCase().contains("h3c")) {
           if (this.model.equalsIgnoreCase("uniserverr4900g3")) {
             this.useTemplate = true;
             this.addCookie = true;
