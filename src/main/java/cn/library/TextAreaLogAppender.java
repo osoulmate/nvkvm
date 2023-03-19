@@ -31,6 +31,7 @@ public class TextAreaLogAppender extends LogAppender {
                 scroll.getVerticalScrollBar().setValue(scroll.getVerticalScrollBar().getMaximum());  
                             } catch (Exception ex) {  
                 //异常不做处理  
+                scanner.close();
             }  
         }  
     }  
