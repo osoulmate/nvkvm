@@ -52,7 +52,7 @@ class Collect
     	  String vendorPattern = "ProductManufacturer:(.*)";
     	  String modelPattern = "ProductName:(.*)";
     	  String bmcVersionPattern = "BoardExtra:BMCVersion(.*)";
-    	  //浪潮NF5288M5机型同机型不同产品序列下载jnlp方法不同
+    	  //zte同机型不同产品序号下载jnlp方法不同
     	  String productPartNumberPattern = "ProductPartNumber:(.*)";
     	  Pattern r1 = Pattern.compile(vendorPattern);
     	  Pattern r2 = Pattern.compile(modelPattern);
@@ -63,7 +63,7 @@ class Collect
     	  Matcher m3 = r3.matcher(outPutMsg);
     	  Matcher m4 = r4.matcher(outPutMsg);
     	  //LoggerUtil.info("ipmi output: "+ outPutMsg );
-    	  log.info("ipmi output: "+ outPutMsg );
+    	  log.info(outPutMsg );
     	  if(m1.find()) {this.VENDOR = m1.group(1);}
     	  if(m2.find()) {this.MODEL = m2.group(1);}
     	  if(m3.find()) {this.BMC_VERSION = m3.group(1);}

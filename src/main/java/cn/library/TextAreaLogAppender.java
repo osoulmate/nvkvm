@@ -21,8 +21,7 @@ public class TextAreaLogAppender extends LogAppender {
         // 将扫描到的字符流输出到指定的JTextArea组件  
         while (scanner.hasNextLine()) {  
             try {  
-                //睡眠  
-                Thread.sleep(1000);  
+                Thread.sleep(100);  
                 String line = scanner.nextLine();  
                 textArea.append(line);  
                 textArea.append("\n");  
