@@ -177,6 +177,13 @@ class ClientSubmitLoginCommon
                   this.loginUrl = "/rpc/WEBSES/create.asp";
                   this.downloadUrl = "/Java/jviewer.jnlp?EXTRNIP="+this.host+"&JNLPSTR=JViewer";
                   this.loginData = "WEBVAR_USERNAME="+this.userName+"&WEBVAR_PASSWORD="+this.passWord;
+              }else if (this.model.equalsIgnoreCase("SA5212M4")) {
+                //this.isHttps = false;
+                this.addCookie = true;
+                this.useTemplate = true;
+                this.loginUrl = "/rpc/WEBSES/create.asp";
+                this.downloadUrl = "/Java/jviewer.jnlp?EXTRNIP="+this.host+"&JNLPSTR=JViewer";
+                this.loginData = "WEBVAR_USERNAME="+this.userName+"&WEBVAR_PASSWORD="+this.passWord;
               }else {
                   this.loginUrl = "/api/session";
                   this.extraUrl = "/api/kvm/download";

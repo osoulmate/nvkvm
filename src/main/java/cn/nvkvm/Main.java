@@ -56,13 +56,7 @@ public class Main extends JFrame
   private JLabel noPassword;
   private JLabel unSupportVendor;
   private JLabel networkAddrError;
-  private JLabel wrongBMCversion;
-  private JLabel loginRestricted;
-  private JLabel userNoJurisdiction;
-  private JLabel passwordOverdued;
-  private JLabel userLocked;
   private JLabel loginFailed;
-  private JLabel obtainProductInfoError;
   //private ConsoleTextArea consoleTextArea;
   private JScrollPane scrollPane; 
   private JTextArea textArea;
@@ -321,6 +315,7 @@ public class Main extends JFrame
                     String bmc_version = mycollect.getBmcVersion();
                     HashMap<String, String> extra = mycollect.getExtra();
                     ClientSubmitLoginCommon commonLogin = new ClientSubmitLoginCommon();
+                    log.info( "vendor:"+ vendor+", model:"+model);
                     String [] loginResult = commonLogin.doLogin(vendor, model, bmc_version,extra,hostIpmi,user_name,PwdStrIPMI, KvmMode);
                     //log.info( "loginResult:"+ loginResult[0]+","+loginResult[1]);
                     if(loginResult[0].equals("400")) {
@@ -380,6 +375,7 @@ public class Main extends JFrame
               Main.this.ip_addr.setForeground(Color.GRAY);
               Main.this.ip_addr.setFont(new Font(Main.this.loginUtil.getString("font_name"), 0, Main.wordSize));
             } 
+            Main.this.kvmButton.setText(Main.this.loginUtil.getString("KVM_Button_Name"));
             Main.this.remindOption[0] = Main.this.loginUtil.getString("RemindOption");
             Main.this.widgetMsgUpdate();
             Main.this.remindMsgSet();
@@ -415,20 +411,8 @@ public class Main extends JFrame
     this.unSupportVendor.setFont(new Font(this.loginUtil.getString("font_name"), 0, wordSize));
     this.networkAddrError = new JLabel(this.loginUtil.getString("network_Addr_Error"));
     this.networkAddrError.setFont(new Font(this.loginUtil.getString("font_name"), 0, wordSize));
-    this.wrongBMCversion = new JLabel(this.loginUtil.getString("wrong_BMC_version"));
-    this.wrongBMCversion.setFont(new Font(this.loginUtil.getString("font_name"), 0, wordSize));
-    this.loginRestricted = new JLabel(this.loginUtil.getString("login_Restricted"));
-    this.loginRestricted.setFont(new Font(this.loginUtil.getString("font_name"), 0, wordSize));
-    this.userNoJurisdiction = new JLabel(this.loginUtil.getString("user_NoJurisdiction"));
-    this.userNoJurisdiction.setFont(new Font(this.loginUtil.getString("font_name"), 0, wordSize));
-    this.passwordOverdued = new JLabel(this.loginUtil.getString("password_Overdued"));
-    this.passwordOverdued.setFont(new Font(this.loginUtil.getString("font_name"), 0, wordSize));
-    this.userLocked = new JLabel(this.loginUtil.getString("user_Locked"));
-    this.userLocked.setFont(new Font(this.loginUtil.getString("font_name"), 0, wordSize));
     this.loginFailed = new JLabel(this.loginUtil.getString("login_Failed"));
     this.loginFailed.setFont(new Font(this.loginUtil.getString("font_name"), 0, wordSize));
-    this.obtainProductInfoError = new JLabel(this.loginUtil.getString("obtain_product_information_Error"));
-    this.obtainProductInfoError.setFont(new Font(this.loginUtil.getString("font_name"), 0, wordSize));
   }
   private void changeTitle() {
     setTitle(this.loginUtil.getString("Login_Name"));

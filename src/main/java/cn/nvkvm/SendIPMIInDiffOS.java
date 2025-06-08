@@ -17,7 +17,6 @@ class SendIPMIInDiffOS
 	  copyFile(WINDOWS_IPMITOOL_PATH,"ipmitool.exe");
   }
   private boolean copyFile(String folderName, String fileName) {
-	// TODO Auto-generated method stub
 	  File libFolder = new File(folderName);
 	  if(!libFolder.exists()) {
 		  libFolder.mkdir();
@@ -51,7 +50,6 @@ public Process useIpmitoolInDiffOS(String ipmiOEM) {
       try {
 		copyExeToJarDir();
       } catch (IOException e1) {
-		// TODO Auto-generated catch block
 		e1.printStackTrace();
       }
       ipmitoolPath = WINDOWS_IPMITOOL_PATH+"/ipmitool.exe";
